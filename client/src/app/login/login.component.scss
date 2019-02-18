@@ -1,0 +1,82 @@
+.card {
+  flex-wrap: wrap;
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+#loginName {
+    font-size: 25px;
+    text-align: center;
+    vertical-align: middle;   
+    padding-left: 83px;       
+    padding-top: 20px;
+    padding-bottom: 20px;
+ }
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  // .container > * {
+  //   width: 100%;
+  // }
+
+  #signButton {
+    padding-left: 60px;
+  }
+
+  #forgotLink {
+    font-size: 10px;
+    padding-left: 145px;
+  }
+  .f{
+    color: #01579B;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center
+  }
+  .u{
+    color: #D50000;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center
+    
+  }
+  .n{
+    color: #FF8F00;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center
+  
+  }
+  .d{
+    color: #01579B;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center
+  
+  }
+  .o{
+    color: #33691E;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center
+  
+  }
+  .o{
+    color: #D50000;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center
+  }
+  .fundoo{
+    margin-left: 20%;
+    font-family: sans-serif
+}
