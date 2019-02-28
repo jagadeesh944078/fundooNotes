@@ -7,14 +7,19 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { CommonModule } from '@angular/common';
 import { from } from 'rxjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { AddNoteComponent } from './add-note/add-note.component';
+import{ NoteBarComponent} from './note-bar/note-bar.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path:'forgot', component: ForgotComponent },
-  { path:'dashboard',component:DashboardComponent}
-];
+  { path:'dashboard',component:DashboardComponent,children:[
+    { path:'',component:AddNoteComponent},
+    { path:'addNote',component:AddNoteComponent,children:[
+      { path:'', component: NoteBarComponent}]
+    }]}
+  ];
 
 @NgModule({
   declarations: [],

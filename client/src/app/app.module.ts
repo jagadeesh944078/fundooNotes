@@ -9,6 +9,8 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { NoteBarComponent } from './note-bar/note-bar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,10 @@ import { AppMaterialModule } from './app-material.module';
     RegistrationComponent,
     LoginComponent,
     ForgotComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddNoteComponent,
+    NoteBarComponent,
+    
   ],
   imports: [
     BrowserModule,
