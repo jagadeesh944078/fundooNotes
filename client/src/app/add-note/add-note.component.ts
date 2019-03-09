@@ -1,173 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import { NoteModel } from 'src/app/models/note.model';
-import { NoteService } from '../service/note.service';
-import {Router} from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-
+import { Component, OnInit,Output,EventEmitter} from '@angular/core';
+// import { NoteModel } from 'src/app/models/note.model';
+import {  HttpService} from '../service/http/http.service';
+import { Router } from '@angular/router';
+import {FormControl,  Validators} from '@angular/forms';
+import { NoteserviceService } from '../service/noteservice.service'
+import { DataserviceService } from '../service/dataservice.service'
 @Component({
   selector: 'app-add-note',
   templateUrl: './add-note.component.html',
   styleUrls: ['./add-note.component.scss']
 })
 export class AddNoteComponent implements OnInit {
-  colorCode: Array<Object> = [
-    { name: "white", colorCode: "rgb(255, 255, 255)" },
-    { name: "lightGreen", colorCode: "rgb(204, 255, 144)" },
-    { name: "purple", colorCode: "rgb(215, 174, 251)" },
-    { name: "red", colorCode: "rgb(242, 139, 130)" },
-    { name: "Teal", colorCode: "rgb(167, 255, 235)" },
-    { name: "pink", colorCode: "rgb(253, 207, 232)" },
-    { name: "orange", colorCode: "rgb(251, 188, 4)" },
-    { name: "blue", colorCode: "rgb(203, 240, 248)" },
-    { name: "brown", colorCode: "rgb(230, 201, 168)" },
-    { name: "yellow", colorCode: "rgb(255, 244, 117)" },
-    { name: "darkBlue", colorCode: "rgb(174, 203, 250)" },
-    { name: "gray", colorCode: "rgb(232, 234, 237)" }
-    ]
-  isOpen:boolean=false;
-  menuOpen : boolean =false;
-  pin : boolean = false;
-  showTick : boolean =true;
-  subMenuOpen : boolean = false;
-  subMenu : boolean = false;
-  open : boolean = false;
-
-  showIcon : boolean=true;
-  showBrush : boolean = true;
-  noteBar : boolean = false;
-  noteNewBar : boolean = false;
-  color : string
-  note : NoteModel =new NoteModel();
-  tempNote : NoteModel = new NoteModel();
-  noteBarValue : NoteModel[];
-allNotes : NoteModel[];
-  constructor(private router : Router,private notecrud : NoteService,private snackBar : MatSnackBar) { }
-
+  public notes:any={};
+  @Output() messageEvent = new EventEmitter<any>();
+  pinnedcard:any;
+  card: any;
+  bgcolor: any="#FFFFFF";
+  flag = true;
+  flag1 = true;
+  title = new FormControl('', [Validators.required, Validators.required]);
+  description = new FormControl('', [Validators.required, Validators.required]);
+  model: any;
+  response: any;
+  isOpen: boolean = false;
+  
+  
+  // note: NoteModel = new NoteModel();
+  constructor(private service : HttpService,private router : Router,private data:DataserviceService,private note:NoteserviceService) { }
   ngOnInit() {
-    this.notecrud.getAllNotes().subscribe(
-      response=>{
-  
-        this.allNotes=response;
-        if(this.allNotes.length!=0)
-        this.showIcon=false;
-      },
-      error =>{  
-       console.log(error);
-      }
-    )          
-      
+    this.data.currentMessage.subscribe(message => this.card = message)
+    console.log(this.card, "card..")
   }
-  subMenuOpenFun()
-  {
-    this.subMenuOpen=true;
-    this.showTick=false;
-  }
-  noteBarShow()
-  {
-      this.noteBar=!this.noteBar
-  }
-  close() : void {
-    // console.log(this.name,this.email,this.password,this.phoneNumber)
-    
-    this.isOpen=!this.isOpen;
-    this.showIcon=false;
-    
-    console.log(this.note.title.length);
-    if(this.note.title.length!=0 || this.note.description.length!=0)
-       {
-        this.note.color=this.color;
-        this.note.pin=this.pin;
-        this.noteBar=true;
-  (this.notecrud.createNote(this.note)).subscribe(
-    
-    response =>{
-      if(response.statusCode==166)
-      {
-        this.snackBar.open(response.statusMessage,"",{
-          duration:2000,
-        })
-      }
-      // this.cardUpdate.changemessage();
-    },
-    error =>{
-      console.log("Error",error);
-    } 
 
-    );
-  //  this.noteBarValue=this.note
-//   this.tempNote=this.note
-//   console.log('temp note ',this.tempNote)
-//   if(this.tempNote.title!=null)
-//   {
-//   this.noteNewBar=true;
   
-//   }
-
- this.note=new NoteModel(); 
- this.color="white"
- this.pin=false;
+  
+  
+  close(){
+    this.flag = !this.flag;
+    if (this.title || this.description ) {
+     this.notes = { 
+    
+      "title":this.title.value,
+      "description":this.description.value,
+      "labelIdList"	:[],
+      "checklist":"",
+      "isPined":"",
+      "isArchived":"",
+      "color":this.bgcolor,
+      "reminder":[],
+     "collaberators":""
 }
-
-
-}
-archive() : void
-{
-  console.log("archive function");
-  
-  this.isOpen=!this.isOpen;
-  this.note.color=this.color;
-  this.note.archive=true;
-this.notecrud.createNote(this.note).subscribe(
- data=> {
-    if(data.statusCode==200)
-    {
-      if(this.allNotes.length==0)
-          this.showIcon=true;
-      this.snackBar.open('Note Archive Successfully', '', {
-        duration: 2000,});
-    }
-    // this.cardUpdate.changemessage();
-  },
-      
-    error => {
-     
-        console.log("Error", error);
-    }
-
-   );
+    console.log(this.notes,'in add');
    
-   this.note=new NoteModel(); 
-   this.note.color="white"
-}
+    
+      this.service.PostUrlEncoded('notes/addNotes',this.notes).subscribe(data=>{
+        console.log(data);
+        this.response = data;
+        this.title.reset();
+        this.description.reset();
 
-changeColor(color)
-{
-  this.color=color;
-}
+        this.isOpen=!this.isOpen;
+        this.messageEvent.emit(this.notes);
+      },
+      err =>
+      {
+        console.log("error occur while adding",err);   
+      })
+     
+      // this.service.getnotes(this.notes).subscribe(data=>{
+      //   console.log(data);
 
-changePin()
-{
-  this.pin=!this.pin;
-  console.log(this.pin)
-}
+      // })
+  
+  }
 
-addLabel()
-{
-  this.subMenu=false;
-  console.log(this.subMenu);
+  }
+  ispinned() {
+    this.flag1 = !this.flag1;
+  }
+  recievemessage($event) {
+    this.bgcolor = $event;
+  }
   
-  this.subMenuOpen=true;
-  console.log(this.subMenuOpen);
-  
+
 }
-openMenu()
-{
-  this.subMenuOpen=true;
-  console.log(this.subMenuOpen);
-  
-}
-menuSub()
-{
-this.open=true;
-}
-}
+ 

@@ -1,0 +1,19 @@
+<div fxFlex='100'>
+  <div>
+  <mat-form-field>
+    
+    <input class="title" matInput [(ngModel)]="data.array.title">
+  </mat-form-field>
+  </div>
+  <div>
+  <mat-form-field>
+    <input class='desc' matInput [(ngModel)]="data.array.description">
+  </mat-form-field>
+  </div>
+  <div fxLayoutAlign='space-between end'>
+    <app-iconlist></app-iconlist>
+    
+      <button fxLayoutAlign='end end' class="notes" mat-button (click)="close()">close</button>
+    
+  </div>
+</div>

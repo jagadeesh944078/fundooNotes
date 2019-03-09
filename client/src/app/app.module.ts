@@ -10,8 +10,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { AddNoteComponent } from './add-note/add-note.component';
-import { NoteBarComponent } from './note-bar/note-bar.component';
-
+import { NotebarComponent } from './notebar/notebar.component';
+import { ArchivenoteComponent } from './archivenote/archivenote.component';
+import { TrashComponent } from './trash/trash.component';
+import { UpdatenoteComponent } from './updatenote/updatenote.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { IconlistComponent } from './iconlist/iconlist.component';
+import { MainNoteComponent } from './main-note/main-note.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +25,12 @@ import { NoteBarComponent } from './note-bar/note-bar.component';
     ForgotComponent,
     DashboardComponent,
     AddNoteComponent,
-    NoteBarComponent,
+    NotebarComponent,
+    ArchivenoteComponent,
+    TrashComponent,
+    UpdatenoteComponent,
+    IconlistComponent,
+    MainNoteComponent,
     
   ],
   imports: [
@@ -28,7 +38,8 @@ import { NoteBarComponent } from './note-bar/note-bar.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

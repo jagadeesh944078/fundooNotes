@@ -21,9 +21,12 @@
     /* //margin: auto; */
     width: 50%;
   }
-  
+  .example-full-width {
+    width: 100%;
+    padding-left: 20%;
+  }
   .searchInputBar {
-    border-radius: 25px;
+    border-radius: 5px;
     width: 150%;
     /* // border: none; */
     /* outline: none; */
@@ -34,10 +37,6 @@
   .mat-toolbar-single-row {
     height: 64px;
   }
-  /* 
-  // .navListItems {
-  //   padding: 10px !important;
-  // } */
   
   .accountButton {
     width: 0px;
@@ -48,14 +47,6 @@
   
   }
   
-  /* // .sideBar {
-  //   display: flex;
-  //   // width: 0px;
-  //   height: 500px;
-  // }
-  // .sideNav{
-  //     height: 500px   ;
-  // } */
   
   .sidenavBar {
     position: absolute;
@@ -81,13 +72,12 @@
     font-size: 15px;
     padding: 8px;
     background-color: #ffffff;
-    color: #5f6368;
-    align-items: baseline;
+    
     text-align: left;
   }
   
   .sideNavlistItemsColored {
-    background-color: #f8e6af !important;
+    background-color: #f8e6af ;
     color: rgba(0, 0, 0, 0.8);
   }
   
@@ -127,10 +117,7 @@
   
   .noteInputBar {
   
-    /* display: flex;
-    padding: 1%; 
-    border: 2px ;
-    width: 40%; */
+    
     width:600px;
     margin:0 auto;
     margin-top: 10px;
@@ -154,13 +141,7 @@
     .textSize
     {
       
-      /* margin-top: 5%;
-      margin-bottom: auto;
-      margin-left:20%;
-      margin-right: auto;
-      width: 100%;  */
-      /* padding-right: 25px; */
-      /* padding-left: 10px; */
+     
       margin-left:15%;
   
     font-size: 15px;
