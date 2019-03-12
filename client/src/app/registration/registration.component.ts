@@ -86,12 +86,13 @@ export class RegistrationComponent implements OnInit {
       "lastName":this.lastName.value,
        //"phoneNumber":this.phone.value,
       "imageUrl":"",
-      "service": "basic",
+      "service": "advance",
       "email":this.email.value,
       "emailVerified": true,
       "createdDate": "",
       "modifiedDate": "",
       "password":this.password.value
+      
     }
     console.log(user);
     if(this.password.value == this.repeatPassword.value){

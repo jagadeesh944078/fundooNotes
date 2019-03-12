@@ -17,6 +17,7 @@ import { UpdatenoteComponent } from './updatenote/updatenote.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IconlistComponent } from './iconlist/iconlist.component';
 import { MainNoteComponent } from './main-note/main-note.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { MainNoteComponent } from './main-note/main-note.component';
     HttpClientModule,
     FlexLayoutModule 
   ],
-  providers: [],
+  providers: [
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,15 +4,15 @@
   <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array)">
 
 
-    <div fxLayout="column"  mat-dialog-content >
+    <div fxLayout="column"  mat-dialog-content class="card" >
     
-      <div ><mat-card-title >{{array.title}} </mat-card-title></div>
-     <div> <mat-card-subtitle  >{{array.description}}</mat-card-subtitle></div>
+      <div ><mat-card-title class="title">{{array.title}} </mat-card-title></div>
+     <div> <mat-card-subtitle class="desc" >{{array.description}}</mat-card-subtitle></div>
     </div>
   </div>
   <div>
     <div fxFlex='100'>              
-      <app-iconlist> </app-iconlist>
+      <app-iconlist [card]=array class="card"> </app-iconlist>
 
     </div>
 

@@ -79,5 +79,38 @@ getHttp(url){
   return this.http.get(this.link+url,httpTocken);
   }
 
-
+  postpassword(url) {
+    
+     
+    var httpAuthOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        
+      })
+  
+    };
+    return this.http.post(this.link+url, this.getFormUrlEncoded(url), httpAuthOptions1);
+  
+  }
+  encodedPostForm(url: any, data: any) {
+    url = this.link + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+    return this.http.post(url, this.getFormUrlEncoded(data), httpOptions);
+  }
+  postJSON(url: string, body: any): any {
+    url=this.link + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+    return this.http.post(url, body, httpOptions)
+  }
 }
+

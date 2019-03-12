@@ -1,19 +1,16 @@
-<div fxFlex='100'>
-  <div>
-  <mat-form-field>
+<div fxFlex='200' [style.background]="data.array.color">
+  <div >
+  <mat-form-field >
     
     <input class="title" matInput [(ngModel)]="data.array.title">
-  </mat-form-field>
-  </div>
-  <div>
-  <mat-form-field>
+  
     <input class='desc' matInput [(ngModel)]="data.array.description">
   </mat-form-field>
   </div>
   <div fxLayoutAlign='space-between end'>
-    <app-iconlist></app-iconlist>
+    <app-iconlist [card]="data.array"></app-iconlist>
     
-      <button fxLayoutAlign='end end' class="notes" mat-button (click)="close()">close</button>
+      <button fxLayoutAlign='end end' class="notes" mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
     
   </div>
 </div>

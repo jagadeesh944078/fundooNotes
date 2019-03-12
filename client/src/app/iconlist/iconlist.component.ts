@@ -1,6 +1,7 @@
-import { Component, OnInit,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit,Output,EventEmitter,Input} from '@angular/core';
 import { DataserviceService } from '../service/dataservice.service'
-
+import { NoteserviceService } from '../service/noteservice.service'
+import { from } from 'rxjs';
 @Component({
   selector: 'app-iconlist',
   templateUrl: './iconlist.component.html',
@@ -8,7 +9,11 @@ import { DataserviceService } from '../service/dataservice.service'
 })
 export class IconlistComponent implements OnInit {
   @Output() messageEvent=new EventEmitter();
-  
+  @Input() card: any;
+  model: any;
+  flag = false;
+  display=false;
+
   colorArray=[[{ 'color': '#FFFFFF', 'name': 'White' },
   { 'color': '#E53935', 'name': 'Red' },
   { 'color': '#EF6C00', 'name': 'Orange' },
@@ -25,16 +30,56 @@ export class IconlistComponent implements OnInit {
   { 'color': '#E0E0E0', 'name': 'gray' }
   
   ]]
-  flag=false;
-  card:any;
+
   
-  constructor(private data:DataserviceService) { }
+  constructor(private data:DataserviceService,private note:NoteserviceService) { }
 
   ngOnInit() {
   }
 
- colorsEdit(color){
-  this.messageEvent.emit(color);
-}
+  colorsEdit(color, card) {
+    if (card == undefined) {
+      console.log('in undefined')
+      console.log(color)
+      this.messageEvent.emit(color);
+    }
+    else {
+      console.log('in defined card')
+      this.updateColor(color,card)
+    }
 
+  }
+  updateColor(color,card) {
+    console.log(card,"card12..")
+    console.log(card.color=color,'color..') 
+    this.note.updateColor({
+      "color": color,
+      'noteIdList': [this.card.id]
+    }).subscribe(data =>{
+      console.log(data, "data from update color")
+    },
+      err=>{
+        console.log(err,"err")
+
+      })
+  }
+deleteNote(card){
+  this.note.deleteNote({
+      "isdeleted":true,
+      "noteIdList":[card.id]
+  }).subscribe(data=>{
+    console.log(data)
+    this.messageEvent.emit(this.deleteNote);
+
+  },err=>console.log(err))
 }
+archive(card){
+  this.note.archive({
+    "isArchived":true,
+    "noteIdlist":[card.id]
+  }).subscribe(data=>{
+    console.log(data)
+  
+  },err=>console.log(err))
+}
+}   

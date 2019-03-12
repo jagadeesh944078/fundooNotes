@@ -1,10 +1,10 @@
 import { Component, OnInit,Input} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {UpdatenoteComponent } from 'src/app/updatenote/updatenote.component'
-
+import{NoteserviceService} from '../service/noteservice.service'
+import { from } from 'rxjs';
 export interface dialog{
-  title:any;  
-  description:any;
+  array:[];
 }
 @Component({
   selector: 'app-notebar',
@@ -12,28 +12,41 @@ export interface dialog{
   styleUrls: ['./notebar.component.scss']
 })
 export class NotebarComponent implements OnInit {
-  notes:any;
-  title:any;
-  description:any;
-  @Input() card=[];
-  
+  // notes:any;
+  // title:any;
+  // description:any;
  
+  array:[]
+  data:any;
+ model:any;
+ @Input() card=[];
 
 
-  constructor(public dialog: MatDialog) { }
-
+  constructor(public dialog: MatDialog,private note:NoteserviceService) { }
+  
   ngOnInit() {
     
 console.log(this.card);
   }
-  openDialog(array): void{
+  openDialog(array){
     const dialogRef = this.dialog.open(UpdatenoteComponent,{
      
-      data: {array}
+      data: { array },
+      width:'600px',
+      height:'185px'
     })
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      this.title = result;
+      console.log(result['array'].id);
+      this.model = {
+        noteId: result['array'].id,
+        title: result['array'].title,
+        description: result['array'].description,
+      }
+      this.note.updatenote(this.model).subscribe(message=>{
+          console.log("fg");
+      })
     });
   }
+  
 }

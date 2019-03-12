@@ -12,10 +12,9 @@ import { DataserviceService } from '../service/dataservice.service'
 })
 export class AddNoteComponent implements OnInit {
   public notes:any={};
-  @Output() messageEvent = new EventEmitter<any>();
   pinnedcard:any;
   card: any;
-  bgcolor: any="#FFFFFF";
+  color='#ffffff';
   flag = true;
   flag1 = true;
   title = new FormControl('', [Validators.required, Validators.required]);
@@ -32,7 +31,8 @@ export class AddNoteComponent implements OnInit {
     console.log(this.card, "card..")
   }
 
-  
+  @Output() messageEvent = new EventEmitter<any>();
+
   
   
   close(){
@@ -46,7 +46,7 @@ export class AddNoteComponent implements OnInit {
       "checklist":"",
       "isPined":"",
       "isArchived":"",
-      "color":this.bgcolor,
+      "color":this.color,
       "reminder":[],
      "collaberators":""
 }
@@ -60,7 +60,7 @@ export class AddNoteComponent implements OnInit {
         this.description.reset();
 
         this.isOpen=!this.isOpen;
-        this.messageEvent.emit(this.notes);
+        this.messageEvent.emit(this.response['status']['details']);
       },
       err =>
       {
@@ -79,7 +79,9 @@ export class AddNoteComponent implements OnInit {
     this.flag1 = !this.flag1;
   }
   recievemessage($event) {
-    this.bgcolor = $event;
+    this.color = $event;
+    console.log(this.color);
+    
   }
   
 

@@ -11,13 +11,15 @@ import { AddNoteComponent } from './add-note/add-note.component';
 import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { MainNoteComponent } from './main-note/main-note.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path:'forgot', component: ForgotComponent },
 
-  { path:'dashboard',component:DashboardComponent,children:[
+  { path:'dashboard',component:DashboardComponent ,children:[
     {path:'',pathMatch:'full',redirectTo:'note'},
 
     { path:'note',component:MainNoteComponent},

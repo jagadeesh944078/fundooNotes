@@ -1,19 +1,19 @@
-<div *ngIf="!isOpen" class="addNote" (click)="isOpen=true" >
+<div *ngIf="!isOpen"  class="addNote" (click)="isOpen=true" >
 
   Take a note ...
-     
-  <button mat-icon-button style="left: 9.3cm">
+   
+  <button mat-icon-button   style="left: 9.3cm">
 <mat-icon aria-label="Example icon-button with a heart icon">
   check_box 
 
 </mat-icon>
 </button>
-<button mat-icon-button style="left: 9.5cm" var=showBrush>
+<button mat-icon-button  style="left: 9.5cm" var=showBrush>
 <mat-icon aria-label="Example icon-button with a heart icon">
   brush
 </mat-icon>
 </button>
-<button mat-icon-button  style="left: 9.6cm">
+<button mat-icon-button   style="left: 9.6cm">
 <mat-icon aria-label="Example icon-button with a heart icon">
   image
 </mat-icon> 
@@ -21,7 +21,7 @@
 
 </div>
 
-<div *ngIf="isOpen" class="addNote" [ngStyle]="{'backgroundColor': color}">
+<div *ngIf="isOpen"  class="addNote"  [ngStyle]="{'backgroundColor': color}">
 
   <div class="addNoteInputDiv">
 
@@ -36,10 +36,10 @@
 
   </div>
   
-  <div class="addNoteControlIcon">
+  <div class="addNoteControlIcon"  >
 
-    <app-iconlist  (messageEvent)="recievemessage($event)"></app-iconlist>
-    <button mat-button  (click)="close(title.value,description.value)"style="left:5cm">close </button>
+    <app-iconlist  (messageEvent)="recievemessage($event)" ></app-iconlist>
+    <button mat-button  (click)="close()"style="left:5cm">close </button>
    
   </div>
 
@@ -47,6 +47,5 @@
     <app-notebar *ngFor="let note of noteBarValue" [[note]]=note></app-notebar>
   </div>
   
-  </div>
-  
+  </div>  
   

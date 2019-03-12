@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   message: any;
   content: any;
+
   constructor(private router: Router) { }
   ngOnInit() {
 
@@ -38,4 +39,7 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('loginItem')
     this.router.navigate(["/login"])
   }
+  values: any = '';
+
+  
 }

@@ -8,11 +8,12 @@ import { NoteserviceService } from '../service/noteservice.service'
 })
 export class MainNoteComponent implements OnInit {
   title:any=[];
+  addnote:any;
   close:any;
   constructor(private notes:NoteserviceService) { }
 
   ngOnInit() {
-    this.getAllCards()
+   this.getAllCards();
   }
   getAllCards(){
     
@@ -32,7 +33,10 @@ export class MainNoteComponent implements OnInit {
   //   this.title.push(this.close)
   // }
   receiveMessage($event) {
-console.log('hello',$event);
+    this.addnote = $event;
+    this.title.push(this.addnote)
+
 
   }
+  
 }

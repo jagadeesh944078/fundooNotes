@@ -10,7 +10,7 @@
   </mat-icon>
 </button>
 
-<button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="colorMenu">
+<button mat-icon-button matTooltip="add color" [matMenuTriggerFor]="colorMenu">
   <mat-icon class="mat-18">color_lens</mat-icon>
 </button>
 
@@ -18,23 +18,23 @@
   <mat-icon class="mat-18">photo</mat-icon>
 </button>
 
-<button mat-icon-button matTooltip="Archive" >
+<button mat-icon-button matTooltip="Archive" (click)="archive(card)" >
   <mat-icon class="mat-18">archive</mat-icon>
 </button>
 
-<button mat-icon-button matTooltip="More" [matMenuTriggerFor]="moreMenu" (click)="openMenu()">
-  <mat-icon class="mat-18">more_vert</mat-icon>
+<button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="settings">
+    <mat-icon class="mat-18">more_vert</mat-icon>
 </button>
 
-<mat-menu #moreMenu="matMenu" class="moreMenu">
+<mat-menu #menu="matMenu">
  
-    <button mat-menu-item (click)="menuSub()" *ngIf="!open">Add Label</button>
-    <button mat-menu-item (click)="menuSub()" *ngIf="!open">edit Label</button>
-    <button mat-menu-item (click)="menuSub()" *ngIf="!open">delete Label</button>
-
-  
-  
-</mat-menu>
+    <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
+    <button mat-menu-item>add label</button>
+    <button mat-menu-item>add drawing</button>
+    <button mat-menu-item>make a copy</button>
+    <button mat-menu-item>show stick boxes</button>
+    <button mat-menu-item>copy to google docs</button>
+  </mat-menu>
 
 <mat-menu #subMenu="matMenu">
  
@@ -50,7 +50,7 @@
     <div class="buttons">
       <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
         <div *ngFor='let color of colors'>
-          <button class="colors" [ngStyle]="{'background-color': color.color }" (click)='colorsEdit(color.color)'
+          <button class="colors" [ngStyle]="{'background-color':  color.color }" (click)='colorsEdit(color.color,card)'
             matTooltip="{{color.name}}" mat-mini-fab></button>
         </div>
       </div>
