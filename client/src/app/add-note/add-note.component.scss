@@ -12,6 +12,11 @@
     opacity: .8;
 
     }
+    @media only screen and (max-width: 920px) {
+      .addNote{
+        width: 100%;
+      }
+    }
     
     .mat-icon-button {
     opacity: 0.9;
@@ -45,7 +50,7 @@
     outline: none;
     resize: none;
     width: 90%;
-    font-size: 14px;
+    font-size: 18 px;
     
     
     }

@@ -33,7 +33,7 @@ console.log(this.card);
      
       data: { array },
       width:'600px',
-      height:'185px'
+      height:'200px'
     })
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');

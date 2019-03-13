@@ -58,7 +58,7 @@ export class AddNoteComponent implements OnInit {
         this.response = data;
         this.title.reset();
         this.description.reset();
-
+        
         this.isOpen=!this.isOpen;
         this.messageEvent.emit(this.response['status']['details']);
       },

@@ -11,6 +11,7 @@ import { AddNoteComponent } from './add-note/add-note.component';
 import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { MainNoteComponent } from './main-note/main-note.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
+import { TrashComponent } from './trash/trash.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,9 @@ const routes: Routes = [
     {path:'',pathMatch:'full',redirectTo:'note'},
 
     { path:'note',component:MainNoteComponent},
-    { path:'updatenote',component:UpdatenoteComponent}
+    { path:'updatenote',component:UpdatenoteComponent},
+    { path:'trash',component:TrashComponent},
+    { path:'archivenote',component:ArchivenoteComponent}
     ]}
   ];
 

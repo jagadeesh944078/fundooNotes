@@ -9,6 +9,7 @@ import { from } from 'rxjs';
 })
 export class IconlistComponent implements OnInit {
   @Output() messageEvent=new EventEmitter();
+  @Output() deletecard=new EventEmitter();
   @Input() card: any;
   model: any;
   flag = false;
@@ -63,23 +64,47 @@ export class IconlistComponent implements OnInit {
 
       })
   }
-deleteNote(card){
-  this.note.deleteNote({
+
+archive(card){
+  console.log(card);
+
+
+  const obj=
+  { "isArchived":true,
+  "noteIdList":[card.id]
+}
+
+  console.log(obj);
+  
+  this.note.archive(obj).subscribe(data=>{
+    console.log(data)
+    // this.messageEvent.emit(this.archive);
+
+  },err=>console.log(err))
+}
+deleteNotes(card){
+  this.note.deleteNotes({
       "isdeleted":true,
       "noteIdList":[card.id]
   }).subscribe(data=>{
     console.log(data)
     this.messageEvent.emit(this.deleteNote);
 
-  },err=>console.log(err))
-}
-archive(card){
-  this.note.archive({
-    "isArchived":true,
-    "noteIdlist":[card.id]
+  },err=>console.log(err))}
+ 
+deleteNote(card){
+
+  
+  this.note.deleteNote({
+    "isDeleted":true,
+    "noteIdList":[card.id]
   }).subscribe(data=>{
     console.log(data)
-  
+    this.cardDelete(card)
+
   },err=>console.log(err))
+}
+cardDelete(card){
+  this.deletecard.emit(card);
 }
 }   

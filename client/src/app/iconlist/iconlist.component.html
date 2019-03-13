@@ -22,6 +22,7 @@
   <mat-icon class="mat-18">archive</mat-icon>
 </button>
 
+
 <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="settings">
     <mat-icon class="mat-18">more_vert</mat-icon>
 </button>
@@ -34,6 +35,8 @@
     <button mat-menu-item>make a copy</button>
     <button mat-menu-item>show stick boxes</button>
     <button mat-menu-item>copy to google docs</button>
+    <button mat-menu-item (click)="deleteNotes(card)">delete forever</button>
+
   </mat-menu>
 
 <mat-menu #subMenu="matMenu">

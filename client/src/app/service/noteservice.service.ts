@@ -15,14 +15,24 @@ export class NoteserviceService {
     return this.http.encodedPostForm('notes/updateNotes',data)
      
    }
-   deleteNote(data){
+   deleteNotes(data){
     return this.http.postJSON('notes/deleteForeverNotes',data)
+
+   }
+   deleteNote(data){
+    return this.http.postJSON('notes/trashNotes',data)
 
    }
    updateColor(data){
     return this.http.postJSON('notes/changesColorNotes',data)
    }
    archive(data){
-     return this.http.postJSON('api/notes/archiveNotes',data)
+     return this.http.postJSON('notes/archiveNotes',data)
+   }
+   getTrashNotes(){
+     return this.http.getHttp('notes/getTrashNotesList')
+   }
+   getArchiveNote(){
+     return this.http.getHttp('notes/getArchiveNotesList')
    }
 }

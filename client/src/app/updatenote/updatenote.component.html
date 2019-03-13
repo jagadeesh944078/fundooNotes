@@ -1,12 +1,15 @@
 <div fxFlex='200' [style.background]="data.array.color">
-  <div >
+  
   <mat-form-field >
     
     <input class="title" matInput [(ngModel)]="data.array.title">
-  
+  </mat-form-field>
+
+    <mat-form-field >
+    
     <input class='desc' matInput [(ngModel)]="data.array.description">
   </mat-form-field>
-  </div>
+  
   <div fxLayoutAlign='space-between end'>
     <app-iconlist [card]="data.array"></app-iconlist>
     
