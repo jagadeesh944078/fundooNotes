@@ -12,7 +12,9 @@ import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { MainNoteComponent } from './main-note/main-note.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
 import { TrashComponent } from './trash/trash.component';
-
+import { LabelsComponent } from './labels/labels.component';
+import { SearchComponent } from './search/search.component';
+import{AuthGuard } from './service/auth/auth.guard'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,13 +22,15 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path:'forgot', component: ForgotComponent },
 
-  { path:'dashboard',component:DashboardComponent ,children:[
-    {path:'',pathMatch:'full',redirectTo:'note'},
+  { path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard] ,children:[
+    {path:'',pathMatch:'full',redirectTo:'note',canActivate:[AuthGuard]},
 
     { path:'note',component:MainNoteComponent},
     { path:'updatenote',component:UpdatenoteComponent},
     { path:'trash',component:TrashComponent},
-    { path:'archivenote',component:ArchivenoteComponent}
+    { path:'archivenote',component:ArchivenoteComponent},
+    { path:'lables',component:LabelsComponent},
+    { path:'search',component:SearchComponent}
     ]}
   ];
 

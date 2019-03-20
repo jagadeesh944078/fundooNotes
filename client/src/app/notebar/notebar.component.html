@@ -1,5 +1,5 @@
-                          
- <div *ngFor="let array of card" fxLayout="row wrap" class="notecard">
+                      
+ <div *ngFor="let array of card  | search:Search" fxLayout="row wrap" class="notecard">
 <mat-card fxLayout="column" class="matcard" fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color'>
   <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array)">
 
@@ -11,8 +11,8 @@
     </div>
   </div>
   <div>
-    <div fxFlex='100'>              
-      <app-iconlist [card]=array class="card"> </app-iconlist>
+    <div fxFlex='100' >              
+      <app-iconlist [card]=array (archivedCard)="archive($event)" [more]=display  [type]=type  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
 
     </div>
 

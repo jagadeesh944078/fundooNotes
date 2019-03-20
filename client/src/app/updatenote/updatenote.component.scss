@@ -1,11 +1,42 @@
-input .desc{
-    border: none ;
+// input .desc{
+//     border: none ;
+//     background: transparent;
+//     background: none;
+//     border: transparent;
+//  }
+//  .textarea{
+//      border : none;
+//      outline: none;
+//      user-select: none;
+//  }
+// ::ng-deep .mat-dialog-container{
+//     padding:0%;
+// }
+// .title{
+//     margin-left: 2.5cm;
+//     margin-top: 2.4cm;
+// }
+// .tit{
+//     border-radius: 10px;
+// }
+.takenote{
     background: transparent;
-    background: none;
-    border: transparent;
- }
- .textarea{
-     border : none;
-     outline: none;
-     user-select: none;
- }
+      margin-bottom: 10px;
+      color: rgb(173, 166, 166);
+      border: none;
+      outline: none;
+      user-select: none;
+
+    }
+    .textArea{
+      background: transparent;
+      border: none;
+      outline: none;
+      user-select: none;
+      margin-left: 0cm;
+      margin-top: 1cm;
+      font-size: 0.4cm;
+    } 
+    ::ng-deep .mat-dialog-container{
+      padding:0%; 
+  }

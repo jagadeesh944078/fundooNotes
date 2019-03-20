@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { NoteserviceService } from '../service/noteservice.service';
 
 @Component({
@@ -7,23 +7,35 @@ import { NoteserviceService } from '../service/noteservice.service';
   styleUrls: ['./archivenote.component.scss']
 })
 export class ArchivenoteComponent implements OnInit {
- archivenote=[];
-  constructor(private data:NoteserviceService) { }
+  card = [];
+  archiveCard = [];
+  archivenote = [];
+
+  constructor(private data: NoteserviceService) { }
 
   ngOnInit() {
     this.archiveNote();
   }
-  archiveNote(){
-    this.data.getArchiveNote().subscribe(data=>{
-console.log('added successfully');
-this.archivenote=data['data']['data']
-},
-err=>{
-  console.log(err);
-    })
-
-    }
+  archiveNote() {
+    this.data.getArchiveNote().subscribe(data => {
+      console.log('added successfully');
+      this.archivenote = data['data']['data'];
+      for (let index = 0; index < this.archiveCard.length; index++) {
+        if (this.archiveCard[index].isArchived == false) {
+          this.archivenote.push(this.archiveCard[index])
+        }
+      }
+    },
+      err => {
+        console.log(err);
+      })
 
   }
+  delete($event) {
+    let ind = this.archivenote.indexOf($event)
+    this.archivenote.splice(ind, 1);
+  }
+
+}
 
 

@@ -1,19 +1,21 @@
-<div fxFlex='200' [style.background]="data.array.color">
-  
-  <mat-form-field >
-    
-    <input class="title" matInput [(ngModel)]="data.array.title">
-  </mat-form-field>
-
-    <mat-form-field >
-    
-    <input class='desc' matInput [(ngModel)]="data.array.description">
-  </mat-form-field>
-  
-  <div fxLayoutAlign='space-between end'>
-    <app-iconlist [card]="data.array"></app-iconlist>
-    
-      <button fxLayoutAlign='end end' class="notes" mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
-    
-  </div>
+<div fxFlex='100' fxLayout="column" >
+  <mat-card [style.background]="data.array.color">
+    <div  fxLayout="column" fxFlex="100" fxFlexOffset.xl="20" fxFlex.xs='97'>
+      <div class="title">
+        <div  fxLayout="row" class="takenote">
+          <textarea class="textArea" matTextareaAutosize placeholder="Title" [(ngModel)]="data.array.title" ></textarea>
+        </div>
+        <div  fxLayout="column" class="takenote">
+          <textarea class="textArea" matTextareaAutosize placeholder="Note" [(ngModel)]="data.array.description"></textarea>
+        </div>
+      </div>
+      <div fxLayoutAlign='space-between end'>
+        <app-iconlist [card]="data.array"></app-iconlist>
+        
+          <button fxLayoutAlign='end end' class="notes" mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
+        
+      </div>
+    </div>
+  </mat-card>
 </div>
+

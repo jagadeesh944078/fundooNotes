@@ -35,4 +35,10 @@ export class NoteserviceService {
    getArchiveNote(){
      return this.http.getHttp('notes/getArchiveNotesList')
    }
+   addLabel(data){
+    return this.http.postJSON('/noteLabels',data)
+   }
+   getLabel(){
+     return this.http.getHttp('noteLabels/getNoteLabelList')
+   }
 }

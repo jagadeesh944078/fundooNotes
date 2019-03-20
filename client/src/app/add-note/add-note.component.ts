@@ -51,15 +51,15 @@ export class AddNoteComponent implements OnInit {
      "collaberators":""
 }
     console.log(this.notes,'in add');
-   
+    this.isOpen=!this.isOpen;
+
     
       this.service.PostUrlEncoded('notes/addNotes',this.notes).subscribe(data=>{
         console.log(data);
         this.response = data;
         this.title.reset();
         this.description.reset();
-        
-        this.isOpen=!this.isOpen;
+         
         this.messageEvent.emit(this.response['status']['details']);
       },
       err =>

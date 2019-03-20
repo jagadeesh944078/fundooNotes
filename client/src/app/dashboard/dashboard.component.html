@@ -9,24 +9,29 @@
     <div class="dashboardTitle">{{headerName}}</div>
 
   </div>
-
   <div class="searchToolBar">
+ 
 
     <button mat-icon-button>
       <mat-icon class="mat-18">search</mat-icon>
     </button>
-    <input class="searchInputBar" type="text"  placeholder="search">
+    <input [(ngModel)]="Search" (keyup)='lookfor()' (click)='goSearch()' class="searchInputBar" type="text"  placeholder="search">
+    
 
   </div>
-
   <div >
 
       <button mat-icon-button matTooltip="Refresh">
           <mat-icon class="refresh">refresh</mat-icon>
         </button>
-      <button mat-icon-button matTooltip="List view"> 
-          <mat-icon class="view_list">view_list</mat-icon>
+
+      <button *ngIf='view==false' mat-icon-button matTooltip="List view" (click)="toggle()"> 
+          <mat-icon class="view_list">view_stream</mat-icon>
         </button>
+        <button *ngIf='view==true' mat-icon-button matTooltip="List view" (click)="toggle()"> 
+            <mat-icon class="view_list">view_module</mat-icon>
+          </button>
+        
         <button mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings" >
             <mat-icon class="settings">settings</mat-icon>
           </button>
@@ -47,11 +52,11 @@
 
 <mat-menu #settingsForHeader="matMenu">
    
-    <button mat-menu-item (click)="settings()">Settings</button>
-    <button mat-menu-item (click)="sendFeedback()">Send FeedBack</button>
-    <button mat-menu-item (click)="help()">Help</button>
-    <button mat-menu-item (click)="appDownload()">App Download</button>
-    <button mat-menu-item (click)="keyboardShortcuts()">Keyboard Shortcut</button>
+    <button mat-menu-item >Settings</button>
+    <button mat-menu-item >Send FeedBack</button>
+    <button mat-menu-item >Help</button>
+    <button mat-menu-item >App Download</button>
+    <button mat-menu-item >Keyboard Shortcut</button>
 
   </mat-menu>
 <mat-menu #accountMenu="matMenu">

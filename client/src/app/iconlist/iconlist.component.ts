@@ -10,10 +10,17 @@ import { from } from 'rxjs';
 export class IconlistComponent implements OnInit {
   @Output() messageEvent=new EventEmitter();
   @Output() deletecard=new EventEmitter();
+  @Output() archivedCard = new EventEmitter();
+  @Output() unarchiveCard = new EventEmitter();
   @Input() card: any;
+  @Input() more;
+  @Input() type;
+
   model: any;
   flag = false;
   display=false;
+  title:any;
+
 
   colorArray=[[{ 'color': '#FFFFFF', 'name': 'White' },
   { 'color': '#E53935', 'name': 'Red' },
@@ -34,8 +41,10 @@ export class IconlistComponent implements OnInit {
 
   
   constructor(private data:DataserviceService,private note:NoteserviceService) { }
-
+//  deletedcards=[];
   ngOnInit() {
+    // console.log(this.card);
+    
   }
 
   colorsEdit(color, card) {
@@ -65,31 +74,41 @@ export class IconlistComponent implements OnInit {
       })
   }
 
-archive(card){
+  doArchive(card){
   console.log(card);
-
-
   const obj=
   { "isArchived":true,
   "noteIdList":[card.id]
 }
-
-  console.log(obj);
-  
+console.log(obj);
   this.note.archive(obj).subscribe(data=>{
     console.log(data)
-    // this.messageEvent.emit(this.archive);
-
-  },err=>console.log(err))
+    this.cardArchive(card)
+   
+ },err=>console.log(err))
 }
-deleteNotes(card){
+doUnArchive(card){
+
+  console.log(card);
+  const obj=
+  { "isArchived":false,
+  "noteIdList":[card.id]
+}
+console.log(obj);
+  this.note.archive(obj).subscribe(data=>{
+    console.log(data)
+    this.notArchive(card)
+    // this.messageEvent.emit(this.archive);
+ },err=>console.log(err))
+}
+deleteforever(card){
   this.note.deleteNotes({
       "isdeleted":true,
       "noteIdList":[card.id]
   }).subscribe(data=>{
-    console.log(data)
-    this.messageEvent.emit(this.deleteNote);
-
+    
+    let ind=this.card.indexOf(card)
+    this.card.splice(ind,0);
   },err=>console.log(err))}
  
 deleteNote(card){
@@ -106,5 +125,25 @@ deleteNote(card){
 }
 cardDelete(card){
   this.deletecard.emit(card);
+}
+restore(card){
+
+  
+  this.note.deleteNote({
+    "isDeleted":false,
+    "noteIdList":[card.id]
+  }).subscribe(data=>{
+    console.log(data)
+    this.cardDelete(card)
+
+  },err=>console.log(err))
+}
+cardArchive(card){
+  this.archivedCard.emit(card)
+
+}
+notArchive(card){
+  this.unarchiveCard.emit(card)
+
 }
 }   

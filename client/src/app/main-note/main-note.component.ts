@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { NoteserviceService } from '../service/noteservice.service'
+import { DataserviceService } from '../service/dataservice.service';
 
 @Component({
   selector: 'app-main-note',
@@ -7,19 +8,29 @@ import { NoteserviceService } from '../service/noteservice.service'
   styleUrls: ['./main-note.component.scss']
 })
 export class MainNoteComponent implements OnInit {
-  title:any=[];
+  title=[];
   addnote:any;
   close:any;
-  constructor(private notes:NoteserviceService) { }
+  card=[];
+
+  constructor(private notes:NoteserviceService,private data:DataserviceService) { }
+  @Input() view;
 
   ngOnInit() {
-   this.getAllCards();
-  }
+    this.data.currentMessageList.subscribe(message => this.view = message)
+    this.getAllCards();
+  } 
   getAllCards(){
     
     this.notes.getNote().subscribe(data=>{
-        this.title = data['data']['data'];
-        console.log(this.title ,"title")
+      console.log(data,'getall cards')
+      this.card = data['data']['data'];
+      for(let index=0;index<this.card.length;index++){
+        if(this.card[index].isDeleted==false && this.card[index].isArchived==false){
+          this.title.push(this.card[index])
+          console.log(this.title,"all cardss")
+        }
+      }
     },
     err=>{
           console.log("error  ")
@@ -34,8 +45,8 @@ export class MainNoteComponent implements OnInit {
   // }
   receiveMessage($event) {
     this.addnote = $event;
-    this.title.push(this.addnote)
-
+    console.log(this.addnote,"......addnote")
+    this.title.splice(0,0,this.addnote)
 
   }
   

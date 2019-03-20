@@ -2,9 +2,10 @@ import { Component, OnInit,Input} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {UpdatenoteComponent } from 'src/app/updatenote/updatenote.component'
 import{NoteserviceService} from '../service/noteservice.service'
-import { from } from 'rxjs';
+
 export interface dialog{
   array:[];
+  cond:any;
 }
 @Component({
   selector: 'app-notebar',
@@ -19,8 +20,17 @@ export class NotebarComponent implements OnInit {
   array:[]
   data:any;
  model:any;
- @Input() card=[];
+ cardid: any;
+ allcards: any;
+ flag1=true;
 
+ message: string;
+
+ @Input() card=[];
+ @Input() arrayCards;
+ @Input() type;
+ @Input() cond;
+@Input() Search;
 
   constructor(public dialog: MatDialog,private note:NoteserviceService) { }
   
@@ -33,7 +43,6 @@ console.log(this.card);
      
       data: { array },
       width:'600px',
-      height:'200px'
     })
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
@@ -44,9 +53,39 @@ console.log(this.card);
         description: result['array'].description,
       }
       this.note.updatenote(this.model).subscribe(message=>{
-          console.log("fg");
+          console.log(message);
       })
     });
   }
-  
+  // unarchive($event){
+  //   try{
+  //   this.card.splice(0,0,$event)
+  //   }catch(err){
+  //     console.log(err)
+  //   }
+  // }
+  archive($event){
+    try{
+    let ind=this.card.indexOf($event)
+    this.card.splice(ind,1);}
+    catch(err){
+      console.log(err)}
+  }
+
+  unarchived($event){
+    try{
+    let ind=this.card.indexOf($event)
+    this.card.splice(ind,1);
+    }catch(err){
+      console.log(err)
+    }
+  }
+  delete($event) {
+    try{
+    let ind = this.card.indexOf($event);
+    this.card.splice(ind, 1);
+    }catch(err){
+      console.log(err)
+    }
+  }
 }

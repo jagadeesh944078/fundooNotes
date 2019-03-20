@@ -1,1 +1,2 @@
-<app-notebar [card]=archivenote></app-notebar>
+<div class="column">
+<app-notebar fxLayout='column'  fxLayout="row wrap" (deletecard)="delete($event)" [card]=archivenote [type]=note></app-notebar></div>

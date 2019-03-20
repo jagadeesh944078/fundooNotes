@@ -17,7 +17,11 @@ import { UpdatenoteComponent } from './updatenote/updatenote.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IconlistComponent } from './iconlist/iconlist.component';
 import { MainNoteComponent } from './main-note/main-note.component';
-
+import { LabelsComponent } from './labels/labels.component';
+import { SearchComponent } from './search/search.component';
+import { SearchPipe } from './pipe/search.pipe';
+import{AuthGuard} from './service/auth/auth.guard';
+import { RemindersComponent } from './reminders/reminders.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +36,10 @@ import { MainNoteComponent } from './main-note/main-note.component';
     UpdatenoteComponent,
     IconlistComponent,
     MainNoteComponent,
+    LabelsComponent,
+    SearchComponent,
+    SearchPipe,
+    RemindersComponent,
     
   ],
   imports: [
@@ -42,7 +50,7 @@ import { MainNoteComponent } from './main-note/main-note.component';
     HttpClientModule,
     FlexLayoutModule 
   ],
-  providers: [
+  providers: [AuthGuard
     ],
   bootstrap: [AppComponent]
 })
