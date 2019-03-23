@@ -41,4 +41,7 @@ export class NoteserviceService {
    getLabel(){
      return this.http.getHttp('noteLabels/getNoteLabelList')
    }
+   updateProfile(data){
+    return this.http.postJSON('user/uploadProfileImage',data)
+   }
 }

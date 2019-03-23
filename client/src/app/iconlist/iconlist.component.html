@@ -1,16 +1,9 @@
+<div class="Hover">
 
-<button mat-icon-button matTooltip="Remind me" [matMenuTriggerFor]="reminder" >
-  <mat-icon class="mat-18">notifications
-  </mat-icon>
-</button>
-
-<mat-menu #reminder="matMenu">
-<mat-list-item><h4>Reminder</h4></mat-list-item>
-  <mat-list-item><p> latetoday  8:00pm</p></mat-list-item>
-  <mat-list-item><p> tomorrow  8:00am</p></mat-list-item>
-  <mat-list-item><p> Next week   mon ,8:00am</p></mat-list-item>
-</mat-menu>
-<button mat-icon-button matTooltip="Collaborator">
+<app-reminders></app-reminders>
+<!-- 
+-->
+<button mat-icon-button matTooltip="Collaborator" (click)="opendialog()">
   <mat-icon class="mat-18">person_add_outline
   </mat-icon>
 </button>
@@ -58,7 +51,7 @@
 
 <mat-menu #colorMenu="matMenu" >
   <ng-template matMenuContent>
-    <div class="buttons">
+    <div class="buttons" >
       <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
         <div *ngFor='let color of colors'>
           <button class="colors" [ngStyle]="{'background-color':  color.color }" (click)='colorsEdit(color.color,card)'
@@ -69,3 +62,4 @@
   </ng-template>
 </mat-menu>
 
+</div>

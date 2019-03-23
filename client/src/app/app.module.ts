@@ -21,7 +21,11 @@ import { LabelsComponent } from './labels/labels.component';
 import { SearchComponent } from './search/search.component';
 import { SearchPipe } from './pipe/search.pipe';
 import{AuthGuard} from './service/auth/auth.guard';
-import { RemindersComponent } from './reminders/reminders.component'
+import { RemindersComponent } from './reminders/reminders.component';
+import { ImageComponent } from './image/image.component'
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { CollaboratorComponent } from './collaborator/collaborator.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +44,9 @@ import { RemindersComponent } from './reminders/reminders.component'
     SearchComponent,
     SearchPipe,
     RemindersComponent,
-    
+    ImageComponent,
+    CollaboratorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,9 @@ import { RemindersComponent } from './reminders/reminders.component'
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,
-    FlexLayoutModule 
+    FlexLayoutModule ,
+    ImageCropperModule
+
   ],
   providers: [AuthGuard
     ],

@@ -15,6 +15,8 @@ import { TrashComponent } from './trash/trash.component';
 import { LabelsComponent } from './labels/labels.component';
 import { SearchComponent } from './search/search.component';
 import{AuthGuard } from './service/auth/auth.guard'
+import { ImageComponent } from './image/image.component';
+import { CollaboratorComponent } from './collaborator/collaborator.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,7 +32,9 @@ const routes: Routes = [
     { path:'trash',component:TrashComponent},
     { path:'archivenote',component:ArchivenoteComponent},
     { path:'lables',component:LabelsComponent},
-    { path:'search',component:SearchComponent}
+    { path:'search',component:SearchComponent},
+    {path:'image',component:ImageComponent},
+    {path:'collaborator',component:CollaboratorComponent}
     ]}
   ];
 

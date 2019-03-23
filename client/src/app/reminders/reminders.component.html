@@ -1,1 +1,85 @@
-<app-notebar [ngClass]="{'card-grid': view, 'card-list': !view}" [card]="title" fxLayout='column' [type]=archive fxLayout="row wrap"  ></app-notebar><br>
+<!-- <app-notebar [ngClass]="{'card-grid': view, 'card-list': !view}" [card]="title" fxLayout='column' [type]=archive fxLayout="row wrap"  ></app-notebar><br> -->
+<button mat-icon-button matTooltip="Remind me" [matMenuTriggerFor]="reminder" >
+        <mat-icon class="mat-18">notifications
+        </mat-icon>
+      </button>
+<mat-menu #reminder="matMenu">
+        <div *ngIf="menuTo==true" class="reminder">
+                <div>
+                        Reminder:
+                    </div>
+                        <!-- -------------------Todays Reminder--------------------- -->
+                    <button mat-menu-item (click)="todaysReminder()">
+                        <div fxFlex>Later today</div>
+                        <div fxFlex></div>
+                        <div fxFlex><span>08.00 PM</span></div>
+                    </button>
+                        <!-- -------------------Tomorrow Reminder--------------------- -->
+            
+                    <button mat-menu-item (click)="tomorrowsReminder()">
+                        <div fxFlex>Tomorrow</div>
+                        <div fxFlex></div>
+                        <div fxFlex><span>08.00 AM</span></div>
+                    </button>
+                        <!-- -------------------weekly Reminder--------------------- -->
+            
+                    <button mat-menu-item (click)="weeklyReminder()">
+                        <div fxFlex>Next week</div>
+                        <div fxFlex></div>
+                        <div fxFlex><span>08.00 AM</span></div>
+                    </button>
+            
+                <button class="itemButton" mat-menu-item (click)="$event.stopPropagation()" 
+                (click)="menuTo=!menuTo">
+                  <mat-icon>access_time</mat-icon>
+                  <span>Pick date And Time</span>
+                </button>
+              </div>
+            
+            
+              <div *ngIf="menuTo==false" class="maindiv">
+                <div class="itemButton" >
+                  <button mat-icon-button>
+                  <mat-icon (click)="menuTo=!menuTo" (click)="$event.stopPropagation()">
+                    arrow_back</mat-icon>
+                  </button>
+                  <span>Pick Datetime</span>
+                </div>
+                <mat-divider></mat-divider>
+                <mat-form-field class="example-full-width">
+                    <input matInput [min]="todayDate" [max]="maxDate" 
+                    (click)="$event.stopPropagation()" [(ngModel)]="customDate" (dateChange)="changeDate()"
+                    [matDatepicker]="picker" placeholder="Choose a date">
+                   
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker ></mat-datepicker>
+                </mat-form-field>
+              
+                <mat-form-field class="example-form-field ">
+                  <input matInput type="text" [disabled]='valueInput' [(ngModel)]="customTime"
+                  (click)="$event.stopPropagation()">
+                  <button mat-button matSuffix mat-icon-button 
+                  (click)="$event.stopPropagation()" [matMenuTriggerFor]="time">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                  </button>
+                </mat-form-field>
+          
+                <div class="save">
+                  <button mat-button (click)="customReminder()">Save</button>
+                </div>
+                </div>
+            </mat-menu>
+          
+            <mat-menu #time="matMenu">
+                <button mat-menu-item class="timelist" (click)="setCustomTime('8am')
+                ;$event.stopPropagation()" [disabled]='time1'>Morning 8am</button>
+                <button mat-menu-item class="timelist" (click)="setCustomTime('1pm')
+                ;$event.stopPropagation()" [disabled]='time2'>Afternoon 1pm</button>
+                <button mat-menu-item class="timelist" (click)="setCustomTime('6pm')
+                ;$event.stopPropagation()" [disabled]='time3'>Evening 6pm</button>
+                <button mat-menu-item class="timelist" (click)="setCustomTime('8pm')
+                ;$event.stopPropagation()" [disabled]='time4'> Night 8pm</button>
+                <button mat-menu-item class="timelist" 
+                (click)="valueInput=!valueInput;$event.stopPropagation()">Custom</button>
+              
+        </mat-menu> 

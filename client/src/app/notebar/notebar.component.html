@@ -1,6 +1,6 @@
                       
- <div *ngFor="let array of card  | search:Search" fxLayout="row wrap" class="notecard">
-<mat-card fxLayout="column" class="matcard" fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color'>
+ <div *ngFor="let array of card  | search:Search" fxLayout="row wrap" >
+<mat-card fxLayout="column" [ngClass]="{'matcard': view,'notecard': !view}"  fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color'>
   <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array)">
 
 

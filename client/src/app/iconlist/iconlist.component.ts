@@ -2,6 +2,8 @@ import { Component, OnInit,Output,EventEmitter,Input} from '@angular/core';
 import { DataserviceService } from '../service/dataservice.service'
 import { NoteserviceService } from '../service/noteservice.service'
 import { from } from 'rxjs';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import{CollaboratorComponent} from '../collaborator/collaborator.component'
 @Component({
   selector: 'app-iconlist',
   templateUrl: './iconlist.component.html',
@@ -15,7 +17,6 @@ export class IconlistComponent implements OnInit {
   @Input() card: any;
   @Input() more;
   @Input() type;
-
   model: any;
   flag = false;
   display=false;
@@ -40,7 +41,7 @@ export class IconlistComponent implements OnInit {
   ]]
 
   
-  constructor(private data:DataserviceService,private note:NoteserviceService) { }
+  constructor(private data:DataserviceService,private note:NoteserviceService,public dialog: MatDialog) { }
 //  deletedcards=[];
   ngOnInit() {
     // console.log(this.card);
@@ -88,7 +89,6 @@ console.log(obj);
  },err=>console.log(err))
 }
 doUnArchive(card){
-
   console.log(card);
   const obj=
   { "isArchived":false,
@@ -144,6 +144,14 @@ cardArchive(card){
 }
 notArchive(card){
   this.unarchiveCard.emit(card)
+
+}
+opendialog(){
+  const dialogRef = this.dialog.open(CollaboratorComponent, {
+    width: '700px',
+    height:'300px',
+    data: {}
+  });
 
 }
 }   

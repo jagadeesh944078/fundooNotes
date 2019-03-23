@@ -2,6 +2,7 @@ import { Component, OnInit,Input} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {UpdatenoteComponent } from 'src/app/updatenote/updatenote.component'
 import{NoteserviceService} from '../service/noteservice.service'
+import { viewAttached } from '@angular/core/src/render3/instructions';
 
 export interface dialog{
   array:[];
@@ -31,11 +32,12 @@ export class NotebarComponent implements OnInit {
  @Input() type;
  @Input() cond;
 @Input() Search;
+view;
 
   constructor(public dialog: MatDialog,private note:NoteserviceService) { }
   
   ngOnInit() {
-    
+    this.view = localStorage.getItem('view');
 console.log(this.card);
   }
   openDialog(array){

@@ -5,7 +5,20 @@ border-radius: 5px;
 box-shadow: 0px 2px 4px;
 margin-left: 47px;
 position: relative;
+opacity: .9;
+max-width: 8.5cm;
+ max-height: 3.6cm;
 }
+.notecard{
+  margin-top: 8%;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px;
+  margin-left: 47px;
+  position: relative;
+  opacity: .9;
+  max-width: 10cm;
+   max-height: 3.6cm;
+  }
 // .notecard{
 //     text-align:center;
 // }
@@ -18,12 +31,9 @@ position: relative;
 .card{
   margin-right: 0px;
 }
-.notecard{
+// .notecard{
   
-  opacity: .9;
- max-width: 8.5cm;
-  max-height: 3.6cm;
-}
+// }
 // .card{
 //   margin-inline-start: 0ch;
 // }

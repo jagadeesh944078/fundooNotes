@@ -21,9 +21,7 @@
   </div>
   <div >
 
-      <button mat-icon-button matTooltip="Refresh">
-          <mat-icon class="refresh">refresh</mat-icon>
-        </button>
+     
 
       <button *ngIf='view==false' mat-icon-button matTooltip="List view" (click)="toggle()"> 
           <mat-icon class="view_list">view_stream</mat-icon>
@@ -32,15 +30,11 @@
             <mat-icon class="view_list">view_module</mat-icon>
           </button>
         
-        <button mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings" >
-            <mat-icon class="settings">settings</mat-icon>
-          </button>
+       
   </div>
   <div>
-    <button mat-icon-button matTooltip="Google Apps">
-      <mat-icon class="mat-18">apps</mat-icon>
-    </button>
-   <button mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
+  
+   <button mat-mini-fab  mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
        
           <mat-icon class="account_circle">account_circle</mat-icon>
         </button>
@@ -50,20 +44,18 @@
 
 </mat-toolbar>
 
-<mat-menu #settingsForHeader="matMenu">
-   
-    <button mat-menu-item >Settings</button>
-    <button mat-menu-item >Send FeedBack</button>
-    <button mat-menu-item >Help</button>
-    <button mat-menu-item >App Download</button>
-    <button mat-menu-item >Keyboard Shortcut</button>
 
-  </mat-menu>
 <mat-menu #accountMenu="matMenu">
-  <span>{{userName}}</span>
-  <button mat-menu-item (click)="logout()">
-    <mat-icon (click)="logout()" class="mat-18">power_settings_new</mat-icon> Logout
-  </button>
+  
+    <button mat-icon-button class="change" (click)="openPicture()">change
+
+    </button>
+
+    <div fxLayout="column" fxLayoutAlign="left left" style="padding-right: 20px">
+        <span class="usernameStyle">{{userName}}</span>
+        <span class="emailStyle">{{email}}</span>
+        <button mat-button (click)="logout()" style="background-color: royalblue; margin-top: 25px">Log Out</button>
+      </div>
 </mat-menu>
 <mat-divider></mat-divider>
 
@@ -123,3 +115,4 @@
 </mat-drawer-content>
 
     </mat-drawer-container>
+    

@@ -7,6 +7,7 @@ import { DataserviceService } from '../service/dataservice.service';
   styleUrls: ['./reminders.component.scss']
 })
 export class RemindersComponent implements OnInit {
+  public menuTo: boolean = true;
 
   constructor(public data:DataserviceService) { }
   @Input() view;

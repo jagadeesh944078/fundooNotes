@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, Inject, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {LabelsComponent} from '../labels/labels.component'
 import { from } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { DataserviceService } from '../service/dataservice.service';
-
+import {ImageComponent} from '../image/image.component'
 export interface dialog{
   array:[];
 }
@@ -14,12 +14,12 @@ export interface dialog{
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  view=false;
 
   message: any;
   content: any;
 Search:string;
 public value = 0;
+view=false;
 
   constructor(private router: Router,public dialog: MatDialog,public data:DataserviceService) {
     
@@ -71,8 +71,19 @@ lookfor(){
 }
 toggle(){
   this.view=!this.view;
+  localStorage.setItem('view', JSON.stringify(this.view))
 this.data.changeAppearance(this.view);
 }
-
+openPicture(){
+  const dialogRef =this.dialog.open(ImageComponent,{
+    width: '80%',
+    height: '80%',
+    data: this.data,
+    disableClose: true
+  })
+  dialogRef.afterClosed().subscribe(result=>{
+   
+  })
+}
 
 }
