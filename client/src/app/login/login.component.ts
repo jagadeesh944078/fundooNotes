@@ -77,7 +77,12 @@ export class LoginComponent implements OnInit {
     }
     console.log(user);
     this.service.postRequest('user/login',user).subscribe((data: any)  =>  {
+      localStorage.setItem('firstName', data['firstName']);
+      localStorage.setItem('lastName', data['lastName']);
+      localStorage.setItem('email', data['email']);
+
       localStorage.setItem('token', data['id']);
+
       console.log(data);
       
       if (data != 'undefined') {

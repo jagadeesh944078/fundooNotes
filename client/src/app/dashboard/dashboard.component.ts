@@ -7,6 +7,7 @@ import { DataserviceService } from '../service/dataservice.service';
 import {ImageComponent} from '../image/image.component'
 export interface dialog{
   array:[];
+  
 }
 @Component({
   selector: 'app-dashboard',

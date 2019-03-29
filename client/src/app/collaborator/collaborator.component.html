@@ -6,40 +6,44 @@
     <span fxLayout="row">
       <button mat-icon-button class="icon"><mat-icon >person_outline</mat-icon></button>
       <div fxLayout="column">
-        <span class="usernameStyle">
-          {{user.userName}}<span style="font-style: italic">(Owner)</span>
-        </span>
-        <span class="emailStyle">
-          {{user.emailId}}
-        </span>
+        <div class="usernameStyle">
+          {{name}}<span style="font-style: italic">(Owner)</span>
+        </div>
+        <div class="emailStyle">
+          {{email}}
+        </div>
       </div>
     </span>
 
     
-    <div *ngFor="let userInfo of userInfos ">
-      <span fxLayout="row" style="position: relative;">
+    <div *ngFor="let array of userList">
+      <div fxLayout="row" style="position: relative;">
         <button mat-icon-button class="icon"><mat-icon>person_outline</mat-icon></button>
           <div fxLayout="column">
-            <span class="usernameStyle">
-                  {{userInfo.userName}}
-            </span>
-            <span class="emailStyle">
-                  {{userInfo.emailId}}
-            </span>
+            <div class="usernameStyle">
+                  {{array.firstName}} {{array.lastName}}
+            </div>
+            <div class="emailStyle">
+                  {{array.email}}
+            </div>
           </div>
-          <button mat-icon-button class="btnCollab" (click)="removeCollab(userInfo.emailId)"><mat-icon>close</mat-icon></button>
-        </span>
+          <button mat-icon-button class="btnCollab" (click)="removeCollab(data.array.id)"><mat-icon>close</mat-icon></button>
+        </div>
       </div>
     
-  <span fxLayout="row" style="position: relative;">
+  <div fxLayout="row" style="position: relative;">
     <button mat-icon-button class="icon"><mat-icon>person_add</mat-icon></button>
-    <input matInput #emailId type="email" (input)="getUser($event.target.value)" class="emailStyle" placeholder="Enter the email-id...">
-    <button mat-icon-button class="btnCollab" (click)="addCollab()"><mat-icon>done</mat-icon></button>
-  </span>
+    <input matInput [(ngModel)]='collaborator' (keyup)='searchForlist(collaborator)' class="emailStyle" placeholder="Enter the email-id..." [matMenuTriggerFor]='menu'>
+    <button mat-icon-button class="btnCollab" (click)="addCollab(data.array.id)"><mat-icon>done</mat-icon></button>
+  </div>
+<mat-menu #menu='matMenu'>
+  <div *ngFor='let array of userList'>
+    <div (click)='details(array)'>{{array.email}}</div>
+  </div>
 
+</mat-menu>
   </div>
   <div mat-dialog-actions class="actionDialog">
-    <button mat-raised-button class="actionButton" (click)="cancel" [mat-dialog-close]>Cancel</button>
+    <button mat-raised-button class="actionButton" (click)="cancel()" [mat-dialog-close]>Cancel</button>
     <button mat-raised-button class="actionButton" (click)="save()" [mat-dialog-close]>Save</button>
   </div>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons">

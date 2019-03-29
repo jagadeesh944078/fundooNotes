@@ -25,6 +25,7 @@ import { RemindersComponent } from './reminders/reminders.component';
 import { ImageComponent } from './image/image.component'
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
+import { RemindericonComponent } from './remindericon/remindericon.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
     RemindersComponent,
     ImageComponent,
     CollaboratorComponent,
+    RemindericonComponent,
 
   ],
   imports: [

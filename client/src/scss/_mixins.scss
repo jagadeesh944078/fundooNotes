@@ -18,3 +18,141 @@
     @mixin font(){
     font-family: 'Google Sans',Roboto,Arial,sans-serif;
     }
+    @mixin searchToolBar {
+        display: flex;
+         width: 50%;
+    }
+    @mixin dashboardToolBar {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+     @mixin searchInputBar {
+        border-radius: 5px;
+        width: 150%;
+        padding: 1%;
+    } 
+    @mixin dashboardTitle {
+        vertical-align: middle;
+        line-height: 49px;
+        width: 100%
+    }
+     @mixin sidenavBar {
+    position: absolute;
+    min-width: 300px;
+    top: 80px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    } 
+    @mixin sideNavlistItemsColored {
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        width: 300px;
+        font-size: 15px;
+        padding: 8px;
+        text-align: left;
+
+    } 
+    @mixin search {
+        margin-right: 33%;
+      width: 300%;
+      border: none;
+      outline: none;
+      user-select: none;
+    }
+    @mixin example-container {
+     position: absolute;
+      min-width: 250 px;
+      top: 80px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+    }
+    @mixin addNote{
+    margin: 9px auto 0 auto;
+    box-shadow: 0px 1px 5px;
+    vertical-align: middle;
+    border-radius: 8px;
+    width: 600px;
+    padding: 3px;
+    opacity: .8;
+}
+@mixin addNoteInput{
+    border: none;
+    outline: none;
+    resize: none;
+    width: 575px;
+    font-size: 14px;
+}
+
+    @mixin addNoteTitleInput{
+
+    border: none;
+    outline: none;
+    resize: none;
+    width: 90%;
+    font-size: 18 px;
+}
+    @mixin textArea{
+        background: transparent;
+        border: none;
+        outline: none;
+        user-select: none;
+        margin-left: 0cm;
+        margin-top: 1cm;
+        font-size: 0.4cm;
+    }
+     
+     @mixin takenote{
+            background: transparent;
+            margin-bottom: 10px;
+            border: none;
+            outline: none;
+            user-select: none;
+        }
+        @mixin  fundoo {
+            font-weight: bold;
+            font-family: sans-serif;
+            text-align: center
+        }
+        @mixin  createAccount {
+            font-size: 20px;
+            text-align: center;
+            vertical-align: middle;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 10%;
+            padding-bottom: 0;
+        }
+        @mixin  card {
+
+        width: 40%;
+        height: 70%;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    @mixin  Card {
+
+    flex-wrap: wrap;
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    }
+    @mixin  loginName {
+
+    font-size: 25px;
+    text-align: center;
+    vertical-align: middle;   
+    padding-left: 83px;       
+    padding-top: 20px;
+    padding-bottom: 20px;}

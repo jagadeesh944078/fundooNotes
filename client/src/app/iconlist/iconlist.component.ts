@@ -4,6 +4,9 @@ import { NoteserviceService } from '../service/noteservice.service'
 import { from } from 'rxjs';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import{CollaboratorComponent} from '../collaborator/collaborator.component'
+export interface dialog{
+  array:any;
+}
 @Component({
   selector: 'app-iconlist',
   templateUrl: './iconlist.component.html',
@@ -21,7 +24,7 @@ export class IconlistComponent implements OnInit {
   flag = false;
   display=false;
   title:any;
-
+ public arrayData=[];
 
   colorArray=[[{ 'color': '#FFFFFF', 'name': 'White' },
   { 'color': '#E53935', 'name': 'Red' },
@@ -45,6 +48,7 @@ export class IconlistComponent implements OnInit {
 //  deletedcards=[];
   ngOnInit() {
     // console.log(this.card);
+    this.getReminder();
     
   }
 
@@ -150,8 +154,15 @@ opendialog(){
   const dialogRef = this.dialog.open(CollaboratorComponent, {
     width: '700px',
     height:'300px',
-    data: {}
+    data: {array:this.card}
   });
+
+}
+getReminder(){
+  this.note.getReminder().subscribe(data=>{
+    this.arrayData=data['data']['data'];
+    // console.log(this.arrayData)
+  })
 
 }
 }   

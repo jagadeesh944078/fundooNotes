@@ -1,22 +1,11 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
 .card {
-  flex-wrap: wrap;
-    width: 300px;
-    height: 400px;
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  @include Card()
   }
 
 #loginName {
-    font-size: 25px;
-    text-align: center;
-    vertical-align: middle;   
-    padding-left: 83px;       
-    padding-top: 20px;
-    padding-bottom: 20px;
+    @include loginName()
  }
   .container {
     display: flex;
@@ -38,43 +27,36 @@
   }
   .f{
     color: #01579B;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: center
+    @include fundoo()
+
   }
   .u{
     color: #D50000;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: center
-    
+    @include fundoo()
+
   }
   .n{
     color: #FF8F00;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: center
+    @include fundoo()
+
   
   }
   .d{
     color: #01579B;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: center
+    @include fundoo()
+
   
   }
   .o{
     color: #33691E;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: center
+    @include fundoo()
+
   
   }
   .o{
     color: #D50000;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: center
+    @include fundoo()
+
   }
   .fundoo{
     margin-left: 20%;

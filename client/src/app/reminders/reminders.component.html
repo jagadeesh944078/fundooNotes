@@ -9,22 +9,22 @@
                         Reminder:
                     </div>
                         <!-- -------------------Todays Reminder--------------------- -->
-                    <button mat-menu-item (click)="todaysReminder()">
-                        <div fxFlex>Later today</div>
+                        <button class="itemButton" mat-menu-item (click)="chooseTime('8pm')">
+                            <div fxFlex>Later today</div>
                         <div fxFlex></div>
                         <div fxFlex><span>08.00 PM</span></div>
                     </button>
                         <!-- -------------------Tomorrow Reminder--------------------- -->
             
-                    <button mat-menu-item (click)="tomorrowsReminder()">
-                        <div fxFlex>Tomorrow</div>
+                        <button class="itemButton" mat-menu-item (click)="chooseTime('8am')">
+                            <div fxFlex>Tomorrow</div>
                         <div fxFlex></div>
                         <div fxFlex><span>08.00 AM</span></div>
                     </button>
                         <!-- -------------------weekly Reminder--------------------- -->
             
-                    <button mat-menu-item (click)="weeklyReminder()">
-                        <div fxFlex>Next week</div>
+                        <button class="itemButton" mat-menu-item (click)="chooseTime('Nextweek')">
+                            <div fxFlex>Next week</div>
                         <div fxFlex></div>
                         <div fxFlex><span>08.00 AM</span></div>
                     </button>

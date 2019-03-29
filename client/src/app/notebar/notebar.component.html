@@ -8,12 +8,13 @@
     
       <div ><mat-card-title class="title">{{array.title}} </mat-card-title></div>
      <div> <mat-card-subtitle class="desc" >{{array.description}}</mat-card-subtitle></div>
+     <app-remindericon ></app-remindericon>
+
     </div>
   </div>
   <div>
     <div fxFlex='100' >              
-      <app-iconlist [card]=array (archivedCard)="archive($event)" [more]=display  [type]=type  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
-
+      <app-iconlist [card]=array (archivedCard)="archive($event)" [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
     </div>
 
   </div>

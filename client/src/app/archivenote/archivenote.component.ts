@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { NoteserviceService } from '../service/noteservice.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class ArchivenoteComponent implements OnInit {
   card = [];
   archiveCard = [];
   archivenote = [];
+  @Input() type;
 
   constructor(private data: NoteserviceService) { }
 

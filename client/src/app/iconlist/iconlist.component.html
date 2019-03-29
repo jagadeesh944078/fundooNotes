@@ -1,7 +1,7 @@
 <div class="Hover">
 
-<app-reminders></app-reminders>
-<!-- 
+<app-reminders  [card]=card ></app-reminders>
+<!--
 -->
 <button mat-icon-button matTooltip="Collaborator" (click)="opendialog()">
   <mat-icon class="mat-18">person_add_outline
@@ -15,10 +15,10 @@
 <button mat-icon-button matTooltip="Add image">
   <mat-icon class="mat-18">photo</mat-icon>
 </button>
-<button  *ngIf='card.isArchived==false'  mat-icon-button matTooltip="Archive" (click)="doArchive(card)" >
+<button  *ngIf='type==note'  mat-icon-button matTooltip="Archive" (click)="doArchive(card)" >
   <mat-icon class="mat-18">archive</mat-icon>
 </button>
-<button *ngIf='card.isArchived==true' mat-icon-button matTooltip="Archive" (click)="doUnArchive(card)" >
+<button *ngIf='type==archive' mat-icon-button matTooltip="Archive" (click)="doUnArchive(card)" >
   <mat-icon class="mat-18">unarchive</mat-icon>
 </button>
 

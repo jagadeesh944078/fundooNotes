@@ -70,7 +70,7 @@
         
       </div>
       <div>
-        <button mat-button  [routerLink]="['remainder']"  (click)="headerName= 'Remainders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
+        <button mat-button  [routerLink]="['remindericon']"  (click)="headerName= 'Remainders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
           <mat-icon>notifications_none</mat-icon> Remainders
         </button>
       </div>
@@ -107,8 +107,7 @@
         </button>
   
       </div>
-      <!-- <app-add-note></app-add-note> -->
-      <!-- <app-notebar></app-notebar> -->
+     
 <router-outlet>
   
 </router-outlet>

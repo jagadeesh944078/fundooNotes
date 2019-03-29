@@ -1,4 +1,4 @@
-import { Component, OnInit,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 // import { NoteModel } from 'src/app/models/note.model';
 import {  HttpService} from '../service/http/http.service';
 import { Router } from '@angular/router';

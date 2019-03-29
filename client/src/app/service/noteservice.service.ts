@@ -44,4 +44,16 @@ export class NoteserviceService {
    updateProfile(data){
     return this.http.postJSON('user/uploadProfileImage',data)
    }
+   addReminders(data){
+     return this.http.postJSON('notes/addUpdateReminderNotes',data)
+   }
+   getReminder(){
+     return this.http.getHttp('notes/getReminderNotesList')
+   }
+   serchUserList(data){
+     return this.http.postJSON('user/searchUserList',data)
+   }
+   addColl(noteId,data){
+     return this.http.postJSON('notes/'+noteId+'/AddcollaboratorsNotes',data)
+   }
 }
