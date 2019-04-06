@@ -3,10 +3,14 @@
 .takenote{
     @include takenote();
       color: $greylight
+      
     }
     .textArea{
     @include textArea()
     } 
     ::ng-deep .mat-dialog-container{
       padding:0%; 
+  }
+  .sample{
+    background: transparent
   }

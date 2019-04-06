@@ -26,6 +26,7 @@ import { ImageComponent } from './image/image.component'
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { RemindericonComponent } from './remindericon/remindericon.component';
+import { DeletedialogComponent } from './deletedialog/deletedialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { RemindericonComponent } from './remindericon/remindericon.component';
     ImageComponent,
     CollaboratorComponent,
     RemindericonComponent,
+    DeletedialogComponent,
 
   ],
   imports: [

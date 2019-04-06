@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NoteserviceService } from '../service/noteservice.service';
 
 @Component({
   selector: 'app-remindericon',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./remindericon.component.scss']
 })
 export class RemindericonComponent implements OnInit {
-
-  constructor() { }
+public reminderData=[];
+  constructor(private note:NoteserviceService) { }
 
   ngOnInit() {
+    this.getReminders()
   }
-
+getReminders(){
+  this.note.getReminder().subscribe(data=>{
+  this.reminderData=data['data']['data']
+  // console.log(this.reminderData,"remindersdata")
+  })
+}
 }

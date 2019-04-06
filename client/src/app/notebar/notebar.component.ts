@@ -1,8 +1,10 @@
-import { Component, OnInit,Input} from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit,Input,Output,EventEmitter} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {UpdatenoteComponent } from 'src/app/updatenote/updatenote.component'
 import{NoteserviceService} from '../service/noteservice.service'
 import { viewAttached } from '@angular/core/src/render3/instructions';
+import{CollaboratorComponent} from '../collaborator/collaborator.component'
+import{DataserviceService} from '../service/dataservice.service'
 
 export interface dialog{
   array:[];
@@ -24,21 +26,30 @@ export class NotebarComponent implements OnInit {
  cardid: any;
  allcards: any;
  flag1=true;
+ ArrayOfLabel=[];
 
  message: string;
-
+// id:any
  @Input() card=[];
  @Input() arrayCards;
  @Input() type;
  @Input() cond;
 @Input() Search;
+@Output() updateEvent = new EventEmitter<any>();
 view;
 
-  constructor(public dialog: MatDialog,private note:NoteserviceService) { }
+  constructor(public dialog: MatDialog,private note:NoteserviceService,private dataservice:DataserviceService) { }
   
   ngOnInit() {
+    this.dataservice.currentMessageList.subscribe(message => {
+      console.log(message,"in display")
+      this.view = message})
+    
+    
+
     this.view = localStorage.getItem('view');
 console.log(this.card);
+this.getLabel();
   }
   openDialog(array){
     const dialogRef = this.dialog.open(UpdatenoteComponent,{
@@ -48,7 +59,7 @@ console.log(this.card);
     })
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      console.log(result['array'].id);
+      // console.log(result['array'].id);
       this.model = {
         noteId: result['array'].id,
         title: result['array'].title,
@@ -90,4 +101,33 @@ console.log(this.card);
       console.log(err)
     }
   }
+  opendialog(){
+    const dialogRef = this.dialog.open(CollaboratorComponent, {
+      width: '700px',
+      height:'300px',
+      data: {array:this.card}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+  remove(array){
+    var id= array.id;
+    console.log(id)
+    this.note.deleteReminder({"noteIdList":[array.id]}).subscribe(data=>{
+console.log(data)
+    // this.card.splice(array.id,1,3)
+    })
+
+  }
+  getLabel(){
+    this.note.getLabel().subscribe(data=>{
+    console.log(data,'label data')
+    this.ArrayOfLabel=data['data']['details']
+    console.log(this.ArrayOfLabel,'iconlist');
+    },
+    err=>{
+      console.log(err)
+    })
+    }
 }

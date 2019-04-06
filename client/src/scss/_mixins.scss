@@ -98,6 +98,11 @@
         background: transparent;
         border: none;
         outline: none;
+        max-height: 200px;
+        overflow: auto;
+        // max-height: 42px;
+        // max-height: 400px;
+
         user-select: none;
         margin-left: 0cm;
         margin-top: 1cm;
@@ -110,6 +115,7 @@
             border: none;
             outline: none;
             user-select: none;
+            overflow: auto;
         }
         @mixin  fundoo {
             font-weight: bold;

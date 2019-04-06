@@ -114,5 +114,27 @@ getHttp(url){
     console.log(localStorage.getItem('token'),"token")
     return this.http.post(url, body, httpOptions)
   }
+  encodedpostForm(url: any, data: any) {
+    url = this.link + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+    return this.http.delete(url, httpOptions);
+  }
+  postImage(url: string, body: any): any {
+    url=this.link + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token')
+  
+      })
+    }
+    console.log(localStorage.getItem('token'),"token")
+    return this.http.post(url, body, httpOptions)
+  }
 }
+
 

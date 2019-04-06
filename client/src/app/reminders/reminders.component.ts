@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { DataserviceService } from '../service/dataservice.service';
 import { NoteserviceService } from '../service/noteservice.service';
 
@@ -12,20 +12,22 @@ export class RemindersComponent implements OnInit {
 
   constructor(public data:DataserviceService,private notes:NoteserviceService) { }
   @Input() card: any;
+  @Output() reminderEvent = new EventEmitter<any>();
   public newDate;
   public date = new Date();
   @Input() note: any;
-  id=localStorage.getItem('token');
+  id=localStorage.getItem('userId');
 
+  @Output() messageEvent = new EventEmitter();
 
   ngOnInit() {
-    // this.data.currentMessage.subscribe(message => this.view = message)
+    // this.data.currentReminder.subscribe(message => this.card = message)
 
   }
   private model = {};
 
-chooseTime(card){
-  console.log(card)
+chooseTime(card,cardObject){
+  console.log('reminder add in ',cardObject)
   if(card=='8pm'){
     this.newDate = new Date(this.date.getFullYear(),this.date.getMonth(),this.date.getDate() + 0, 20, 0, 0)
   }
@@ -35,19 +37,36 @@ chooseTime(card){
   else if(card=='Nextweek'){
     this.newDate=new Date(this.date.getFullYear(),this.date.getMonth(),this.date.getDay()+7,8,0,0)
   }
+  console.log(cardObject,'iudshdhsoihdsoi');
+  
  
-const model={
-  'reminder':this.newDate,
-  'noteIdList':[this.card.id]
+  if(cardObject!=undefined)
+  {
+    const model={
+      'reminder':this.newDate,
+      'noteIdList':[this.card.id]
+    
+    
+    }
+    console.log(model);
+    
+    this.notes.addReminders(model).subscribe(data=>{
+    console.log(data);
+    },err=>console.log(err))
+    
+    }
+    else{
+      const model={
+        'reminder':this.newDate,
+        'type':'reminder'
+      
+      
+      }
+      console.log(model);
+      this.reminderEvent.emit(model)
+      //  this.data.changeReminder(model)
+    }
+  }
 
-
-}
-console.log(model);
-
-this.notes.addReminders(model).subscribe(data=>{
-console.log(data);
-},err=>console.log(err))
-
-}
 
 }

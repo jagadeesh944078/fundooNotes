@@ -4,7 +4,9 @@ import {LabelsComponent} from '../labels/labels.component'
 import { from } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { DataserviceService } from '../service/dataservice.service';
-import {ImageComponent} from '../image/image.component'
+import {ImageComponent} from '../image/image.component';
+import { environment } from 'src/environments/environment';
+import { NoteserviceService } from '../service/noteservice.service';
 export interface dialog{
   array:[];
   
@@ -15,19 +17,25 @@ export interface dialog{
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  private profile;
   message: any;
   content: any;
 Search:string;
+name:string;
+email:string
 public value = 0;
 view=false;
-
-  constructor(private router: Router,public dialog: MatDialog,public data:DataserviceService) {
+imageProfile: string;
+ private ArrayOfLabel = [];
+  constructor(private router: Router,public dialog: MatDialog,public data:DataserviceService,public note:NoteserviceService) {
     
    }
 
   ngOnInit() {
-
+this.name=localStorage.getItem('firstName')
+this.email=localStorage.getItem('email')
+this.data.currentPhoto.subscribe(message => {this.message = message})
+this.getlabel()
   }
  
   addNote(): void {
@@ -73,18 +81,39 @@ lookfor(){
 toggle(){
   this.view=!this.view;
   localStorage.setItem('view', JSON.stringify(this.view))
-this.data.changeAppearance(this.view);
+   this.data.changeAppearance(this.view);
 }
-openPicture(){
+imageFile = null;
+public imageNew = localStorage.getItem('imageUrl');
+img = environment.profileUrl + this.imageNew;
+onFileUpload(event) {
+  this.imageFile = event.path[0].files[0];
+  const uploadImage = new FormData();
+  uploadImage.append('file', this.imageFile, this.imageFile.name);
+  this.openPicture(event);
+
+}
+openPicture(data){
   const dialogRef =this.dialog.open(ImageComponent,{
     width: '80%',
     height: '80%',
-    data: this.data,
-    disableClose: true
+    data: data,
+    // disableClose: true
   })
   dialogRef.afterClosed().subscribe(result=>{
-   
+   this.data.currentPhoto.subscribe(response=>this.profile=response)
+   if(this.profile=true){
+     this.imageProfile=localStorage.getItem('imageUrl');
+     this.img=environment.profileUrl+this.imageProfile;
+   }
   })
 }
-
+// public image={};
+getlabel(){
+  this.note.getLabel().subscribe(data=>{
+    this.ArrayOfLabel=data['data']['details']
+    this.data.changeMessage(data['data']['details'])
+    // this.data.currentMessage.subscribe(message=>this.ArrayOfLabel=message)
+  })
+}
 }

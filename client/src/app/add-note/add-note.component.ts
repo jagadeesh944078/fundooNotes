@@ -14,6 +14,7 @@ export class AddNoteComponent implements OnInit {
   public notes:any={};
   pinnedcard:any;
   card: any;
+  date:Date;
   color='#ffffff';
   flag = true;
   flag1 = true;
@@ -22,13 +23,23 @@ export class AddNoteComponent implements OnInit {
   model: any;
   response: any;
   isOpen: boolean = false;
-  
+  private isArchived=false;
+  collaboratorArray=[];
   
   // note: NoteModel = new NoteModel();
   constructor(private service : HttpService,private router : Router,private data:DataserviceService,private note:NoteserviceService) { }
   ngOnInit() {
-    this.data.currentMessage.subscribe(message => this.card = message)
-    console.log(this.card, "card..")
+ this.data.currentCollaborator.subscribe(data=>{
+   console.log('data in add note ',data);
+   if(data.email!="")
+   this.collaboratorArray.push(data)
+   
+ },err=>{
+   console.log('error in add note ',err);
+   
+ })
+ console.log(this.date);
+ 
   }
 
   @Output() messageEvent = new EventEmitter<any>();
@@ -36,8 +47,12 @@ export class AddNoteComponent implements OnInit {
   
   
   close(){
+
     this.flag = !this.flag;
     if (this.title || this.description ) {
+
+
+
      this.notes = { 
     
       "title":this.title.value,
@@ -45,10 +60,15 @@ export class AddNoteComponent implements OnInit {
       "labelIdList"	:[],
       "checklist":"",
       "isPined":"",
-      "isArchived":"",
+      "isArchived":this.isArchived,
       "color":this.color,
-      "reminder":[],
-     "collaberators":""
+      "reminder":this.date,
+     "collaberators":JSON.stringify(this.collaboratorArray),
+}
+if(this.date==undefined){
+  console.log(this.date);
+  
+  this.notes.reminder='';
 }
     console.log(this.notes,'in add');
     this.isOpen=!this.isOpen;
@@ -83,7 +103,13 @@ export class AddNoteComponent implements OnInit {
     console.log(this.color);
     
   }
-  
+  remind(event){
+
+    console.log('event in add note',event);
+    this.date=event.reminder;
+    console.log(this.date,  '  ');
+    
+  }
 
 }
  

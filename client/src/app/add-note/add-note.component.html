@@ -4,7 +4,7 @@
   Take a note ...
    
   <button mat-icon-button   style="left: 9.3cm">
-<mat-icon aria-label="Example icon-button with a heart icon">
+<mat-icon aria-label="Example icon-button with a heart icon" (click)="choose3=false">
   check_box 
 
 </mat-icon>
@@ -34,17 +34,39 @@
     </button>
     <label></label>
     <textarea [ngStyle]="{'backgroundColor': color}" class="addNoteInput" [formControl]="description" placeholder="Take a note..." ></textarea>
+    
 
   </div>
-  
+  <!-- <div *ngFor='let item of array.reminder'>
+      <mat-chip-list>
+      <mat-chip class="sample" (mouseenter)="icon=true" (mouseleave)="icon=false">
+        Tom{{item|date:shorttime}}
+        <mat-icon *ngIf=icon (click)="remove(array)" matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    </div> -->
+    <mat-chip-list  *ngIf="date!=undefined">
+        <mat-chip class="sample" >
+          {{date | date}}
+          <mat-icon  (click)="remove(array)" matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+    <div fxLayout="row wrap" >
+      <div  *ngFor="let person of  collaboratorArray"  class="index" fxLayoutGap="40px">
+     <button  matTooltip="{{person.email}}" (click)="opendialog()"class="basic" mat-mini-fab >
+     {{person.email | uppercase | slice : 0 : 1 }} </button>
+     </div>
+     </div>
+
   <div class="addNoteControlIcon"  >
 
-    <app-iconlist  (messageEvent)="recievemessage($event)" ></app-iconlist>
+    <app-iconlist  (reminderEvent)='remind($event)' (messageEvent)="recievemessage($event)" [type]=note  ></app-iconlist>
     <button mat-button  (click)="close()"style="left:5cm">close </button>
-   
+
   </div>
 
-<div *ngIf=noteBar>
+  <div *ngIf=noteBar>
     <app-notebar *ngFor="let note of noteBarValue" [[note]]=note></app-notebar>
   </div>
   

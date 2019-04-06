@@ -1,0 +1,13 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.span{
+    margin-left:280px;
+    font-size:30px;
+  @include font();
+}
+.array{
+    margin-top:30px;
+    margin-bottom:60px;
+
+}

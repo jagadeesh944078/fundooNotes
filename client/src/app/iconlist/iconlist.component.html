@@ -1,9 +1,9 @@
 <div class="Hover">
 
-<app-reminders  [card]=card ></app-reminders>
+<app-reminders (reminderEvent)="remind($event)"  [card]=card  ></app-reminders>
 <!--
 -->
-<button mat-icon-button matTooltip="Collaborator" (click)="opendialog()">
+<button mat-icon-button matTooltip="Collaborator" (click)="opendialog(card)">
   <mat-icon class="mat-18">person_add_outline
   </mat-icon>
 </button>
@@ -29,11 +29,32 @@
 
 <mat-menu #menu="matMenu">
  
-    <button mat-menu-item>add label</button>
+    <button mat-menu-item (click)="getlabel()" [matMenuTriggerFor]="addlabel"><span>addlabel</span></button>
+    <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();" #addlabel="matMenu">
+        <div class="title">Label note
+
+</div>
+<br><div fxLayout="row" (click)="$event.stopPropagation();">
+    <mat-icon fxFlex="10"  style="max-width:10%" (click)="searchState()">search
+
+    </mat-icon>
+    
+    <input   class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
+   
+</div>
+<div *ngFor= "let label of ArrayOfLabel">
+   
+    <mat-checkbox >{{label.label}}</mat-checkbox>
+     
+  </div>
+<br>
+
+</mat-menu>
+
     <button mat-menu-item>add drawing</button>
     <button mat-menu-item>make a copy</button>
     <button mat-menu-item>show stick boxes</button>
-        <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
+    <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
 
     <button mat-menu-item (click)="deleteforever(card)">delete forever</button>
     <button mat-menu-item (click)="restore(card)">restore</button>

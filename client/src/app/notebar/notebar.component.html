@@ -1,27 +1,54 @@
-                      
- <div *ngFor="let array of card  | search:Search" fxLayout="row wrap" >
-<mat-card fxLayout="column" [ngClass]="{'matcard': view,'notecard': !view}"  fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color'>
+    <div fxLayout="row wrap">                  
+ <div *ngFor="let array of card  | search:Search" class="array"  >
+<mat-card class="EachCard" fxLayout="column" [ngClass]="{'matcard': view==true,'notecard': view==false}"  fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color' >
   <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array)">
 
 
     <div fxLayout="column"  mat-dialog-content class="card" >
     
       <div ><mat-card-title class="title">{{array.title}} </mat-card-title></div>
-     <div> <mat-card-subtitle class="desc" >{{array.description}}</mat-card-subtitle></div>
-     <app-remindericon ></app-remindericon>
+      <div><mat-card-subtitle class="desc">{{array.description}}</mat-card-subtitle></div>
 
+   <!----------------------- collaborators---------------------------------------->
+    <div fxLayout="row wrap" >
+    <div  *ngFor="let person of  array.collaborators"  class="index" fxLayoutGap="40px">
+   <button  matTooltip="{{person.email}}" (click)="opendialog()"class="basic" mat-mini-fab >
+   {{person.email | uppercase | slice : 0 : 1 }} </button>
+   </div>
+   </div>
+   <!------------------------reminders ------------------------------------------->
+<div *ngIf="array.reminder.length > 0">
+    <div *ngFor='let item of array.reminder'>
+      <mat-chip-list >
+      <mat-chip class="sample" >
+        Tom{{item | date}}
+        <mat-icon  (click)="remove(array)" matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
     </div>
   </div>
-  <div>
+    </div>
+   
+  </div>
+  <!-----------------------------------labels------------------------------------->
+  
+  <div *ngFor= "let label of array.ArrayOfLabel">
+   <mat-chip-list>
+    <mat-chip (click)="getLabel()">{{label.label}}</mat-chip>
+  </mat-chip-list>
+  </div>
+
+
+
     <div fxFlex='100' >              
       <app-iconlist [card]=array (archivedCard)="archive($event)" [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
     </div>
 
-  </div>
+ 
 
 </mat-card>
 </div>
-
+</div>
   
 
  

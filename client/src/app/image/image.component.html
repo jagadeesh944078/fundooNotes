@@ -23,7 +23,7 @@
     </div>
     <div style="bottom:5;margin-top: 5%" fxLayout="row">
       <div style="padding:5px;">
-          <button mat-raised-button color="primary" [mat-dialog-close]="{'image':croppedImage}">Save as profile picture</button>
+          <button mat-raised-button color="primary" [mat-dialog-close]="{'image':croppedImage}" (click)=setimage()>Save as profile picture</button>
       </div>
       <div style="padding:5px;">
           <button mat-button [mat-dialog-close]="{'title':false}" cdkFocusInitial>Cancel</button>

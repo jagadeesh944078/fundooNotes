@@ -7,7 +7,7 @@ import { NoteserviceService } from '../service/noteservice.service';
   styleUrls: ['./archivenote.component.scss']
 })
 export class ArchivenoteComponent implements OnInit {
-  card = [];
+   card = [];
   archiveCard = [];
   archivenote = [];
   @Input() type;

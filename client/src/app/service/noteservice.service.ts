@@ -56,4 +56,20 @@ export class NoteserviceService {
    addColl(noteId,data){
      return this.http.postJSON('notes/'+noteId+'/AddcollaboratorsNotes',data)
    }
+   removeColl(noteId,userId){
+     return this.http.encodedpostForm('notes/'+noteId+'/removeCollaboratorsNotes/'+userId,"")
+   }
+   uploagImage(data){
+     return this.http.postImage('user/uploadProfileImage',data)
+
+   }
+   deleteReminder(data){
+     return this.http.postJSON('notes/removeReminderNotes',data)
+   }
+   postUpdateNotelabel(labelid,data){
+     return this.http.postJSON('noteLabels/'+labelid+'/updateNoteLabel',data)
+   }
+   deletelabel(labelid){
+     return this.http.encodedpostForm('noteLabels/'+labelid+'/deleteNoteLabel',"")
+   }
 }

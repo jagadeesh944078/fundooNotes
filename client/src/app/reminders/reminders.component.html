@@ -9,21 +9,21 @@
                         Reminder:
                     </div>
                         <!-- -------------------Todays Reminder--------------------- -->
-                        <button class="itemButton" mat-menu-item (click)="chooseTime('8pm')">
+                        <button class="itemButton" mat-menu-item (click)="chooseTime('8pm',card)">
                             <div fxFlex>Later today</div>
                         <div fxFlex></div>
                         <div fxFlex><span>08.00 PM</span></div>
                     </button>
                         <!-- -------------------Tomorrow Reminder--------------------- -->
             
-                        <button class="itemButton" mat-menu-item (click)="chooseTime('8am')">
+                        <button class="itemButton" mat-menu-item (click)="chooseTime('8am',card)">
                             <div fxFlex>Tomorrow</div>
                         <div fxFlex></div>
                         <div fxFlex><span>08.00 AM</span></div>
                     </button>
                         <!-- -------------------weekly Reminder--------------------- -->
             
-                        <button class="itemButton" mat-menu-item (click)="chooseTime('Nextweek')">
+                        <button class="itemButton" mat-menu-item (click)="chooseTime('Nextweek',card)">
                             <div fxFlex>Next week</div>
                         <div fxFlex></div>
                         <div fxFlex><span>08.00 AM</span></div>
@@ -32,7 +32,7 @@
                 <button class="itemButton" mat-menu-item (click)="$event.stopPropagation()" 
                 (click)="menuTo=!menuTo">
                   <mat-icon>access_time</mat-icon>
-                  <span>Pick date And Time</span>
+                  Pick date And Time
                 </button>
               </div>
             
@@ -71,13 +71,13 @@
             </mat-menu>
           
             <mat-menu #time="matMenu">
-                <button mat-menu-item class="timelist" (click)="setCustomTime('8am')
+                <button mat-menu-item class="timelist" (click)="setCustomTime('8am',card)
                 ;$event.stopPropagation()" [disabled]='time1'>Morning 8am</button>
-                <button mat-menu-item class="timelist" (click)="setCustomTime('1pm')
+                <button mat-menu-item class="timelist" (click)="setCustomTime('1pm',card)
                 ;$event.stopPropagation()" [disabled]='time2'>Afternoon 1pm</button>
-                <button mat-menu-item class="timelist" (click)="setCustomTime('6pm')
+                <button mat-menu-item class="timelist" (click)="setCustomTime('6pm',card)
                 ;$event.stopPropagation()" [disabled]='time3'>Evening 6pm</button>
-                <button mat-menu-item class="timelist" (click)="setCustomTime('8pm')
+                <button mat-menu-item class="timelist" (click)="setCustomTime('8pm',card)
                 ;$event.stopPropagation()" [disabled]='time4'> Night 8pm</button>
                 <button mat-menu-item class="timelist" 
                 (click)="valueInput=!valueInput;$event.stopPropagation()">Custom</button>

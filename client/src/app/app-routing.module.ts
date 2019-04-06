@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgotComponent } from './forgot/forgot.component';
-//import { from } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { from } from 'rxjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -45,6 +44,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

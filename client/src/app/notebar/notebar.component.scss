@@ -1,35 +1,66 @@
-
+@import '../../scss/mixins';
+@import '../../scss/variables';
 .matcard{
-margin-top: 8%;
+// margin-top: 8%;
 border-radius: 5px;
 box-shadow: 0px 2px 4px;
 margin-left: 47px;
 position: relative;
 opacity: .9;
- max-height: 4.2cm;
- width: 275px;
+//  height:180px;
+ width: 700px;
+ margin-bottom: 5%;
+//  padding-bottom: 10px
 
 }
 .notecard{
-  margin-top: 8%;
+  // margin-top: 8%;
   border-radius: 5px;
-  box-shadow: 0px 2px 4px;
   margin-left: 47px;
   position: relative;
   opacity: .9;
-  max-height: 3.3cm;
-  width: 200px;
+  margin-bottom: 5%;
+  // max-height: 3.3cm;
+  // min-height: 179px;
+  overflow: hidden;
+
+  width: 300px;
   }
 // .notecard{
 //     text-align:center;
 // }
 .title{
   font-size: 14px;
+  // max-height: 42px;
+    overflow: hidden;
+    position: static;
+
 }
-.desc{
+.textArea{
   font-size: 18px;
+  width: 12px;
+}
+.EachCard{
+  margin-bottom: 4%;
+  margin-left: 10%;
+border-radius: 10px;
+// display: flex
+  // max-width: 33%;
+}
+.EachCard:hover{
+  box-shadow:1px 1px 2px 4px #888888;
+}
+.array{
+  height: fit-content;
+  
 }
 .card{
-  margin-right: 0px;
+  overflow: hidden;
 }
-
+.desc{
+   max-height: 42px;
+   position: static;;
+    overflow: hidden;}
+    .sample{
+      background: transparent
+    }
