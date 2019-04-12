@@ -23,7 +23,8 @@ export class CollaboratorComponent implements OnInit {
   constructor(  public dialogRef: MatDialogRef<CollaboratorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: dialog,public note:NoteserviceService,public dataservice:DataserviceService) { 
       this.card=data['collaborators']
-      console.log(this.card ,"data1")
+      console.log(data);
+      
 if(this.card==undefined){
   this.card=[];
 }
@@ -38,7 +39,7 @@ if(this.card==undefined){
   }
 
   addCollab(data){
-console.log(data.array);
+console.log(data);
 
     var body={
       "firstName":this.rFname,
@@ -50,15 +51,16 @@ this.card.push(body)
 
 this.collaborator=''
     this.dataservice.changeCollaborator(body);
-  console.log(body,"data")
-  if(data.array!=undefined)
-  this.note.addColl(data.array.id,body).subscribe(data=>{
+  console.log(data,"data",data.length)
+  if(data!=undefined && data.id!=undefined)
+  this.note.addColl(data.id,body).subscribe(data=>{
     console.log(data,"resp while adding")
   
 
   })
   }
 details(array,data){
+console.log(data);
 
 if(this.checkCollaborator(array)){
   return;
@@ -71,7 +73,6 @@ console.log(this.card,"deatails")
     this.rmail=array.email;
     this.rId=array.userId
     this.collaborator=this.rmail
-    this.addCollab
 
   }
   searchForlist(data){
@@ -82,11 +83,27 @@ console.log(this.card,"deatails")
     })
     
   }
-  removeCollab(noteid,userId){
+  
+  removeCollab(noteid,userId,index){
+    console.log(index);
+    
+   this.card.splice(index,1);
+
+
     console.log(userId,"cardid")
-    this.note.removeColl(noteid,userId.userId).subscribe(data=>{
+    console.log(noteid.id)
+    if(noteid.id!=undefined)
+{
+  this.note.removeColl(noteid.id,userId.userId).subscribe(data=>{
     console.log(data);
     })
+}else{
+  userId.type='remove';
+  this.dataservice.removeCollaboratorMethod(userId);
+}
+
+
+    
   }
 
  checkCollaborator(item){

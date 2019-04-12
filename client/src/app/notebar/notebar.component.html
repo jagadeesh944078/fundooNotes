@@ -17,12 +17,12 @@
    </div>
    </div>
    <!------------------------reminders ------------------------------------------->
-<div *ngIf="array.reminder.length > 0">
-    <div *ngFor='let item of array.reminder'>
+<div *ngIf="array.reminder.length!=0">
+    <div *ngFor='let item of array.reminder;'>
       <mat-chip-list >
-      <mat-chip class="sample" >
+      <mat-chip class="sample" (mouseenter)="show=true" (mouseleave)="show=false">
         Tom{{item | date}}
-        <mat-icon  (click)="remove(array)" matChipRemove>cancel</mat-icon>
+        <mat-icon  *ngIf=show (click)="remove(array)" matChipRemove>cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
     </div>
@@ -31,17 +31,21 @@
    
   </div>
   <!-----------------------------------labels------------------------------------->
-  
-  <div *ngFor= "let label of array.ArrayOfLabel">
+  <div *ngIf='array.noteLabels.length!=0'>
+      <div *ngFor= "let item of array.noteLabels">
    <mat-chip-list>
-    <mat-chip (click)="getLabel()">{{label.label}}</mat-chip>
+    <mat-chip class="sample" (mouseenter)="showing=true" (mouseleave)="showing=false">{{item.label}}
+        <mat-icon *ngIf=showing  (click)="removelabel(array.id,item.id)" matChipRemove>cancel</mat-icon>
+  </mat-chip>
+
   </mat-chip-list>
-  </div>
+  </div></div>
+
 
 
 
     <div fxFlex='100' >              
-      <app-iconlist [card]=array (archivedCard)="archive($event)" [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
+      <app-iconlist [card]=array (labelEvent)="label($event)" (archivedCard)="archive($event)" [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
     </div>
 
  

@@ -49,7 +49,7 @@ view;
 
     this.view = localStorage.getItem('view');
 console.log(this.card);
-this.getLabel();
+// this.getLabel();
   }
   openDialog(array){
     const dialogRef = this.dialog.open(UpdatenoteComponent,{
@@ -111,23 +111,33 @@ this.getLabel();
       console.log('The dialog was closed');
     });
   }
+  label($event){
+    this.ArrayOfLabel=$event.label;
+    // console.log($event,"labels")
+  }
+
   remove(array){
     var id= array.id;
     console.log(id)
     this.note.deleteReminder({"noteIdList":[array.id]}).subscribe(data=>{
 console.log(data)
-    // this.card.splice(array.id,1,3)
+ array.reminder=[]
+
+    // this.card.splice()
     })
 
   }
-  getLabel(){
-    this.note.getLabel().subscribe(data=>{
-    console.log(data,'label data')
-    this.ArrayOfLabel=data['data']['details']
-    console.log(this.ArrayOfLabel,'iconlist');
-    },
-    err=>{
-      console.log(err)
-    })
-    }
+ removelabel(noteid,labelid){
+   console.log(noteid)
+   console.log(labelid)
+   this.note.postAddLabelnotesRemove(noteid, labelid,{
+     "noteId":noteid,
+     "lableId":labelid
+   }
+    ).subscribe(data=>{
+     console.log(data)
+     
+   })
+
+ }
 }

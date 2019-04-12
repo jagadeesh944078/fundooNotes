@@ -17,6 +17,7 @@ import{AuthGuard } from './service/auth/auth.guard'
 import { ImageComponent } from './image/image.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { RemindericonComponent } from './remindericon/remindericon.component';
+import { QuestionComponent } from './question/question.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -35,7 +36,8 @@ const routes: Routes = [
     { path:'search',component:SearchComponent},
     {path:'image',component:ImageComponent},
     {path:'collaborator',component:CollaboratorComponent},
-    {path:'remindericon',component:RemindericonComponent}
+    {path:'remindericon',component:RemindericonComponent},
+    {path:'note/:noteId/question',component:QuestionComponent}
     ]}
   ];
 

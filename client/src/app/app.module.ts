@@ -27,6 +27,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { RemindericonComponent } from './remindericon/remindericon.component';
 import { DeletedialogComponent } from './deletedialog/deletedialog.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { QuestionComponent } from './question/question.component';
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { DeletedialogComponent } from './deletedialog/deletedialog.component';
     CollaboratorComponent,
     RemindericonComponent,
     DeletedialogComponent,
+    QuestionComponent,
 
   ],
   imports: [
@@ -59,7 +63,9 @@ import { DeletedialogComponent } from './deletedialog/deletedialog.component';
     AppMaterialModule,
     HttpClientModule,
     FlexLayoutModule ,
-    ImageCropperModule
+    ImageCropperModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot() ,
+    BarRatingModule
 
   ],
   providers: [AuthGuard

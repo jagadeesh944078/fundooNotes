@@ -53,7 +53,7 @@ this.getLabel();
     }
     console.log(this.model)
 
-    this.Data.addLabel(this.model).subscribe(data=>{
+    this.Data.addlabel(this.model).subscribe(data=>{
       console.log(data,"data  ")
       this.label='';
       this.ArrayOfLabel.push(data);

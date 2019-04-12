@@ -4,6 +4,7 @@ import { NoteserviceService } from '../service/noteservice.service'
 import { from } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CollaboratorComponent } from '../collaborator/collaborator.component'
+import { Router } from '@angular/router';
 
 export interface dialog {
   array: any;
@@ -16,7 +17,7 @@ export interface dialog {
 export class IconlistComponent implements OnInit {
   @Output() messageEvent = new EventEmitter();
   @Output() reminderEvent = new EventEmitter();
-
+  @Output() labelEvent = new EventEmitter();
   @Output() deletecard = new EventEmitter();
   @Output() archivedCard = new EventEmitter();
   @Output() unarchiveCard = new EventEmitter();
@@ -49,14 +50,14 @@ export class IconlistComponent implements OnInit {
   ]]
 
 
-  constructor(private data: DataserviceService, private note: NoteserviceService, public dialog: MatDialog) { }
+  constructor(private data: DataserviceService, private note: NoteserviceService, public dialog: MatDialog,private router:Router) { }
   //  deletedcards=[];
   ngOnInit() {
     // console.log(this.card);
     // this.getReminder();
     this.getLabel()
     this.data.currentCollaborator.subscribe(message=>{
-      console.log(message,'mess in icon');
+      // console.log(message,'mess in icon');
       
       if(message.email!=""){
         this.collab.push(message);
@@ -93,6 +94,7 @@ export class IconlistComponent implements OnInit {
   }
 
   doArchive(card) {
+    if(card!=undefined){
     console.log(card);
     const obj =
     {
@@ -104,7 +106,12 @@ export class IconlistComponent implements OnInit {
       console.log(data)
       this.cardArchive(card)
 
-    }, err => console.log(err))
+    }, err => console.log(err))}
+    else{
+      const obj={
+       "isArchived":true
+      }
+    }
   }
   doUnArchive(card) {
     console.log(card);
@@ -169,12 +176,12 @@ export class IconlistComponent implements OnInit {
   opendialog(data) {
     if(data==undefined){
       data={
-        collaborator:[]
+        collaborators:[]
       }
       console.log(this.collab);
       
       if(this.collab.length>0)
-      data.collaborator=this.collab;
+      data.collaborators=this.collab;
     }
     const dialogRef = this.dialog.open(CollaboratorComponent, {
       width: '600px',
@@ -183,23 +190,64 @@ export class IconlistComponent implements OnInit {
     });
 
   }
+  userId=localStorage.getItem('userId')
+  // id=localStorage.getItem('id')
 
-  getLabel() {
-    this.note.getLabel().subscribe(data => {
-      console.log(data, 'label data')
-      this.ArrayOfLabel = data['data']['details']
-      console.log(this.ArrayOfLabel, 'iconlist');
+  addLabel(label,card){
+    if(card!=undefined){
+
+    console.log(label,card.id);
+    this.model={
+      "id":card.id,
+      "label": label.label,
+      "isDeleted": false,
+      "labelId": label.id,
+      
+    }
+    console.log(this.model)
+
+    this.note.addLabel(this.model).subscribe(data=>{
+      console.log(data,"data  ")
+      // this.card.ArrayOfLabel=[this.model.labelId]
+
+      this.label='';
+
+      // this.ArrayOfLabel.push(data);
+      // this.getLabel();
     },
-      err => {
+    err=>{
+      console.log(err)
+    })}
+    else{
+      this.model={
+        // "id":card.id,
+        "label": label.label,
+        "isDeleted": false,
+        "labelId": label.id,
+        
+      }
+      this.labelEvent.emit(this.model);
+
+    }
+  }
+  getLabel() {
+  this.note.getLabel().subscribe(data => {
+  // console.log(data, 'label data')
+  this.ArrayOfLabel = data['data']['details']
+  // console.log(this.ArrayOfLabel, 'iconlist');
+  },
+   err => {
         console.log(err)
-      })
+   })
   }
 
 
   remind(event) {
-    console.log('event in iconlist ', event);
+    console.log('event in iconlist', event);
     this.reminderEvent.emit(event);
   }
+  askquestion(){
+  this.router.navigate(['/dashboard/note/'+ this.card.id +'/question'])}
 }
 
 

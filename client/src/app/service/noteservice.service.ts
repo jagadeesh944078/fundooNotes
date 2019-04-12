@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../service/http/http.service'
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,10 @@ export class NoteserviceService {
      return this.http.getHttp('notes/getArchiveNotesList')
    }
    addLabel(data){
-    return this.http.postJSON('/noteLabels',data)
+    return this.http.postJSON('notes/'+data.id+'/addLabelToNotes/'+data.labelId+'/add',data)
+   }
+   addlabel(data){
+     return this.http.postJSON('/noteLabels',data)
    }
    getLabel(){
      return this.http.getHttp('noteLabels/getNoteLabelList')
@@ -72,4 +76,19 @@ export class NoteserviceService {
    deletelabel(labelid){
      return this.http.encodedpostForm('noteLabels/'+labelid+'/deleteNoteLabel',"")
    }
+  postAddLabelnotesRemove(note, label,data) {
+   return this.http.postJSON('notes/'+note+'/addLabelToNotes/'+label+'/remove',data)
+  }
+  getNotesId(noteId){
+   return this.http.getHttp('notes/getNotesDetail/'+noteId)
+  }
+  addquestion(data){
+    return this.http.postJSON('questionAndAnswerNotes/addQuestionAndAnswer',data)
+  }
+  replyQnA(noteId,data){
+    return this.http.postJSON('questionAndAnswerNotes/reply/'+noteId,data)
+  }
+  likeQnA(id,data){
+    return this.http.postJSON('questionAndAnswerNotes/like/'+id,data)
+  }
 }

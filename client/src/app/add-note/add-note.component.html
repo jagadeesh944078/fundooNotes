@@ -37,18 +37,11 @@
     
 
   </div>
-  <!-- <div *ngFor='let item of array.reminder'>
-      <mat-chip-list>
-      <mat-chip class="sample" (mouseenter)="icon=true" (mouseleave)="icon=false">
-        Tom{{item|date:shorttime}}
-        <mat-icon *ngIf=icon (click)="remove(array)" matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list>
-    </div> -->
+  
     <mat-chip-list  *ngIf="date!=undefined">
-        <mat-chip class="sample" >
+        <mat-chip class="sample" (mouseenter)="show=true" (mouseleave)="show=false" >
           {{date | date}}
-          <mat-icon  (click)="remove(array)" matChipRemove>cancel</mat-icon>
+          <mat-icon  *ngIf=show (click)="remove(array)" matChipRemove>cancel</mat-icon>
         </mat-chip>
       </mat-chip-list>
 
@@ -58,7 +51,14 @@
      {{person.email | uppercase | slice : 0 : 1 }} </button>
      </div>
      </div>
-
+     <div *ngFor="let label of array2 ">
+     <mat-chip-list selected>
+      <mat-chip style="margin-top:15px">
+        {{label.label}}
+      <mat-icon matChipRemove (click)="removeAssignments()">cancel
+   </mat-icon>
+    </mat-chip>
+    </mat-chip-list></div>
   <div class="addNoteControlIcon"  >
 
     <app-iconlist  (reminderEvent)='remind($event)' (messageEvent)="recievemessage($event)" [type]=note  ></app-iconlist>

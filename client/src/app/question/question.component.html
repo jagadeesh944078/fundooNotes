@@ -1,0 +1,59 @@
+<div class="close_button">
+  <button mat-button (click)="closeQAndA()">Close</button>
+</div>
+<div class="card_detail">
+  <div class="title" [innerHTML]="title"></div>
+  <div class="description" [innerHTML]="description"></div><br>
+</div>
+<div>
+  <mat-divider></mat-divider>
+  <div>
+
+    <div *ngIf="show==0">
+    <div>Ask a Question </div>
+    <div>
+    <div class="floralEditor" [froalaEditor]="options" [(froalaModel)]="editorContent"></div>
+    </div>
+    <div class="close_button"><button (click)="addQuestion()" mat-button>Done</button> </div>
+    </div>
+    <div *ngIf="show!=0">
+    <div class="title"> Question asked</div>
+    <div [innerHtml]="question"> </div><br><hr>
+    </div>
+    </div>
+    <div>
+   <div *ngIf='show!=0'>
+   <div class="space" >
+        <button [ngStyle]="{'background-image':'url(' +img+qA[0].user.imageUrl+ ')','background-size':'cover'}"
+        mat-mini-fab>
+   </button> {{firstname}} {{lastname}}  {{qA[0].modifiedDate | date:'medium'}}
+      <mat-icon matTooltip="Reply" (click)="answer(qA[0].id)">reply</mat-icon>
+      
+          <mat-icon matTooltip="Like" class="icon" (click)="like(qA[0])">thumb_up_alt</mat-icon>
+           {{qA[0].like.length}}
+    
+     <div >
+        <bar-rating class="rating" matTooltip="Rate" [(rate)]="rate" [max]="5" (rateChange)="rating(qA[0], $event)"></bar-rating>
+      </div>
+      
+    </div>
+  <div class="title" [innerHtml]="question"> </div>
+
+    
+  </div></div>
+  <!-- reply -->
+      <div *ngIf="replyShow && qID==qA[0].id " >
+      <div >
+     <div>
+         
+    </div>
+    <div fxFlex=80 fxLayout="column" fxLayoutGap="10px">
+    <div class="floralEditor" [froalaEditor] [(froalaModel)]="editorContent"></div>
+    <div>
+    <button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button>
+    </div>
+    </div>
+   </div>
+  </div>
+
+</div>

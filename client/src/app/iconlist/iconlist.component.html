@@ -1,86 +1,80 @@
 <div class="Hover">
 
-<app-reminders (reminderEvent)="remind($event)"  [card]=card  ></app-reminders>
-<!--
+  <app-reminders (reminderEvent)="remind($event)" [card]=card></app-reminders>
+  <!--
 -->
-<button mat-icon-button matTooltip="Collaborator" (click)="opendialog(card)">
-  <mat-icon class="mat-18">person_add_outline
-  </mat-icon>
-</button>
-
-<button mat-icon-button matTooltip="add color" [matMenuTriggerFor]="colorMenu">
-  <mat-icon class="mat-18">color_lens</mat-icon>
-</button>
-
-<button mat-icon-button matTooltip="Add image">
-  <mat-icon class="mat-18">photo</mat-icon>
-</button>
-<button  *ngIf='type==note'  mat-icon-button matTooltip="Archive" (click)="doArchive(card)" >
-  <mat-icon class="mat-18">archive</mat-icon>
-</button>
-<button *ngIf='type==archive' mat-icon-button matTooltip="Archive" (click)="doUnArchive(card)" >
-  <mat-icon class="mat-18">unarchive</mat-icon>
-</button>
-
-
-<button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="settings">
-    <mat-icon class="mat-18">more_vert</mat-icon>
-</button>
-
-<mat-menu #menu="matMenu">
- 
-    <button mat-menu-item (click)="getlabel()" [matMenuTriggerFor]="addlabel"><span>addlabel</span></button>
-    <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();" #addlabel="matMenu">
-        <div class="title">Label note
-
-</div>
-<br><div fxLayout="row" (click)="$event.stopPropagation();">
-    <mat-icon fxFlex="10"  style="max-width:10%" (click)="searchState()">search
-
+  <button mat-icon-button matTooltip="Collaborator" (click)="opendialog(card)">
+    <mat-icon class="mat-18">person_add_outline
     </mat-icon>
-    
-    <input   class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
-   
-</div>
-<div *ngFor= "let label of ArrayOfLabel">
-   
-    <mat-checkbox >{{label.label}}</mat-checkbox>
-     
-  </div>
-<br>
+  </button>
 
-</mat-menu>
+  <button mat-icon-button matTooltip="add color" [matMenuTriggerFor]="colorMenu">
+    <mat-icon class="mat-18">color_lens</mat-icon>
+  </button>
 
-    <button mat-menu-item>add drawing</button>
-    <button mat-menu-item>make a copy</button>
+  <button mat-icon-button matTooltip="Add image">
+    <mat-icon class="mat-18">photo</mat-icon>
+  </button>
+  <button *ngIf='type==note' mat-icon-button matTooltip="Archive" (click)="doArchive(card)">
+    <mat-icon class="mat-18">archive</mat-icon>
+  </button>
+  <button *ngIf='type==archive' mat-icon-button matTooltip="Archive" (click)="doUnArchive(card)">
+    <mat-icon class="mat-18">unarchive</mat-icon>
+  </button>
+
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="settings">
+    <mat-icon class="mat-18">more_vert</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+
+    <button mat-menu-item [matMenuTriggerFor]="addlabel"><span>addlabel</span></button>
+    <mat-menu [overlapTrigger]="false" (click)="$event.stopPropagation();" #addlabel="matMenu">
+      <div class="title">Label note</div>
+      <br>
+      <div fxLayout="row">
+        <div>
+            <mat-icon fxFlex="10" style="max-width:10%" (click)="searchState()">search
+              </mat-icon>
+      
+          <input class="inputTitle" [(ngModel)]="search" placeholder="Enter label name">
+        </div>
+      
+      </div>
+      <div *ngFor="let label of ArrayOfLabel">
+        <mat-checkbox (click)="$event.stopPropagation();" (click)="addLabel(label,card)">{{label.label}}</mat-checkbox>
+      </div>
+      <br>
+
+    </mat-menu>
+
+    <!-- <button mat-menu-item>add drawing</button> -->
+    <!-- <button mat-menu-item>make a copy</button> -->
     <button mat-menu-item>show stick boxes</button>
     <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
-
     <button mat-menu-item (click)="deleteforever(card)">delete forever</button>
     <button mat-menu-item (click)="restore(card)">restore</button>
-
+    <button mat-menu-item (click)="askquestion()">askquestion</button>
   </mat-menu>
 
-<mat-menu #subMenu="matMenu">
- 
-  Label Note
-  <input matInput placeholder="create new label">
-
-  
-</mat-menu>
+  <mat-menu #subMenu="matMenu">
+    Label Note
+    <input matInput placeholder="create new label">
+  </mat-menu>
 
 
-<mat-menu #colorMenu="matMenu" >
-  <ng-template matMenuContent>
-    <div class="buttons" >
-      <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
-        <div *ngFor='let color of colors'>
-          <button class="colors" [ngStyle]="{'background-color':  color.color }" (click)='colorsEdit(color.color,card)'
-            matTooltip="{{color.name}}" mat-mini-fab></button>
+  <mat-menu #colorMenu="matMenu">
+    <ng-template matMenuContent>
+      <div class="buttons">
+        <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
+          <div *ngFor='let color of colors'>
+            <button class="colors" [ngStyle]="{'background-color':  color.color }" (click)='colorsEdit(color.color,card)'
+              matTooltip="{{color.name}}" mat-mini-fab></button>
+          </div>
         </div>
       </div>
-    </div>
-  </ng-template>
-</mat-menu>
+    </ng-template>
+  </mat-menu>
 
 </div>

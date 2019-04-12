@@ -27,6 +27,7 @@ public value = 0;
 view=false;
 imageProfile: string;
  private ArrayOfLabel = [];
+ label=[];
   constructor(private router: Router,public dialog: MatDialog,public data:DataserviceService,public note:NoteserviceService) {
     
    }
@@ -34,7 +35,9 @@ imageProfile: string;
   ngOnInit() {
 this.name=localStorage.getItem('firstName')
 this.email=localStorage.getItem('email')
-this.data.currentPhoto.subscribe(message => {this.message = message})
+this.data.currentPhoto.subscribe(data=> {
+  console.log(data ,"image data")
+})
 this.getlabel()
   }
  
@@ -101,11 +104,14 @@ openPicture(data){
     // disableClose: true
   })
   dialogRef.afterClosed().subscribe(result=>{
-   this.data.currentPhoto.subscribe(response=>this.profile=response)
+   this.data.currentPhoto.subscribe(imageResponse=>this.profile=imageResponse)
    if(this.profile=true){
      this.imageProfile=localStorage.getItem('imageUrl');
+
      this.img=environment.profileUrl+this.imageProfile;
    }
+  //  localStorage.setItem('imageUrl',data['status'].imageUrl)
+
   })
 }
 // public image={};
@@ -113,6 +119,7 @@ getlabel(){
   this.note.getLabel().subscribe(data=>{
     this.ArrayOfLabel=data['data']['details']
     this.data.changeMessage(data['data']['details'])
+    this.label.push(this.ArrayOfLabel)
     // this.data.currentMessage.subscribe(message=>this.ArrayOfLabel=message)
   })
 }

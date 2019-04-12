@@ -52,6 +52,7 @@ chooseTime(card,cardObject){
     
     this.notes.addReminders(model).subscribe(data=>{
     console.log(data);
+    this.card.reminder=[model.reminder]
     },err=>console.log(err))
     
     }

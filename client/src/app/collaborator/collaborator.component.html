@@ -16,7 +16,7 @@
     </span>
 
     <div *ngIf="card.length >0">
-    <div *ngFor="let array of card">
+    <div *ngFor="let array of card ;let i=index;">
       <div fxLayout="row" style="position: relative;">
         <button mat-icon-button class="icon"><mat-icon>person_outline</mat-icon></button>
           <div fxLayout="column">
@@ -27,7 +27,7 @@
                   {{array.email}}
             </div>
           </div>
-          <button mat-icon-button class="btnCollab" (click)="removeCollab(card.array.id,array)"><mat-icon>close</mat-icon></button>
+          <button mat-icon-button class="btnCollab" (click)="removeCollab(data,array,i)"><mat-icon>close</mat-icon></button>
         </div>
       </div>
     </div>
