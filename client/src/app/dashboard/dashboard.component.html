@@ -16,6 +16,9 @@
     </button>
     <input [(ngModel)]="Search" (keyup)='lookfor()' (click)='goSearch()' class="searchInputBar" type="text" placeholder="search">
   </div>
+  <div>
+  <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" [routerLink]="['cart']">
+    <mat-icon>shopping_cart</mat-icon></button></div>
   <!-----------------------------Gridview&listview --------------------------------------------->
   <div>
     <button *ngIf='view==false' mat-icon-button matTooltip="List view" (click)="toggle()">
@@ -73,8 +76,13 @@
 
   </mat-menu>
 
-
+  <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" >
+    <mat-icon routerLink="/dashboard/cart" >
+      shopping_cart
+    </mat-icon>
+</button>
 <mat-divider></mat-divider>
+
 <!--------------------------------------sidenav bar  -------------------------------------->
 <mat-drawer-container class="example-container">
   <mat-drawer #sidenav mode="side" opened="true">

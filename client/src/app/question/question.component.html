@@ -1,59 +1,219 @@
-<div class="close_button">
-  <button mat-button (click)="closeQAndA()">Close</button>
-</div>
-<div class="card_detail">
-  <div class="title" [innerHTML]="title"></div>
-  <div class="description" [innerHTML]="description"></div><br>
-</div>
-<div>
-  <mat-divider></mat-divider>
-  <div>
+<div class="first" fxLayout="column" fxLayout.xs="column">
+  <div class="mainCard">
+      <!-- <mat-card class="matcard_override"> -->
+          <div class="close_button"><button (click)=closeQAndA() mat-button>Close</button> </div>
+          <!--********** card Duplicate***********-->
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="card_detail">
+                  <div class="title" [innerHTML]="title"></div>
+                  <div class="description" [innerHTML]="description"></div>
+              </div>
 
-    <div *ngIf="show==0">
-    <div>Ask a Question </div>
-    <div>
-    <div class="floralEditor" [froalaEditor]="options" [(froalaModel)]="editorContent"></div>
-    </div>
-    <div class="close_button"><button (click)="addQuestion()" mat-button>Done</button> </div>
-    </div>
-    <div *ngIf="show!=0">
-    <div class="title"> Question asked</div>
-    <div [innerHtml]="question"> </div><br><hr>
-    </div>
-    </div>
-    <div>
-   <div *ngIf='show!=0'>
-   <div class="space" >
-        <button [ngStyle]="{'background-image':'url(' +img+qA[0].user.imageUrl+ ')','background-size':'cover'}"
-        mat-mini-fab>
-   </button> {{firstname}} {{lastname}}  {{qA[0].modifiedDate | date:'medium'}}
-      <mat-icon matTooltip="Reply" (click)="answer(qA[0].id)">reply</mat-icon>
-      
-          <mat-icon matTooltip="Like" class="icon" (click)="like(qA[0])">thumb_up_alt</mat-icon>
-           {{qA[0].like.length}}
-    
-     <div >
-        <bar-rating class="rating" matTooltip="Rate" [(rate)]="rate" [max]="5" (rateChange)="rating(qA[0], $event)"></bar-rating>
+          </div>
+          <!--********** card Duplicate***********-->
+          <hr>
+          <!--********** Question Details**********-->
+          <div>
+
+              <div *ngIf="show==0" fxLayoutAlign="space-between center">
+                  <div>
+                      <!-- <div contenteditable="true" #quesReplyArea class="question_field" placeholder="Enter your Query"></div> -->
+                      <div class="floralEditor" [froalaEditor]="options" [(froalaModel)]="editorContent"></div>
+                  </div>
+                  <div class="close_button"><button (click)=addQuestion() mat-button>Done</button> </div>
+              </div>
+              <div *ngIf="show!=0">
+                  <div class="title" > Question.....</div>
+                  <div [innerHtml]="question" > </div>
+
+              </div>
+
+          </div>
+
+      <!-- </mat-card> -->
+  </div>
+  <!--********** Question Details done**********-->
+
+  <div class="overflow" fxLayout="column" *ngIf="show!=0">
+      <!------------ 1st Level Relply---------------->
+      <div class="moving_pannel" *ngIf="show!=0">
+          <div fxLayout="row">
+              <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md=10 fxFlex.lg=5 fxFlex.xl=5>
+                  <button [ngStyle]="{'background-image':'url(' +img+qA[0].user.imageUrl+ ')','background-size':'cover'}"
+                      mat-mini-fab>
+                  </button>
+              </div>
+
+              <div fxFlex.xs=70 fxFlex.sm=70 fxFlex.md=70 fxFlex.lg=80 fxFlex.xl=80 fxFlex.lt-sm=80 fxFlex.lt-md=80
+                  fxFlex.lt-xl=80 fxFlex.gt-xs=80 fxFlex.gt-md=80 fxFlex.gt-lg=80 fxLayout="column">
+                  <div fxLayout="row" fxLayout.xs="column">
+                      <div class="username">{{qA[0].user.firstName}} {{qA[0].user.lastName}}</div>
+
+                      <div fxLayout="row " class="date">{{qA[0].modifiedDate | date:'medium'}}</div>
+                  </div>
+                  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                      <div class="main_ques_display" [innerHtml]=" qA[0].message"></div>
+                      <div fxLayout="row" fxLayoutGap="10px">
+                          <div>
+                              <mat-icon matTooltip="Reply" (click)="answer(qA[0].id)" class="icon">reply</mat-icon>
+                          </div>
+                          <div fxLayout="row">
+                              <mat-icon matTooltip="Like" class="icon" (click)="like(qA[0])">thumb_up_alt</mat-icon>
+                              <div class="count_like"> {{qA[0].like.length}}</div>
+                          </div>
+                          <div *ngIf="checkRating(qA[0].rate)">
+                              <bar-rating class="rating" matTooltip="Rate" [(rate)]="rate" [max]="5" (rateChange)="rating(qA[0], $event)"></bar-rating>
+                          </div>
+                          <div class="rating">{{averageRating(qA[0].rate)}}</div>
+                          <div>
+                                  <mat-icon  class="down" *ngIf="open==true" (click)="open = !open">keyboard_arrow_down</mat-icon>
+                                  <mat-icon matTooltip="Hide {{viewReplies(qA[0])}} replies" class="down" *ngIf="open==false" (click)="open = !open">keyboard_arrow_up</mat-icon>
+                          </div>
+                          <div class="reply"> View {{viewReplies(qA[0])}} replies</div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+          <div *ngIf="replyShow && qID==qA[0].id " >
+              <div fxLayout="row">
+                  <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md=10 fxFlex.lg=5 fxFlex.xl=5>
+                      <button [ngStyle]="{'background-image':'url(' +img2+ ')','background-size':'cover'}"
+                          mat-mini-fab>
+                      </button>
+                  </div>
+                  <div fxFlex=80 fxLayout="column" fxLayoutGap="10px">
+                      <div class="floralEditor" [froalaEditor] [(froalaModel)]="editorContent"></div>
+                      <div>
+                          <button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button>
+                      </div>
+                  </div>
+                  
+
+              </div>
+          </div>
       </div>
-      
-    </div>
-  <div class="title" [innerHtml]="question"> </div>
 
-    
-  </div></div>
-  <!-- reply -->
-      <div *ngIf="replyShow && qID==qA[0].id " >
-      <div >
-     <div>
-         
-    </div>
-    <div fxFlex=80 fxLayout="column" fxLayoutGap="10px">
-    <div class="floralEditor" [froalaEditor] [(froalaModel)]="editorContent"></div>
-    <div>
-    <button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button>
-    </div>
-    </div>
-   </div>
+
+      <!--------********** 2nd Level Relply**************----------->
+      <div style="margin-left: 50px" *ngFor="let item of qA">
+          <div *ngIf="item.parentId==qA[0].id && open==false">
+              <div class="moving_pannel">
+                  <div fxLayout="row">
+                      <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md:=10 fxFlex.lg=5 fxFlex.xl=5>
+                          <button [ngStyle]="{'background-image':'url(' +img+item.user.imageUrl+ ')','background-size':'cover'}"
+                              mat-mini-fab></button>
+                      </div>
+
+                      <div fxFlex.xs=70 fxFlex.sm=70 fxFlex.md=70 fxFlex.lg=80 fxFlex.xl=80 fxFlex.lt-sm=80
+                          fxFlex.lt-md=80 fxFlex.lt-xl=80 fxFlex.gt-xs=80 fxFlex.gt-md=80 fxFlex.gt-lg=80 fxLayout="column">
+                          <div fxLayout="row" fxLayout.xs="column">
+                              <div class="username">{{item.user.firstName}} {{item.user.lastName}}</div>
+
+                              <div fxLayout="row " class="date">{{item.modifiedDate | date:'medium'}}</div>
+
+                          </div>
+                          <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                              <div class="main_ques_display2" [innerHTML]=" item.message"></div>
+                              <div fxLayout="row" fxLayoutGap="10px">
+                                  <div>
+                                      <mat-icon matTooltip="Reply" (click)="answer(item.id)" class="icon">reply</mat-icon>
+                                  </div>
+                                  <div fxLayout="row">
+
+                                      <mat-icon matTooltip="Like" class="icon" (click)="like(item)">thumb_up_alt</mat-icon>
+                                      <div class="count_like"> {{item.like.length}}</div>
+
+                                  </div>
+                                  <div *ngIf="checkRating(item.rate)">
+                                      <bar-rating matTooltip="Rate" [max]="5" [(rate)]="rate" (rateChange)="rating(item, $event)"></bar-rating>
+                                  </div>
+                                  <div class="rating">{{averageRating(item.rate)}}</div>
+                                  <div>
+                                          <mat-icon matTooltip=" View {{viewReplies(item)}} replies" class="down" *ngIf="down==true" (click)="replyDown(item.id)">keyboard_arrow_down</mat-icon>
+                                          <mat-icon matTooltip=" Hide {{viewReplies(item)}} replies" class="down" *ngIf="down==false" (click)="replyDown(item.id)">keyboard_arrow_up</mat-icon>
+                                  </div>
+
+
+                              </div>
+
+
+                          </div>
+                      </div>
+
+                  </div>
+                  <div *ngIf="replyShow && qID==item.id">
+                      <div fxLayout="row">
+                          <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md:=10 fxFlex.lg=5 fxFlex.xl=5>
+                              <button [ngStyle]="{'background-image':'url(' +img2+ ')','background-size':'cover'}"
+                                  mat-mini-fab>
+                              </button>
+                          </div>
+                          <div fxFlex=80 fxLayout="column" fxLayoutGap="15px">
+                              <div  [froalaEditor]="options" [(froalaModel)]="editorContent"></div>
+                              <div><button class="reply_button" (click)="replyTo()" mat-raised-button>Reply</button> </div>
+                          </div>
+                       </div>
+
+                  </div>
+              </div>
+              <!-------********** 3rd Level container************------->
+
+
+              <div style="margin-left: 40px">
+                  <div *ngFor="let item2 of qA">
+                      <div *ngIf="item2.parentId==item.id && down==false &&  rID==item.id">
+
+                          <div class="moving_pannel">
+                              <div fxLayout="row">
+                                  <div fxFlex.xs=20 fxFlex.sm=10 fxFlex.md:=10 fxFlex.lg=5 fxFlex.xl=5>
+                                      <button [ngStyle]="{'background-image':'url(' +img+item2.user.imageUrl+ ')','background-size':'cover'}"
+                                          mat-mini-fab></button>
+                                  </div>
+
+                                  <div fxFlex.xs=70 fxFlex.sm=70 fxFlex.md=70 fxFlex.lg=80 fxFlex.xl=80 fxFlex.lt-sm=80
+                                      fxFlex.lt-md=80 fxFlex.lt-xl=80 fxFlex.gt-xs=80 fxFlex.gt-md=80 fxFlex.gt-lg=80
+                                      fxLayout="column">
+                                      <div fxLayout="row" fxLayout.xs="column">
+                                          <div class="username">{{item2.user.firstName}} {{item2.user.lastName}}</div>
+
+                                          <div fxLayout="row" class="date">{{item2.modifiedDate |
+                                              date:'medium'}}</div>
+
+                                      </div>
+                                      <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                                          <div class="main_ques_display3" [innerHTML]="item2.message"></div>
+                                          <div fxLayout="row" fxLayoutGap="10px">
+                                              <div>
+                                                  <mat-icon matTooltip="Reply" (click)="answer(item.id)" class="icon">reply</mat-icon>
+                                              </div>
+
+                                              <div fxLayout=row>
+                                                  <mat-icon matTooltip="Like" class="icon" (click)="like(item2)">thumb_up_alt</mat-icon>
+                                                  <div class="count_like"> {{item2.like.length}}</div>
+
+                                              </div>
+
+
+                                              <div *ngIf="checkRating(item2.rate)">
+                                                  <bar-rating matTooltip="Rate" [max]="5" [(rate)]="rate"
+                                                      (rateChange)="rating(item2, $event)"></bar-rating>
+                                              </div>
+                                              <div class="rating">{{averageRating(item2.rate)}}</div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-----------------------4th level ------------------>
+          </div>
+      </div>
+
+
   </div>
 
 </div>

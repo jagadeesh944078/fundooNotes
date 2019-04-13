@@ -18,6 +18,7 @@ import { ImageComponent } from './image/image.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { RemindericonComponent } from './remindericon/remindericon.component';
 import { QuestionComponent } from './question/question.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -37,7 +38,8 @@ const routes: Routes = [
     {path:'image',component:ImageComponent},
     {path:'collaborator',component:CollaboratorComponent},
     {path:'remindericon',component:RemindericonComponent},
-    {path:'note/:noteId/question',component:QuestionComponent}
+    {path:'note/:noteId/question',component:QuestionComponent},
+    {path:'cart',component:CartComponent}
     ]}
   ];
 

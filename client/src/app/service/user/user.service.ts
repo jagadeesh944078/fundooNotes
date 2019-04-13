@@ -1,176 +1,218 @@
-
-// import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-// import { HttpService } from '../../core/services/http/http.service'
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-// import { DialogComponent } from '../dialog/dialog.component';
-// import { AddlabelComponent } from '../addlabel/addlabel.component';
-// import { MatSnackBar } from '@angular/material';
-// import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
-// import { NotesService } from '../../core/services/notes/notes.service';
-// import { LoggerService } from '../../core/services/logger/logger.service';
-// import { takeUntil } from 'rxjs/operators';
-// import { Subject } from 'rxjs';
+// import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+// import { NoteService } from 'src/app/core/service/note-service/note.service';
+// import { Router, ActivatedRoute, Params } from '@angular/router';
+// import { environment } from 'src/environments/environment';
+// import { RatingModule } from "ngx-rating";
+// import { LoggerService } from "../../core/service/logger/logger.service"
 
 // @Component({
-//   selector: 'app-moreicon',
-//   templateUrl: './moreicon.component.html',
-//   styleUrls: ['./moreicon.component.scss']
+//   selector: 'app-question-and-answer',
+//   templateUrl: './question-and-answer.component.html',
+//   styleUrls: ['./question-and-answer.component.scss']
 // })
-// export class MoreiconComponent implements OnInit,OnDestroy {
-//   destroy$: Subject<boolean> = new Subject<boolean>();
 
-//   @Input() arrayOfNotes;
-//   @Input() arrayOfMynotes;
-//   @Output() delEvent = new EventEmitter<any>();
-//   @Output() moreEvent = new EventEmitter<any>();
-//   @Input() name;
+// export class QuestionAndAnswerComponent implements OnInit {
+//   data: any;
 
-//   private ArrayOfLabel = [];
-//   public checklist = [];
-//   //  Forever
-//   public check = true;
-//   private array1 = [];
-//   private array2 = [];
-
-//   public noteArray;
-//   public isChecked;
-//   public model;
-//   public event: boolean;
-//   constructor(public service: HttpService,public notesService:NotesService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+//   constructor(private noteService: NoteService,
+//     private router: Router,
+//     private activatedRoute: ActivatedRoute) { }
+//   @ViewChild('replyArea') private answerReply: ElementRef;
+//   @ViewChild('quesReplyArea') private quesReply: ElementRef;
+//   private noteId;
+//   private title;
+//   private description;
+//   private question;
+//   private show;
+//   private body = {
+//     "question": ""
+//   }
+//   public owner;
+//   private img;
+//   private date;
+//   private fName;
+//   private lName;
+//   private qA;
+//   private replyShow = false;
+//   private image;
+//   private img2;
+//   private open = true;
+//   private down = true;
+//   private rID;
+//   private replyCount;
+//   private value;
+//   private avgRate;
+//   private qID;
+//   private rate;
+//   public editorContent: string ;
 
 //   ngOnInit() {
-
+//     this.activatedRoute.params.subscribe((params: Params) => {
+//       this.noteId = params['noteId'];
+//     });
+//     // this.noteService.getNoteDetails(this.noteId).subscribe(response => {
+//     //   this.title = response['data']['data'][0].title;
+//     //   this.description = response['data']['data'][0].description;
+//     //   this.show = response['data']['data'][0].questionAndAnswerNotes.length;
+//     //   if (this.show != 0) {
+//     //     this.question = response['data']['data'][0].questionAndAnswerNotes[0].message;
+//     //   }
+//     //   this.img = environment.profieUrl;
+//     //   this.date = response['data']['data'][0].questionAndAnswerNotes[0].modifiedDate;
+//     //   this.qA = response['data']['data'][0].questionAndAnswerNotes;
+//     //   this.image=localStorage.getItem('imageUrl');
+//     //   this.img2=environment.profieUrl+this.image; 
+//     // })
+//     this.getNotes();
 //   }
-//   private token = localStorage.getItem('token')
-//   public temp;
-//   deleteNotes(arrayOfNotes) {
+//   getNotes() {
+//     this.activatedRoute.params.subscribe((params: Params) => {
+//       this.noteId = params['noteId'];
+//     });
+     
+//       this.noteService.getNoteDetails(this.noteId).subscribe(response => {
+// console.log(response);
 
-//     LoggerService.log(this.arrayOfNotes);
-//     let model = {
-//       "isDeleted": true,
-//       "noteIdList": [this.arrayOfNotes]
-//     }
-//     this.notesService.postTrashNotes(model)
-//     .pipe(takeUntil(this.destroy$))
-//     .subscribe(data => {
-//       LoggerService.log("delete note", data);
-//       this.snackBar.open("note deleted  successfully,please check in trash", "trash", {
-//         duration: 10000,
-
-//       });
-//       this.moreEvent.emit();
-
-//     })
-//   }
-//   getLabel() {
-
-//     this.notesService.getLabels()
-//     .pipe(takeUntil(this.destroy$))
-//     .subscribe(result => {
-//       LoggerService.log(result['data'].details);
-
-//       this.ArrayOfLabel = [];
-//       for (let index = 0; index < result['data'].details.length; index++) {
-//         if (result['data'].details[index].isDeleted == false) {
-//           this.ArrayOfLabel.push(result['data'].details[index]);
-//         }
+//       this.title = response['data']['data'][0].title;
+//       this.description = response['data']['data'][0].description;
+//       this.show = response['data']['data'][0].questionAndAnswerNotes.length;
+//       if (this.show != 0) {
+//         this.question = response['data']['data'][0].questionAndAnswerNotes[0].message;
 //       }
-//       LoggerService.log("emitting",this.ArrayOfLabel);
+//       this.img = environment.profieUrl;
+//       this.date = response['data']['data'][0].questionAndAnswerNotes[0].modifiedDate;
+//       this.qA = response['data']['data'][0].questionAndAnswerNotes;
 
+//       this.image = localStorage.getItem('imageUrl');
+//       this.img2 = environment.profieUrl + this.image;
+//     })
 
+//   }
+//   /**
+//   *   @description : Api call for add question Label
+//   **/
+//   addQuestion() {
+//     this.show = !this.show;
+//     let requestBody = {
+//       "message": this.editorContent,
+//       "notesId": this.noteId
+//     }
+//     this.noteService.addQuestion(requestBody).subscribe(result => {
+//       this.getNotes();
 //     })
 //   }
-//   addLabelList(label) {
-
-//     LoggerService.log(label.id);
-//     LoggerService.log("noteid", this.arrayOfNotes);
-//     this.notesService.postAddLabelnotes(label.id, this.arrayOfNotes)
-//     .pipe(takeUntil(this.destroy$))
-//     .subscribe(response => {
-//       LoggerService.log("adding label to note", response);
-
-//       this.moreEvent.emit(label);
-
-//     })
-   
+//   /**
+//    *   @description : Api call for closing QandA
+//    **/
+//   closeQAndA() {
+//     this.router.navigate(['/home/notes'])
 //   }
-//   selectCheck(labelOption){
-    
-//     if (this.arrayOfMynotes.noteLabels.some((data) => data.label == labelOption.label)) {
+//   /**
+//    *   @description : Api call for like
+//    **/
+//   like(data) {
+//     let requestBody = {
+//       "like": true
+//     }
+//     this.noteService.likeQnA(data.id, requestBody).subscribe(response => {
+//       this.getNotes();
+//     })
+//   }
+//   private rateBody = {
+//     "rate": ""
+//   }
+//   /**
+//    *   @description : Api call for rating
+//    **/
+//   rating(data, event) {
+
+//     let reqBody = {
+//       "rate": event
+//     }
+//     this.noteService.ratingQnA(data.id, reqBody).subscribe(result => {
+//       this.getNotes();
+//     })
+//   }
+
+//   /**
+//    *   @description : Api call for Answer
+//    **/
+//   answer(id) {
+//     this.replyShow = !this.replyShow;
+//     this.qID = id;
+
+//   }
+//   private replyBody = {
+//     "reply": ""
+//   };
+//   replyTo() {
+//     let replyRequest = {
+//       "message": this.editorContent,
+//     }
+//     this.noteService.replyQnA(this.qID, replyRequest).subscribe(response => {
+//       this.getNotes();
+//     })
+//   }
+  
+//   checkRating(rateArray) {
+//     this.rate = 0;
+//     if (rateArray.length == 0) {
+//       return true;
+//     }
+//     for (let i = 0; i < rateArray.length; i++) {
+//       if (rateArray[i].userId == localStorage.getItem('userId')) {
+//         this.rate = rateArray[i].rate;
+//       }
+//     }
 //     return true;
-//     }
-//     else {
-
-//      return false;
-//   }
 //   }
 
-//   clickFunc(label) {
-//     LoggerService.log(label);
-
-//     LoggerService.log(label.id, "yess");
-//     LoggerService.log(label.label, "yes...");
-
-
-//     if (!this.array2.some((data) => data == label.label)) {
-//       this.array1.push(label.id);
-//       this.array2.push(label.label);
-//       this.addLabelList(label)
+//   averageRating(rateArray) {
+//     this.value = 0;
+//     if (rateArray.length != 0) {
+//       for (let i = 0; i < rateArray.length; i++) {
+//         this.value += rateArray[i].rate
+//       }
+//       this.avgRate = this.value / rateArray.length;
+//       return this.avgRate.toFixed(1);
 //     }
-//     else {
+//   }
 
-//       const index = this.array2.indexOf(label.label, 0);
-//       if (index > -1) {
-//         this.array2.splice(index, 1);
+//   replyDown(replyId) {
+//     this.down = !this.down;
+//     this.rID = replyId;
+//   }
+//   viewReplies(questAns) {
+//     this.replyCount = 0;
+//     for (let i = 0; i < this.qA.length; i++) {
+//       if (questAns.id == this.qA[i].parentId) {
+//         this.replyCount++
 //       }
 //     }
-
+//     return this.replyCount;
 //   }
-//   deleteforever() {
-//     const dialogRef = this.dialog.open(DeletedialogComponent, {
-//       width: '500px',
-//       panelClass: 'myapp-no-paddding-dialog',
-//       data: { name: 'trash' }
-//     });
-//     dialogRef.afterClosed().subscribe(data => {
-//       if (data) {
-//         this.model = {
-//           "isDeleted": true,
-//           "noteIdList": [this.arrayOfNotes]
-//         }
-//         this.notesService.postDeleteForeverNotes(this.model)
-//         .pipe(takeUntil(this.destroy$))
-//         .subscribe(data => {
-//           this.delEvent.emit();
-//           this.snackBar.open("note deleted  permanently", "trash", {
-//             duration: 10000,
-//           });
-//         })
-
-//       }
-//     });
-//   }
-//   restore(arrayOfNotes) {
-//     let model = {
-//       "isDeleted": false,
-//       "noteIdList": [this.arrayOfNotes]
-//     }
-//     this.notesService.postTrashNotes(model)
-//     .pipe(takeUntil(this.destroy$))
-//     .subscribe(data => {
-//       this.snackBar.open("note restored  successfully,please check in notes", "notes", {
-//         duration: 10000,
-
-//       });
-//       this.delEvent.emit();
-
-//     })
-//   }
-//   ngOnDestroy() { 
-//     this.destroy$.next(true);
-//     // Now let's also unsubscribe from the subject itself:
-//     this.destroy$.unsubscribe();
-//   }
-
+//   public options: Object = {
+//     charCounterCount: true,
+//     toolbarButtons: ['bold', 'italic', 'underline','fontFamily', 'strikeThrough', 'subscript', 
+//     'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+//      'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+//     'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+//     'insertHorizontalRule', 'removeFormat', 'fullscreen','paragraphStyles'],
+//     toolbarButtonsXS: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+//     'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+//      'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+//     'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+//     'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+//     toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+//     'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+//      'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+//     'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+//     'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+//     toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+//     'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+//      'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+//     'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+//     'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+//   };
+  
 // }
-

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NoteserviceService } from '../service/noteservice.service';
 import { environment } from 'src/environments/environment';
@@ -8,27 +8,37 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-  public firstname;
-  public lastname;
-  data:any;
+  @ViewChild('replyArea') private answerReply: ElementRef;
+  @ViewChild('quesReplyArea') private quesReply: ElementRef;
   private noteId;
   private title;
   private description;
-  public editorContent: string ;
-  private show;
   private question;
-  private date;
+  private show;
+  private body = {
+    "question": ""
+  }
+  public owner;
   private img;
-  private image;
+  private date;
+  private fName;
+  private lName;
   private qA;
+  private replyShow = false;
+  private image;
   private img2;
-  private image2;
-  private replyShow=false;
-  private qID
+  private open = true;
+  private down = true;
+  private rID;
+  private replyCount;
   private value;
-  private avgRate
-  private replyCount
+  private avgRate;
+  private qID;
   private rate;
+  private firstname;
+  private lastname;
+  private image2
+public editorContent: string ;
   constructor(public router: Router, public activateRoute: ActivatedRoute,public note:NoteserviceService) { }
 
   ngOnInit() {
@@ -63,43 +73,127 @@ this.getNote()
   })
   }
   addQuestion() {
-    this.show=!this.show
-    let body={
-      "message":this.editorContent,
-      "notesId":this.noteId
+    this.show = !this.show;
+    let requestBody = {
+      "message": this.editorContent,
+      "notesId": this.noteId
     }
-    console.log(body)
-    this.note.addquestion(body).subscribe(data=>{
-      console.log(data)
+    this.note.addquestion(requestBody).subscribe(result => {
+      this.getNote();
     })
   }
+  /**
+   *   @description : Api call for closing QandA
+   **/
   closeQAndA() {
-  this.router.navigate(['/dashboard/note'])  }
-  answer(id){
-    this.replyShow=!this.replyShow
-    this.qID=id;
-    console.log(this.qID)
+    this.router.navigate(['/home/notes'])
+  }
+  /**
+   *   @description : Api call for like
+   **/
+  like(data) {
+    let requestBody = {
+      "like": true
+    }
+    this.note.likeQnA(data.id, requestBody).subscribe(response => {
+      this.getNote();
+    })
+  }
+  private rateBody = {
+    "rate": ""
+  }
+  /**
+   *   @description : Api call for rating
+   **/
+  rating(data, event) {
+
+    let reqBody = {
+      "rate": event
+    }
+    this.note.ratingQnA(data.id, reqBody).subscribe(result => {
+      this.getNote();
+    })
+  }
+
+  /**
+   *   @description : Api call for Answer
+   **/
+  answer(id) {
+    this.replyShow = !this.replyShow;
+    this.qID = id;
+
   }
   private replyBody = {
     "reply": ""
-};
-replyTo() {
-  let replyRequest = {
-    "message": this.editorContent,
+  };
+  replyTo() {
+    let replyRequest = {
+      "message": this.editorContent,
+    }
+    this.note.replyQnA(this.qID, replyRequest).subscribe(response => {
+      this.getNote();
+    })
   }
-  this.note.replyQnA(this.qID, replyRequest).subscribe(data => {
-    console.log(data)
-    this.getNote();
-  })
-}
-like(data) {
-  let requestBody = {
-    "like": true
+  
+  checkRating(rateArray) {
+    this.rate = 0;
+    if (rateArray.length == 0) {
+      return true;
+    }
+    for (let i = 0; i < rateArray.length; i++) {
+      if (rateArray[i].userId == localStorage.getItem('userId')) {
+        this.rate = rateArray[i].rate;
+      }
+    }
+    return true;
   }
-  console.log(data)
-  this.note.likeQnA(data.id, requestBody).subscribe(response => {
-    this.getNote();
-  })
-}
 
+  averageRating(rateArray) {
+    this.value = 0;
+    if (rateArray.length != 0) {
+      for (let i = 0; i < rateArray.length; i++) {
+        this.value += rateArray[i].rate
+      }
+      this.avgRate = this.value / rateArray.length;
+      return this.avgRate.toFixed(1);
+    }
+  }
+
+  replyDown(replyId) {
+    this.down = !this.down;
+    this.rID = replyId;
+  }
+  viewReplies(questAns) {
+    this.replyCount = 0;
+    for (let i = 0; i < this.qA.length; i++) {
+      if (questAns.id == this.qA[i].parentId) {
+        this.replyCount++
+      }
+    }
+    return this.replyCount;
+  }
+  // public options: Object = {
+  //   charCounterCount: true,
+  //   toolbarButtons: ['bold', 'italic', 'underline','fontFamily', 'strikeThrough', 'subscript', 
+  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+  //   'insertHorizontalRule', 'removeFormat', 'fullscreen','paragraphStyles'],
+  //   toolbarButtonsXS: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+  //   'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+  //   toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+  //   'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+  //   toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
+  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
+  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
+  //   'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
+  // };
+  
 }

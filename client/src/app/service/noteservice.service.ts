@@ -91,4 +91,7 @@ export class NoteserviceService {
   likeQnA(id,data){
     return this.http.postJSON('questionAndAnswerNotes/like/'+id,data)
   }
+  ratingQnA(id,data){
+    return this.http.postJSON('questionAndAnswerNotes/rate/'+id,data)
+  }
 }
