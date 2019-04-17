@@ -2,7 +2,11 @@ import { Component, OnInit,Inject,Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { dialog} from '../notebar/notebar.component'
 import { NoteserviceService } from '../service/noteservice.service'
-
+export interface DialogData {
+  title: string;
+  description: string;
+  id: string;
+}
 
 @Component({
   selector: 'app-updatenote',

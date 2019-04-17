@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-  @ViewChild('replyArea') private answerReply: ElementRef;
-  @ViewChild('quesReplyArea') private quesReply: ElementRef;
+  // @ViewChild('replyArea') private answerReply: ElementRef;
+  // @ViewChild('quesReplyArea') private quesReply: ElementRef;
   private noteId;
   private title;
   private description;
@@ -172,28 +172,6 @@ this.getNote()
     }
     return this.replyCount;
   }
-  // public options: Object = {
-  //   charCounterCount: true,
-  //   toolbarButtons: ['bold', 'italic', 'underline','fontFamily', 'strikeThrough', 'subscript', 
-  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
-  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
-  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
-  //   'insertHorizontalRule', 'removeFormat', 'fullscreen','paragraphStyles'],
-  //   toolbarButtonsXS: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
-  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
-  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
-  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
-  //   'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
-  //   toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
-  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
-  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
-  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
-  //   'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
-  //   toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
-  //   'superscript', 'fontFamily', 'fontSize', 'color','formatBlock', 'blockStyle',
-  //    'inlineStyle', 'align', "Text Direction","placeholder",'shape', 'size', 
-  //   'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent',
-  //   'insertHorizontalRule', 'uploadFile', 'removeFormat', 'fullscreen'],
-  // };
+  
   
 }

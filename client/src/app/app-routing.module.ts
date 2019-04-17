@@ -19,28 +19,32 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { RemindericonComponent } from './remindericon/remindericon.component';
 import { QuestionComponent } from './question/question.component';
 import { CartComponent } from './cart/cart.component';
+import { ProductComponent } from './product/product.component';
+import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path:'forgot', component: ForgotComponent },
-
+  {path:'product',component:ProductComponent},
+  {path:'productconfirm',component:ProductconfirmComponent},
   { path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard] ,children:[
     {path:'',pathMatch:'full',redirectTo:'note',canActivate:[AuthGuard]},
 
-    { path:'note',component:MainNoteComponent},
-    { path:'updatenote',component:UpdatenoteComponent},
-    { path:'trash',component:TrashComponent},
-    { path:'archivenote',component:ArchivenoteComponent},
-    { path:'lables',component:LabelsComponent},
-    { path:'search',component:SearchComponent},
-    {path:'image',component:ImageComponent},
-    {path:'collaborator',component:CollaboratorComponent},
-    {path:'remindericon',component:RemindericonComponent},
-    {path:'note/:noteId/question',component:QuestionComponent},
-    {path:'cart',component:CartComponent}
-    ]}
+    { path:'note',component:MainNoteComponent,canActivate:[AuthGuard]},
+    { path:'updatenote',component:UpdatenoteComponent,canActivate:[AuthGuard]},
+    { path:'trash',component:TrashComponent,canActivate:[AuthGuard]},
+    { path:'archivenote',component:ArchivenoteComponent,canActivate:[AuthGuard]},
+    // { path:'lables',component:LabelsComponent,canActivate:[AuthGuard]},
+    { path:'search',component:SearchComponent,canActivate:[AuthGuard]},
+    {path:'image',component:ImageComponent,canActivate:[AuthGuard]},
+    {path:'collaborator',component:CollaboratorComponent,canActivate:[AuthGuard]},
+    {path:'remindericon',component:RemindericonComponent,canActivate:[AuthGuard]},
+    {path:'note/:noteId/question',component:QuestionComponent,canActivate:[AuthGuard]},
+    {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
+      {path: 'labels/:labels', component: LabelsComponent}
+  ]}
   ];
 
 @NgModule({

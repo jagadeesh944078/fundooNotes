@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl,  Validators} from '@angular/forms';
 import {  HttpService} from '../service/http/http.service';
 import { Router } from '@angular/router';
+import { NoteserviceService } from '../service/noteservice.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -9,11 +10,19 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   maxDate = new Date();
-  
-   constructor(private service : HttpService, private router : Router) { }
+  cards = [];
+  records = {};
+   constructor(private service : HttpService, private router : Router,public note:NoteserviceService) { }
   
   ngOnInit() {
-   
+    this.records = this.note.getServiceOfUser().subscribe(data => {
+      for (var i = 0; i < data["data"].data.length; i++) {
+        data["data"].data[i].select = false;
+        this.cards.push(data["data"].data[i]);
+      }
+      var value = data["data"].data.name;
+})
+    this.getCartInformation()
   }
     /**
    * @description firstName validation 
@@ -42,6 +51,10 @@ export class RegistrationComponent implements OnInit {
    /**
    * @description Gets firstName error message
    */
+  private cartId = localStorage.getItem('cartId')
+  private prodId : any = [];
+  private getService;
+
   firstNameErrorMessage(){
     return this.firstName.hasError('required') ? 'Enter the name':
     this.firstName.hasError('pattern') ? 'Enter a valid name':
@@ -105,5 +118,28 @@ export class RegistrationComponent implements OnInit {
       })
     }
   }
+  selectCards(card) {
+    this.service = card.name;
+    card.select = true;
+    for (var i = 0; i < this.cards.length; i++) {
+      if (card.name == this.cards[i].name) {
+        continue;
+      }
+      this.cards[i].select = false;
+    }
+}
+getCartInformation(){
+  this.note.getCartDetails(this.cartId).subscribe(
+    data => {
+      console.log(data)
+      this.prodId = data['data'].productId
+      console.log(this.prodId)
+      this.getService =  data['data']['product'].name ;
+    },
+    error => {
+      console.log(error)
+    }
+)
+}
 }
   

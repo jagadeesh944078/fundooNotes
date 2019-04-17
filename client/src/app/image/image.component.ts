@@ -27,6 +27,7 @@ export class ImageComponent implements OnInit {
   }
   imageCropped($event) {
     this.croppedImageEvent = $event.file;
+    
 
       // this.croppedImage = event.base64;
   }

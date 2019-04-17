@@ -31,6 +31,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { QuestionComponent } from './question/question.component';
 import { BarRatingModule } from "ngx-bar-rating";
 import { CartComponent } from './cart/cart.component';
+import { ProductComponent } from './product/product.component';
+import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { CartComponent } from './cart/cart.component';
     DeletedialogComponent,
     QuestionComponent,
     CartComponent,
+    ProductComponent,
+    ProductconfirmComponent,
 
   ],
   imports: [

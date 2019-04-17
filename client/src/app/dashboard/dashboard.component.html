@@ -18,7 +18,8 @@
   </div>
   <div>
   <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" [routerLink]="['cart']">
-    <mat-icon>shopping_cart</mat-icon></button></div>
+    <mat-icon>shopping_cart</mat-icon></button>
+  </div>
   <!-----------------------------Gridview&listview --------------------------------------------->
   <div>
     <button *ngIf='view==false' mat-icon-button matTooltip="List view" (click)="toggle()">
@@ -76,11 +77,11 @@
 
   </mat-menu>
 
-  <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" >
+  <!-- <button aria-label="Toggle sidenav" mat-icon-button aria-label="Toggle sidenav" >
     <mat-icon routerLink="/dashboard/cart" >
       shopping_cart
     </mat-icon>
-</button>
+</button> -->
 <mat-divider></mat-divider>
 
 <!--------------------------------------sidenav bar  -------------------------------------->
@@ -105,7 +106,7 @@
     <p class="textSize">LABELS</p>
    <div *ngFor= "let label of ArrayOfLabel">
      <mat-nav-list>
-      <mat-list-item>
+      <mat-list-item (click)="openlabel(label.label)">
       <mat-icon>label_outline</mat-icon>
        {{label.label}}
        </mat-list-item>

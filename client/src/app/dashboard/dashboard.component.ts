@@ -123,4 +123,7 @@ getlabel(){
     // this.data.currentMessage.subscribe(message=>this.ArrayOfLabel=message)
   })
 }
+openlabel(labels){
+this.router.navigate(['labels',labels])
+}
 }

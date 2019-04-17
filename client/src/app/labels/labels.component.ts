@@ -30,6 +30,7 @@ constructor(public dialogRef: MatDialogRef< LabelsComponent >,@Inject(MAT_DIALOG
 @ViewChild('editDiv') editDiv: ElementRef;
 
   ngOnInit() {
+    
 // this.ArrayOfLabel=[this.data];
 this.getLabel();
   }

@@ -94,4 +94,15 @@ export class NoteserviceService {
   ratingQnA(id,data){
     return this.http.postJSON('questionAndAnswerNotes/rate/'+id,data)
   }
+  getServiceOfUser(){
+    return this.http.getHttp('/user/service')
+}
+addtoCart(data){
+  return this.http.postJSON("/productcarts/addToCart",data)
+}
+
+  getCartDetails(cartId){
+    return this.http.getHttp("/productcarts/getCartDetails/"+cartId+"")
+}
+
 }
