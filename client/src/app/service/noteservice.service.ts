@@ -8,6 +8,12 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class NoteserviceService {
 
   constructor(private http:HttpService) { }
+newPassword(body){
+ return this.http.signUpAndLoginPost('user/reset',body)
+}
+resetPassword(body){
+  return this.http.postReset('user/reset-password',body)
+}
   getNote(){
     
     return  this.http.getHttp('notes/getNotesList')
@@ -95,14 +101,19 @@ export class NoteserviceService {
     return this.http.postJSON('questionAndAnswerNotes/rate/'+id,data)
   }
   getServiceOfUser(){
-    return this.http.getHttp('/user/service')
+    return this.http.getConfig('/user/service')
 }
 addtoCart(data){
   return this.http.postJSON("/productcarts/addToCart",data)
 }
 
-  getCartDetails(cartId){
+getCartDetails(cartId){
     return this.http.getHttp("/productcarts/getCartDetails/"+cartId+"")
 }
-
+myCart(){
+  return this.http.getHttp("/productcarts/myCart")
+}
+placeOrder(body){
+  return this.http.postJSON("/productcarts/placeOrder",body)
+}
 }

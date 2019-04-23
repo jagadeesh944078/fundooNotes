@@ -1,39 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar'
+import {  NoteserviceService } from  '../service/noteservice.service'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-forgot',
   templateUrl: './forgot.component.html',
   styleUrls: ['./forgot.component.scss']
 })
-export class ForgotComponent implements OnInit {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  password= new FormControl('', [
-    Validators.required
-  ]);
-
- model={};
- hide=true;
-login(){
-  console.log("hello");
-console.log(this.password.value ,this.emailFormControl.value);
+export class ForgotComponent implements OnInit  {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  email = new FormControl('', [Validators.required, Validators.email]);
+  getErrorEmail() {
+    return this.email.hasError('required') ? 'Enter a Valid email  ' :
+      this.email.hasError('email') ? 'Invalid email' :
+        '';
 }
-  matcher = new MyErrorStateMatcher();
-
-  constructor() { }
+  constructor(public note:NoteserviceService,private snackbar:MatSnackBar) { }
 
   ngOnInit() {
   }
+  private model: any = {}
+  goToPassword() {
+    console.log(this.model.email)
+    if (!this.email.invalid) {
+      this.note.newPassword({
+        "email": this.model.email,
 
+      })
+        .subscribe(
+          (data) => {
+           console.log(data)
+          },
+          error => {
+           
+          }
+        )
+    }
+    else {
+
+    }
+}
 }

@@ -135,6 +135,20 @@ getHttp(url){
     console.log(localStorage.getItem('token'),"token")
     return this.http.post(url, body, httpOptions)
   }
+
+
+  getConfig(url) {
+    return this.http.get(this.link + url);
 }
-
-
+signUpAndLoginPost(url, body) {
+  return this.http.post(this.link + url, body);
+}
+postReset(url, body) {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    })
+  };
+  return this.http.post(this.link + url, body, httpOptions)
+}
+}

@@ -7,9 +7,9 @@
    </div>
     <div class="margins-top"></div>
     <div  fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px" fxLayoutAlign="center center">
-      <div *ngFor="let product of cards" (click)="openDialog(product)">
+      <div *ngFor="let product of cards"  (click)="selectCards(product)"  (click)="openDialog(product)"  >
         <div class="shadow" [ngClass]="product.select ? 'select' : 'notSelect'">
-          <mat-card class="break " (click)="click()" (click)="selectCards(product)" >
+          <mat-card class="break " (click)="click()" (click)=cartAdd(product)>
             <mat-card-title>
               {{product.price | currency:usd}}
             </mat-card-title>
@@ -21,11 +21,16 @@
 
             </mat-card-content>
           </mat-card>
-          <div class="whiteFont"> <span (click)=cartAdd(product)>ADD TO CART</span></div>
+          <div class="whiteFont"> <span >ADD TO CART</span></div>
+
         </div>
+
       </div>
+
     </div>
+    <div _ngcontent-c1="" class="back" (click)="login()" fxlayoutalign="center" ng-reflect-align="center" style="place-content: stretch center; align-items: stretch; flex-direction: row; box-sizing: border-box; display: flex;">Sign in instead</div>
   </div>
+
   <div fxFlex.lg="10" fxFlex.xs="10" fxFlex.sm="10" fxFlex.md="10"></div>
   <!-- <mat-hint><a href="/login">Sign in instead</a></mat-hint> -->
 

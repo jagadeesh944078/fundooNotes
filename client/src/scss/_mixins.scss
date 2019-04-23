@@ -10,13 +10,13 @@
     
     }
     @mixin over(){
-    overflow: hidden;
+        overflow: hidden;
     }
     @mixin right(){
-    float:right;
+        float:right;
     }
     @mixin font(){
-    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+        font-family: 'Google Sans',Roboto,Arial,sans-serif;
     }
     @mixin searchToolBar {
         display: flex;

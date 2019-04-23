@@ -33,6 +33,7 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ProductconfirmComponent } from './productconfirm/productconfirm.compone
     CartComponent,
     ProductComponent,
     ProductconfirmComponent,
+    ResetComponent,
 
   ],
   imports: [

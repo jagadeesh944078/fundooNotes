@@ -3,6 +3,7 @@ import { NoteserviceService } from '../service/noteservice.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import{ ProductconfirmComponent} from '../productconfirm/productconfirm.component'
 import { from } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -13,7 +14,7 @@ export class ProductComponent implements OnInit {
   private records;
   private cards=[];
 private service;
-  constructor(public note:NoteserviceService,public dialog: MatDialog) { }
+  constructor(public note:NoteserviceService,public dialog: MatDialog,public router:Router) { }
 
   ngOnInit() {
     this.getServices()
@@ -74,5 +75,8 @@ private service;
         console.log("Error ", error)
       }
     )
+}
+login(){
+  this.router.navigate(['login'])
 }
 }

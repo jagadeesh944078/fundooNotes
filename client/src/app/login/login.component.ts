@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import {  HttpService} from '../service/http/http.service';
 import { Router } from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { NoteserviceService } from '../service/noteservice.service';
+import { Subject } from 'rxjs';
 /** Error when invalid control is dirty, touched, or submitted. */
 // export class MyErrorStateMatcher implements ErrorStateMatcher {
 //   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -15,25 +17,19 @@ import {ErrorStateMatcher} from '@angular/material/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-//   emailFormControl = new FormControl('', [
-//     Validators.required,
-//     Validators.email,
-//   ]);
-//   password= new FormControl('', [
-//     Validators.required
-//   ]);
-//   model={};
-//  hide=true;
-// login(){
-//   console.log("hello");
-// console.log(this.password.value ,this.emailFormControl.value);
-// }
-//   matcher = new MyErrorStateMatcher()
-  constructor(private service : HttpService, private router : Router) { }
+export class LoginComponent implements OnInit ,OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+private records;
+private cards = [];
+private cartId = localStorage.getItem('cartId')
+private prodId: any = [];
+private getService;
+  constructor(private service : HttpService, private router : Router,private note:NoteserviceService) { }
 
   ngOnInit() {
-    
+    this.getServices()
+    this.getCartInformation()
   }
   /**
    * @description Hide and show password
@@ -101,6 +97,9 @@ export class LoginComponent implements OnInit {
   registration() { 
     this.router.navigate(['registration']);
   }
+  account() { 
+    this.router.navigate(['product']);
+  }
   
 /**
  * @description Navigates to forgot password page
@@ -108,4 +107,64 @@ export class LoginComponent implements OnInit {
   forgot() {
     this.router.navigate(['forgot']);
   }
+  getServices() {
+    this.records = this.note.getServiceOfUser()
+      .subscribe(data => {
+        for (var i = 0; i < data["data"].data.length; i++) {
+          data["data"].data[i].select = false;
+          this.cards.push(data["data"].data[i]);
+        }
+        console.log(this.cards)
+        var value = data["data"].data.name;
+      })
+  }
+
+  selectCards(product) {
+    console.log("selected")
+    this.service = product.name;
+    console.log(this.service)
+    product.select = true;
+    for (var i = 0; i < this.cards.length; i++) {
+      if (product.name == this.cards[i].name) {
+        continue;
+      }
+      this.cards[i].select = false;
+    }
+  }
+
+  getCartInformation() {
+    this.note.getCartDetails(this.cartId).subscribe(
+      data => {
+        console.log(data)
+        this.prodId = data['data'].productId
+        console.log(this.prodId)
+        this.getService = data['data']['product'].name;
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  cartAdd(cart) {
+    this.note.addtoCart(
+      {
+        "productId": cart.id
+      }
+    ).subscribe(
+      (data) => {
+        console.log("successfully added to cart", data)
+        localStorage.setItem("cartId", data['data']['details'].id)
+        // this.openDialog(cart);
+      }, error => {
+        console.log("Error ", error)
+      }
+    )
+
+}
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
+}
 }
