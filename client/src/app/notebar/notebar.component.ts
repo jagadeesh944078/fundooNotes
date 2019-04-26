@@ -49,7 +49,8 @@ view;
 
     this.view = localStorage.getItem('view');
 console.log(this.card);
-// this.getLabel();
+
+// this.getLabel();)
   }
   openDialog(array){
     const dialogRef = this.dialog.open(UpdatenoteComponent,{
@@ -133,8 +134,7 @@ console.log(data)
    this.note.postAddLabelnotesRemove(noteid, labelid,{
      "noteId":noteid,
      "lableId":labelid
-   }
-    ).subscribe(data=>{
+   }).subscribe(data=>{
      console.log(data)
      
    })

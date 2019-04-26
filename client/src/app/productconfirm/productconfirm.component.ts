@@ -5,7 +5,7 @@ import { DialogData } from '../updatenote/updatenote.component';
 @Component({
   selector: 'app-productconfirm',
   templateUrl: './productconfirm.component.html',
-  styleUrls: ['./productconfirm.component.css']
+  styleUrls: ['./productconfirm.component.scss']
 })
 export class ProductconfirmComponent implements OnInit {
 
@@ -13,6 +13,7 @@ export class ProductconfirmComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private router:Router) { }
 
   ngOnInit() {
+    
   }
   onNoClick(): void {
     this.dialogRef.close();

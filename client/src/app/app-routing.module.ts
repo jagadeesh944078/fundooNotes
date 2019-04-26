@@ -45,7 +45,7 @@ const routes: Routes = [
     {path:'remindericon',component:RemindericonComponent,canActivate:[AuthGuard]},
     {path:'note/:noteId/question',component:QuestionComponent,canActivate:[AuthGuard]},
     {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
-      {path: 'labels/:labels', component: LabelsComponent}
+    {path: 'labels/:labels', component: LabelsComponent}
   ]}
   ];
 

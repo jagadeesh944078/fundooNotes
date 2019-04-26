@@ -47,7 +47,9 @@
     <div fxFlex='100' >              
       <app-iconlist [card]=array (labelEvent)="label($event)" (archivedCard)="archive($event)" [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
     </div>
-
+<div>
+ <div [innerHTML]="question"></div>
+</div>
  
 
 </mat-card>

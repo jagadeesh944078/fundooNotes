@@ -8,8 +8,8 @@
     <div class="margins-top"></div>
     <div  fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px" fxLayoutAlign="center center">
       <div *ngFor="let product of cards"  (click)="selectCards(product)"  (click)="openDialog(product)"  >
-        <div class="shadow" [ngClass]="product.select ? 'select' : 'notSelect'">
-          <mat-card class="break " (click)="click()" (click)=cartAdd(product)>
+        <div class="shadow" [ngClass]="product.select ? 'select' : 'select'">
+          <mat-card class="break "  (click)=cartAdd(product)>
             <mat-card-title>
               {{product.price | currency:usd}}
             </mat-card-title>
@@ -35,3 +35,5 @@
   <!-- <mat-hint><a href="/login">Sign in instead</a></mat-hint> -->
 
 </div>
+
+

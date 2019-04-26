@@ -8,6 +8,17 @@
         <div  fxLayout="column" class="takenote">
           <textarea class="textArea"  placeholder="Note" [(ngModel)]="data.array.description"></textarea>
         </div>
+
+
+     <mat-divider></mat-divider>
+     <div>
+<mat-icon>add</mat-icon>
+<mat-checkbox class="iconCheck" *ngIf="adding" [(ngModel)]=addCheck color="primary"></mat-checkbox>
+<input class="note" fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{'background-color':data.array.color}"/>     </div>
+<mat-divider></mat-divider>
+
+
+
         <div fxLayout="row wrap" >
             <div  *ngFor="let person of  data.array.collaborators"  class="index" fxLayoutGap="40px">
            <button  matTooltip="{{person.email}}" (click)="opendialog()"class="basic" mat-mini-fab >

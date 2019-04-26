@@ -34,6 +34,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
 import { ResetComponent } from './reset/reset.component';
+import { PinComponent } from './pin/pin.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ResetComponent } from './reset/reset.component';
     ProductComponent,
     ProductconfirmComponent,
     ResetComponent,
+    PinComponent,
 
   ],
   imports: [

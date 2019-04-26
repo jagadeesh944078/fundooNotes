@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   public firstCss = true;
   private details;
 public forCss;
+private price;
   constructor(private note:NoteserviceService) { }
 
   ngOnInit() {

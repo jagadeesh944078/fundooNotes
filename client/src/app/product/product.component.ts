@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  private clicked = false;
+  private clicked = true;
   private records;
   private cards=[];
 private service;
@@ -27,16 +27,6 @@ private service;
     });
 
   
-  }
-
-
-
-  click() {
-    this.clicked = true;
-  }
-
-  unClick() {
-    this.clicked = false;
   }
 
   getServices() {
