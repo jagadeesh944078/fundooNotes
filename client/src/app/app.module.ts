@@ -35,6 +35,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
 import { ResetComponent } from './reset/reset.component';
 import { PinComponent } from './pin/pin.component';
+import { LabelComponent } from './label/label.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { PinComponent } from './pin/pin.component';
     ProductconfirmComponent,
     ResetComponent,
     PinComponent,
+    LabelComponent,
 
   ],
   imports: [

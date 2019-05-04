@@ -116,4 +116,22 @@ myCart(){
 placeOrder(body){
   return this.http.postJSON("/productcarts/placeOrder",body)
 }
+doPin(data){
+  return this.http.postJSON('notes/pinUnpinNotes',data)
+  }
+  doUnpin(data){
+    return this.http.postJSON('notes/pinUnpinNotes',data)
+  }
+  addCheckList(checklist,noteid){
+    return this.http.postJSON('notes/'+noteid+'/checklist/add',checklist)
+  }
+  getCheckList(noteid){
+    return this.http.getHttp('notes/'+noteid+'/noteCheckLists')
+  }
+  removeChecklist(noteid,checklistid){
+    return this.http.postJSON( 'notes/'+noteid+'/checklist/'+checklistid+'/remove','')
+  }
+  updateCheckList(noteid,checklistid,data){
+    return this.http.postJSON('notes/'+noteid+'/checklist/'+checklistid+'/update',data)
+  }
 }

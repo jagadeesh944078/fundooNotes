@@ -1,7 +1,7 @@
     <div fxLayout="row wrap">                  
  <div *ngFor="let array of card  | search:Search" class="array"  >
 <mat-card class="EachCard" fxLayout="column" [ngClass]="{'matcard': view==true,'notecard': view==false}"  fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color' >
-  <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array)">
+  <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array,cond,array.id,type)">
 
 
     <div fxLayout="column"  mat-dialog-content class="card" >
@@ -16,6 +16,7 @@
    {{person.email | uppercase | slice : 0 : 1 }} </button>
    </div>
    </div>
+  
    <!------------------------reminders ------------------------------------------->
 <div *ngIf="array.reminder.length!=0">
     <div *ngFor='let item of array.reminder;'>
@@ -30,6 +31,27 @@
     </div>
    
   </div>
+ <!-- checklist -->
+ <div *ngIf='show==false'>
+  <div *ngFor='let list of array.noteCheckLists'>
+    <div *ngIf='!list.isDeleted'>
+      <div fxLayout='column'>{{list.itemName}}</div>
+    </div>
+  </div>
+</div>
+<div *ngIf='show==true'>
+  <div *ngFor='let list of array.noteCheckLists'>
+    <div *ngIf="list.status=='open' && list.status!='close' && !list.isDeleted" fxLayout='center center'>
+      <img src="../../../assets/empty_box.svg" (click)='removeCheckList(list)'>{{list.itemName}}
+    </div>
+  </div>
+  <div *ngFor='let list of array.noteCheckLists'>
+    <div *ngIf="list.status=='close' && !list.isDeleted" fxLayout='center center'>
+      <img src="../../../assets/right_box.svg" (click)='addCheckList(list)'><del>{{list.itemName}}</del>
+    </div>
+  </div>
+</div>
+   <!--checklist  -->
   <!-----------------------------------labels------------------------------------->
   <div *ngIf='array.noteLabels.length!=0'>
       <div *ngFor= "let item of array.noteLabels">
@@ -45,11 +67,14 @@
 
 
     <div fxFlex='100' >              
-      <app-iconlist [card]=array (labelEvent)="label($event)" (archivedCard)="archive($event)" [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
+      <app-iconlist [card]=array (labelEvent)="label($event)" (archivedCard)="archive($event)"  (showtickUpdate)='showTickBox($event)' [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
     </div>
-<div>
- <div [innerHTML]="question"></div>
-</div>
+  <div *ngIf="array.questionAndAnswerNotes.length>0" (click)='navigate(array)'>
+      <mat-divider></mat-divider>
+      <div class="text">Question Asked</div>
+      <div *ngIf="array.questionAndAnswerNotes.length>0" [innerHtml]='array.questionAndAnswerNotes[0].message'></div>
+    </div>
+
  
 
 </mat-card>

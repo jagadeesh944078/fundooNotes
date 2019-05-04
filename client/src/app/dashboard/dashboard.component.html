@@ -106,7 +106,7 @@
     <p class="textSize">LABELS</p>
    <div *ngFor= "let label of ArrayOfLabel">
      <mat-nav-list>
-      <mat-list-item (click)="openlabel(label.label)">
+      <mat-list-item (click)="editlabel(label)">
       <mat-icon>label_outline</mat-icon>
        {{label.label}}
        </mat-list-item>

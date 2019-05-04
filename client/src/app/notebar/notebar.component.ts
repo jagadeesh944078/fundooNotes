@@ -5,10 +5,13 @@ import{NoteserviceService} from '../service/noteservice.service'
 import { viewAttached } from '@angular/core/src/render3/instructions';
 import{CollaboratorComponent} from '../collaborator/collaborator.component'
 import{DataserviceService} from '../service/dataservice.service'
+import { Router } from '@angular/router';
 
 export interface dialog{
-  array:[];
-  cond:any;
+  array: [];
+  cardid: any;
+  cond: any;
+  type:string
 }
 @Component({
   selector: 'app-notebar',
@@ -19,7 +22,7 @@ export class NotebarComponent implements OnInit {
   // notes:any;
   // title:any;
   // description:any;
- 
+  show=true;
   array:[]
   data:any;
  model:any;
@@ -30,15 +33,15 @@ export class NotebarComponent implements OnInit {
 
  message: string;
 // id:any
- @Input() card=[];
- @Input() arrayCards;
+@Input() card: any;
+@Input() arrayCards;
  @Input() type;
  @Input() cond;
 @Input() Search;
 @Output() updateEvent = new EventEmitter<any>();
 view;
 
-  constructor(public dialog: MatDialog,private note:NoteserviceService,private dataservice:DataserviceService) { }
+  constructor(public dialog: MatDialog,private note:NoteserviceService,private dataservice:DataserviceService,public router:Router) { }
   
   ngOnInit() {
     this.dataservice.currentMessageList.subscribe(message => {
@@ -52,10 +55,10 @@ console.log(this.card);
 
 // this.getLabel();)
   }
-  openDialog(array){
+  openDialog(array, cond, cardid,type){
     const dialogRef = this.dialog.open(UpdatenoteComponent,{
      
-      data: { array },
+      data: { array, cond, cardid,type },
       width:'600px',
     })
     dialogRef.afterClosed().subscribe(result => {
@@ -135,9 +138,71 @@ console.log(data)
      "noteId":noteid,
      "lableId":labelid
    }).subscribe(data=>{
+    
+
      console.log(data)
-     
+  
+
    })
 
  }
+ navigate(card){
+
+  this.router.navigate(['/dashboard/note/'+ card.id +'/question',])}
+  doPinned(card){
+    this.note.doPin({
+      "isPined": true,
+      "noteIdList": [card.id]
+    }).subscribe(data=>{
+      console.log(card.isPined=true,'cardddddddddddd')
+      console.log(data,"resp dopin")},err=>
+      console.log(err)) 
+  }
+  doUnPinned(card){
+  this.note.doPin({
+    "isPined": false,
+    "noteIdList": [card.id]
+  }).subscribe(data=>{
+    console.log(card.isPined=false,'do unpin cardddddddddddd')
+ },err=>
+    console.log(err))
+   
+}
+showTickBox($event) {
+  this.show = $event
+}
+
+addCheckList(list){
+  try{
+    var model={
+      "isDeleted": false,
+      "itemName": list.itemName,
+      "status":"open"
+    }
+  this.note.updateCheckList(list.notesId,list.id,model).subscribe(data=>{
+ console.log(data)
+  })
+}catch(err){
+      console.log(err,"error occur while adding checklist")
+}
+}
+
+/**
+ * @param itemname will get itm name to remove that item from checklist
+//  */
+removeCheckList(list){
+  try{
+    var model={
+      "isDeleted": false,
+      "itemName": list.itemName,
+      "status":"close"
+    }
+  this.note.updateCheckList(list.notesId,list.id,model).subscribe(data=>{console.log(data)
+    console.log(data)
+  })
+}
+catch(err){
+  console.log(err)
+}
+}
 }

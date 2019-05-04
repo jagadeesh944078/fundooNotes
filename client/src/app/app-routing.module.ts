@@ -11,7 +11,7 @@ import { ArchivenoteComponent } from './archivenote/archivenote.component';
 import { MainNoteComponent } from './main-note/main-note.component';
 import { UpdatenoteComponent } from './updatenote/updatenote.component';
 import { TrashComponent } from './trash/trash.component';
-import { LabelsComponent } from './labels/labels.component';
+import { LabelComponent } from './label/label.component';
 import { SearchComponent } from './search/search.component';
 import{AuthGuard } from './service/auth/auth.guard'
 import { ImageComponent } from './image/image.component';
@@ -22,6 +22,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
 import { ResetComponent } from './reset/reset.component';
+import { LabelsComponent } from './labels/labels.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path:'forgot', component: ForgotComponent },
   {path: 'resetpassword/:forgotToken', component:ResetComponent},
   {path:'product',component:ProductComponent},
+
   {path:'productconfirm',component:ProductconfirmComponent},
   { path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard] ,children:[
     {path:'',pathMatch:'full',redirectTo:'note',canActivate:[AuthGuard]},
@@ -45,7 +47,9 @@ const routes: Routes = [
     {path:'remindericon',component:RemindericonComponent,canActivate:[AuthGuard]},
     {path:'note/:noteId/question',component:QuestionComponent,canActivate:[AuthGuard]},
     {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
-    {path: 'labels/:labels', component: LabelsComponent}
+      {path: 'labels', component: LabelsComponent},
+      {path:'label', component:LabelComponent}
+
   ]}
   ];
 

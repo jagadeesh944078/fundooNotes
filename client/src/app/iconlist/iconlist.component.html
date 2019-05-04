@@ -51,8 +51,12 @@
 
     <!-- <button mat-menu-item>add drawing</button> -->
     <!-- <button mat-menu-item>make a copy</button> -->
-    <button mat-menu-item>show  checkboxes</button>
-    <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
+    <div *ngIf='flag4==true'>
+      <button mat-menu-item (click)='HideTick()'>show tick boxes</button>
+    </div>
+    <div *ngIf='flag4==false'>
+      <button mat-menu-item  (click)='HideTick()'>Hide tick boxes</button>
+</div>    <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
     <button mat-menu-item (click)="deleteforever(card)">delete forever</button>
     <button mat-menu-item (click)="restore(card)">restore</button>
     <button mat-menu-item (click)="askquestion()">askquestion</button>

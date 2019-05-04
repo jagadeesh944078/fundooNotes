@@ -8,17 +8,42 @@
         <div  fxLayout="column" class="takenote">
           <textarea class="textArea"  placeholder="Note" [(ngModel)]="data.array.description"></textarea>
         </div>
+<!----------------------------------checklist--------------------------------------------- -->
 
+<div *ngIf='show==false'>
+  <div *ngFor='let list of checkLists'>
+    <div fxLayout='row' *ngIf='!list.isDeleted'>
+      <input class="text" matInput [(ngModel)]=list.itemName>
+    </div>
+  </div>
+</div>
+<div *ngIf='show==true'>
+  <div *ngFor='let list of unDeletedList'>
+      <div fxLayoutAlign='space-between center'>
+        <mat-checkbox (click)="update(list,'close')">
+          <input  class="text" matInput [(ngModel)]=list.itemName></mat-checkbox>
+        <div (click)='delete(list,"open")'>
+          <img src='../../../assets/wrong_mark.svg'>
+        </div>
+      </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div  *ngIf="data.cond != 'trash'" fxLayout='row'><img src='../../../assets/add_mark.svg'>
+    <input  class="text" matInput [(ngModel)]="list" placeholder="List"
+      (keydown)='enter($event,list)' ></div>
+      <div *ngIf="data.cond=='trash'" fxLayout='row' (click)='openSnackBar()' ><img src='../../../assets/add_mark.svg'><input placeholder="List"> </div>
+  <mat-divider></mat-divider>
+  <div *ngFor='let list of deletedLists'>
+      <div fxLayoutAlign='space-between center'>
+        <img src='../../../assets/right_box.svg' class='decorate' (click)="update(list,'open')"><input  class="text" matInput style="text-decoration:line-through;" [(ngModel)]=list.itemName>
+        <div (click)='delete(list,"close")'>
+          <img src='../../../assets/wrong_mark.svg'>
+        </div>
+      </div>
+  </div>
+</div><br><br>
 
-     <mat-divider></mat-divider>
-     <div>
-<mat-icon>add</mat-icon>
-<mat-checkbox class="iconCheck" *ngIf="adding" [(ngModel)]=addCheck color="primary"></mat-checkbox>
-<input class="note" fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{'background-color':data.array.color}"/>     </div>
-<mat-divider></mat-divider>
-
-
-
+<!---------------------------checklistend --------------------------------------------------->
         <div fxLayout="row wrap" >
             <div  *ngFor="let person of  data.array.collaborators"  class="index" fxLayoutGap="40px">
            <button  matTooltip="{{person.email}}" (click)="opendialog()"class="basic" mat-mini-fab >
@@ -35,7 +60,7 @@
       </div>
      
       <div fxLayoutAlign='space-between end'>
-        <app-iconlist [card]="data.array" [type]=note></app-iconlist>
+        <app-iconlist [card]="data.array" [type]=note  (showtickUpdate)=showCheckBox($event)></app-iconlist>
         
           <button fxLayoutAlign='end end' class="notes" mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
         

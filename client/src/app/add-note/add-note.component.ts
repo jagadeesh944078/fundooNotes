@@ -137,5 +137,6 @@ label($event){
   this.array2.push($event)
   console.log($event,"labelsdata")
 }
+
 }
  

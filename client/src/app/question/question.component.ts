@@ -86,7 +86,7 @@ this.getNote()
    *   @description : Api call for closing QandA
    **/
   closeQAndA() {
-    this.router.navigate(['/home/notes'])
+    this.router.navigate(['/dashboard'])
   }
   /**
    *   @description : Api call for like

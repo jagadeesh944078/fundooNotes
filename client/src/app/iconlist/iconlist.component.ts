@@ -21,6 +21,7 @@ export class IconlistComponent implements OnInit {
   @Output() deletecard = new EventEmitter();
   @Output() archivedCard = new EventEmitter();
   @Output() unarchiveCard = new EventEmitter();
+  @Output() showtickUpdate = new EventEmitter();
   @Input() card: any;
   @Input() more;
   @Input() type;
@@ -29,6 +30,7 @@ export class IconlistComponent implements OnInit {
   display = false;
   title: any;
   collab=[];
+  flag4 = false;
   label: string;
   public arrayData = [];
   ArrayOfLabel: []
@@ -133,8 +135,6 @@ export class IconlistComponent implements OnInit {
       "noteIdList": [card.id]
     }).subscribe(data => {
 
-      let ind = this.card.indexOf(card)
-      this.card.splice(ind, 1);
     }, err => console.log(err))
   }
 
@@ -246,12 +246,21 @@ export class IconlistComponent implements OnInit {
     console.log('event in iconlist', event);
     this.reminderEvent.emit(event);
   }
-  askquestion(){
+  question(note){
   this.router.navigate(['/dashboard/note/'+ this.card.id +'/question'])}
+
+  HideTick() {
+    try {
+      this.showtickUpdate.emit(this.flag4)
+      console.log(this.flag4, "flag4")
+      this.flag4 = !this.flag4
+    } catch (err) {
+      console.log(err)
+    }
+
+}
 }
 
 
-// reminderService(){
 
-// }
 
