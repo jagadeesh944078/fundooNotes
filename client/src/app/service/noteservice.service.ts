@@ -51,6 +51,9 @@ resetPassword(body){
    getLabel(){
      return this.http.getHttp('noteLabels/getNoteLabelList')
    }
+   getNotesListByLabel(labelName) {
+    return this.http.postJSON('notes/getNotesListByLabel/' + labelName, '');
+}
    updateProfile(data){
     return this.http.postJSON('user/uploadProfileImage',data)
    }

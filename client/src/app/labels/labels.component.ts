@@ -93,6 +93,7 @@ editlabel(label) {
     "id": label.id,
     "userId": this.userId
   }
+  console.log(body,"data")
   this.Data.postUpdateNotelabel( label.id, body)
     .subscribe(result => {
       // this.dataService.change(true);

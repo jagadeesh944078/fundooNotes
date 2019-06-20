@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewChild,AfterViewInit } from '@angular/core';
 import { NoteserviceService } from '../service/noteservice.service'
 import { identifierModuleUrl } from '@angular/compiler';
-
+import { AddNoteComponent} from '../add-note/add-note.component'
+import { from } from 'rxjs';
 @Component({
   selector: 'app-main-note',
   templateUrl: './main-note.component.html',
@@ -10,11 +11,13 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class MainNoteComponent implements OnInit {
   title = [];
   addnote: any;
+  
   close: any;
   card = [];
 
   constructor(private notes: NoteserviceService) { }
   @Input() view: boolean;
+  @ViewChild(AddNoteComponent) child;
 
   ngOnInit() {
     this.getAllCards();
@@ -37,19 +40,15 @@ export class MainNoteComponent implements OnInit {
         console.log("error  ")
       })
   }
-  // recievemessage($event) {
-  //   console.log($event,"note")
-  //   this.close = $event;
-  //   console.log(this.close,"note")
-  //   this.title.push(this.close)
-  // }
+ 
   receiveMessage($event) {
     this.addnote = $event;
     console.log(this.addnote, "......addnote")
     this.title.splice(0, 0, this.addnote)
-
-  }
-
-
-
+}
+message:any;
+ngAfterViewInit() {
+  this.message = this.child.message
+  console.log(this.message,"dfgj")
+}
 }

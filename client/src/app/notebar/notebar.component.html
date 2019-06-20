@@ -1,10 +1,13 @@
-    <div fxLayout="row wrap">                  
+    <div fxLayout="row wrap" fxFlexOffset="10">                  
  <div *ngFor="let array of card  | search:Search" class="array"  >
 <mat-card class="EachCard" fxLayout="column" [ngClass]="{'matcard': view==true,'notecard': view==false}"  fxFlex="92" fxFlexOffset.xl="10" fxFlex.xs='97'  [style.backgroundColor]='array.color' >
   <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center"(click)="openDialog(array,cond,array.id,type)">
 
 
     <div fxLayout="column"  mat-dialog-content class="card" >
+      <!-- <button  class="hover" class="pinIcon" (click)=changePin()>
+      <img src="../../../assets/pin.svg" >
+    </button> -->
     
       <div ><mat-card-title class="title">{{array.title }} </mat-card-title></div>
       <div><mat-card-subtitle class="desc">{{array.description}}</mat-card-subtitle></div>
@@ -31,7 +34,7 @@
     </div>
    
   </div>
- <!-- checklist -->
+ <!--------------------------------- checklist -------------------------------------------------->
  <div *ngIf='show==false'>
   <div *ngFor='let list of array.noteCheckLists'>
     <div *ngIf='!list.isDeleted'>
@@ -51,7 +54,7 @@
     </div>
   </div>
 </div>
-   <!--checklist  -->
+  <!---------------------------------- checklist ------------------------------------->
   <!-----------------------------------labels------------------------------------->
   <div *ngIf='array.noteLabels.length!=0'>
       <div *ngFor= "let item of array.noteLabels">
@@ -69,14 +72,11 @@
     <div fxFlex='100' >              
       <app-iconlist [card]=array (labelEvent)="label($event)" (archivedCard)="archive($event)"  (showtickUpdate)='showTickBox($event)' [more]=display  [type]=note  class="card" (unarchiveCard)='unarchived($event)'    (deletecard)="delete($event)"> </app-iconlist>
     </div>
-  <div *ngIf="array.questionAndAnswerNotes.length>0" (click)='navigate(array)'>
+    <div *ngIf="array.questionAndAnswerNotes.length>0" (click)='navigate(array)'>
       <mat-divider></mat-divider>
-      <div class="text">Question Asked</div>
+      <div class="text">Question asked</div>
       <div *ngIf="array.questionAndAnswerNotes.length>0" [innerHtml]='array.questionAndAnswerNotes[0].message'></div>
     </div>
-
- 
-
 </mat-card>
 </div>
 </div>

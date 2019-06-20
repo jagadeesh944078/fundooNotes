@@ -24,13 +24,14 @@ export class RegistrationComponent implements OnInit {
 })
     this.getCartInformation()
   }
-    /**
+    hide=true;
+  /**
    * @description firstName validation 
    */
   firstName = new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z]*')]);
     /**
    * @description lastName validation 
-   */z
+   */
   lastName = new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z]*')]);
     /**
    * @description email validation 

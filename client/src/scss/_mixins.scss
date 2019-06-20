@@ -22,6 +22,7 @@
         display: flex;
          width: 50%;
     }
+
     @mixin dashboardToolBar {
         display: flex;
         justify-content: space-between;
@@ -78,6 +79,7 @@
     padding: 3px;
     opacity: .8;
 }
+
 @mixin addNoteInput{
     border: none;
     outline: none;

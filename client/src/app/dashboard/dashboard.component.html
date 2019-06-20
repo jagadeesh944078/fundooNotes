@@ -36,8 +36,7 @@
       <button  *ngIf="imageNew != '' " (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
       mat-mini-fab 
       [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}" 
-      [matMenuTriggerFor]="accountMenu" class="imagetext"
-      >
+      [matMenuTriggerFor]="accountMenu" class="imagetext">
 </button>
       <button *ngIf="imageNew == '' "  (click) = "$event.stopPropagation()"  matTooltip="fundoo Account"
       mat-mini-fab 
@@ -85,16 +84,13 @@
 <mat-divider></mat-divider>
 
 <!--------------------------------------sidenav bar  -------------------------------------->
-<mat-drawer-container class="example-container">
+<mat-drawer-container  fxFlexFill  class="example-container" >
   <mat-drawer #sidenav mode="side" opened="true">
     <div>
-
       <button mat-button [routerLink]="['note']" (click)="headerName= 'Fundoo Notes'" [ngClass]="{'sideNavListItems': headerName!='Fundoo Notes', 'sideNavlistItemsColored': headerName=='Fundoo Notes'}">
         <mat-icon>lightbulb_outline</mat-icon> Notes
-
       </button>
-
-    </div>
+  </div>
     <div>
       <button mat-button [routerLink]="['remindericon']" (click)="headerName= 'Remainders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
         <mat-icon>notifications_none</mat-icon> Remainders

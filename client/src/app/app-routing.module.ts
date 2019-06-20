@@ -23,6 +23,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductconfirmComponent } from './productconfirm/productconfirm.component';
 import { ResetComponent } from './reset/reset.component';
 import { LabelsComponent } from './labels/labels.component';
+import { DragComponent } from './drag/drag.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -48,7 +49,8 @@ const routes: Routes = [
     {path:'note/:noteId/question',component:QuestionComponent,canActivate:[AuthGuard]},
     {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
       {path: 'labels', component: LabelsComponent},
-      {path:'label', component:LabelComponent}
+      {path:'label', component:LabelComponent},
+      {path:'drag',component:DragComponent}
 
   ]}
   ];

@@ -76,7 +76,7 @@ private getService;
       localStorage.setItem('firstName', data['firstName']);
       localStorage.setItem('lastName', data['lastName']);
       localStorage.setItem('email', data['email']);
-
+      localStorage.setItem('userId', data['userId'])
       localStorage.setItem('token', data['id']);
 
       console.log(data);

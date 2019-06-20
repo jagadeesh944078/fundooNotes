@@ -124,5 +124,6 @@ getlabel(){
   })
 }
 editlabel(label){
-  this.router.navigate(['dashboard/label',label])}
+  this.router.navigate(['dashboard/label',label])
+}
 }

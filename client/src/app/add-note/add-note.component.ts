@@ -110,7 +110,7 @@ if(this.date==undefined){
       //   console.log(data);
 
       // })
-  
+  message:'jsegf';
   }
   this.date=null;
   }

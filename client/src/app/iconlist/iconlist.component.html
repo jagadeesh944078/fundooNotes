@@ -56,10 +56,11 @@
     </div>
     <div *ngIf='flag4==false'>
       <button mat-menu-item  (click)='HideTick()'>Hide tick boxes</button>
-</div>    <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
+</div>    
+<button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
     <button mat-menu-item (click)="deleteforever(card)">delete forever</button>
     <button mat-menu-item (click)="restore(card)">restore</button>
-    <button mat-menu-item (click)="askquestion()">askquestion</button>
+    <button mat-menu-item (click)="question()">askquestion</button>
   </mat-menu>
 
   <mat-menu #subMenu="matMenu">

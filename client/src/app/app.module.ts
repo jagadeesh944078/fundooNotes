@@ -36,7 +36,8 @@ import { ProductconfirmComponent } from './productconfirm/productconfirm.compone
 import { ResetComponent } from './reset/reset.component';
 import { PinComponent } from './pin/pin.component';
 import { LabelComponent } from './label/label.component';
-
+import {DragDropModule } from '@angular/cdk/drag-drop';
+import { DragComponent } from './drag/drag.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { LabelComponent } from './label/label.component';
     ResetComponent,
     PinComponent,
     LabelComponent,
+    DragComponent,
 
   ],
   imports: [
@@ -77,7 +79,8 @@ import { LabelComponent } from './label/label.component';
     FlexLayoutModule ,
     ImageCropperModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot() ,
-    BarRatingModule
+    BarRatingModule,
+    DragDropModule
 
   ],
   providers: [AuthGuard

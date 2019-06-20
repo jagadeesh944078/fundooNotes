@@ -10,6 +10,8 @@ opacity: .9;
 //  height:180px;
  width: 700px;
  margin-bottom: 5%;
+ animation-name: example;
+ animation-duration: 4s;
 //  padding-bottom: 10px
 
 }
@@ -19,6 +21,8 @@ opacity: .9;
   margin-left: 47px;
   position: relative;
   opacity: .9;
+  animation-name: example;
+  animation-duration: 4s;
   margin-bottom: 5%;
   // max-height: 3.3cm;
   // min-height: 179px;
@@ -57,11 +61,27 @@ border-radius: 10px;
 }
 .card{
   overflow: hidden;
+  
 }
 .desc{
    max-height: 42px;
    position: static;;
     overflow: hidden;}
     .sample{
-      background: transparent
+      background:transparent;
+      animation-name: example;
+      animation-duration: 4s;
+    }
+    @keyframes example {
+      0%   {background-color: red;}
+      25%  {background-color: yellow;}
+      50%  {background-color: blue;}
+      100% {background-color: green;}
+    }
+     .pinIcon {
+       margin-left: 195px;
+      border: none;
+    //  resize: none;
+      // outline: none
+  
     }

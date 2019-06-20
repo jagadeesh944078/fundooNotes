@@ -1,12 +1,11 @@
-
-<div *ngIf="!isOpen"  class="addNote" (click)="isOpen=true" >
+<div fxLayout.xs="60"  >
+<div *ngIf="!isOpen"  class="addNote" (click)="isOpen=true"  >
 
   Take a note ...
    
   <button mat-icon-button   style="left: 9.3cm">
 <mat-icon aria-label="Example icon-button with a heart icon" (click)="choose3=false">
   check_box 
-
 </mat-icon>
 </button>
 <button mat-icon-button  style="left: 9.5cm" var=showBrush>
@@ -71,4 +70,4 @@
   </div>
   
   </div>  
-  
+</div>

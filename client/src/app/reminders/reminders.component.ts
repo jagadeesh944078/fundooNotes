@@ -14,6 +14,7 @@ export class RemindersComponent implements OnInit {
   @Input() card: any;
   @Output() reminderEvent = new EventEmitter<any>();
   public newDate;
+  public hours;
   public date = new Date();
   @Input() note: any;
   id=localStorage.getItem('userId');
@@ -69,5 +70,24 @@ chooseTime(card,cardObject){
     }
   }
 
-
+  setCustomTime(data){
+    if(data=='8am'){
+      this.hours=8;
+    }
+    if(data=='1pm'){
+      this.hours=13;
+    }
+    if(data=='6pm'){
+      this.hours=18;
+    }
+    if(data=='8pm'){
+      this.hours=20
+    }
+    // if(this.hours>12){
+    //   this.customTime=(this.hours-12)+':'+'00'+' PM'
+    // }
+    // else if(this.hours<=12){
+    //   this.customTime=this.hours+':'+'00'+' AM'
+    // }
+}
 }

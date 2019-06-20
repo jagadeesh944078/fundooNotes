@@ -1,5 +1,5 @@
 <div fxFlex='100' fxLayout="column" >
-  <mat-card [style.background]="data.array.color">
+  <mat-card [style.background]="data.array.color" class="card">
     <div  fxLayout="column" fxFlex="100" fxFlexOffset.xl="20" fxFlex.xs='97'>
       <div class="title">
         <div  fxLayout="row" class="takenote" matTextareaAutosize>
@@ -8,6 +8,14 @@
         <div  fxLayout="column" class="takenote">
           <textarea class="textArea"  placeholder="Note" [(ngModel)]="data.array.description"></textarea>
         </div>
+<!-----------------------------------LABEL ----------------------------------------------------->
+<div *ngFor='let labels of data.array.noteLabels'>
+  <mat-chip-list selected>
+      <mat-chip (mouseenter)="showing=true" (mouseleave)="showing=false"style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px;background: transparent" class="btn">{{labels.label}}
+        <mat-icon  *ngIf="showing" matChipRemove (click)="removeLabel(data.array,labels)">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+</div>
 <!----------------------------------checklist--------------------------------------------- -->
 
 <div *ngIf='show==false'>
@@ -61,9 +69,7 @@
      
       <div fxLayoutAlign='space-between end'>
         <app-iconlist [card]="data.array" [type]=note  (showtickUpdate)=showCheckBox($event)></app-iconlist>
-        
-          <button fxLayoutAlign='end end' class="notes" mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
-        
+         <button fxLayoutAlign='end end' class="notes" mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
       </div>
     </div>
   </mat-card>
